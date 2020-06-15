@@ -3,9 +3,14 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import TestForm from "./components/testForm";
+import MainWrapper from "./components/mainWrapper";
 
 function App() {
-  return <TestForm />;
+  return (
+    <MainWrapper>
+      <TestForm />
+    </MainWrapper>
+  );
 }
 
 export default App;

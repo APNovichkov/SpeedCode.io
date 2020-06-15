@@ -3,6 +3,10 @@
   height: 60px;
 }
 
+.main-wrapper {
+  margin-top: 100px;
+}
+
 .App {
   text-align: center;
 }
