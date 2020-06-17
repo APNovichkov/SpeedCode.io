@@ -1,6 +1,87 @@
 /* header */
+body {
+  background-color: #f9fcfb;
+  font-family: "Roboto", sans-serif;
+}
+
 .navbar-home {
   height: 60px;
+  background-color: #f9fcfb;
+}
+
+.navbar-wrapper {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+.navbar-logo {
+  padding-bottom: -7px;
+}
+
+.navbar-search-button {
+  border: 1px solid #d63447;
+  border-radius: 60px;
+  background-color: transparent;
+  margin-left: 6px;
+  height: 38px;
+  width: 38px;
+}
+
+.navbar-search-icon {
+  color: #d63447;
+}
+
+.navbar-welcome {
+  color: #d63447;
+}
+
+.navbar-search {
+  border-radius: 30px;
+  border-color: #d63447;
+  background-color: transparent;
+}
+
+.navbar-search::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #d63447;
+}
+
+.navbar-profile-picture {
+  border: 1px solid #d63447;
+  border-radius: 60px;
+  margin-left: 10px;
+}
+
+.links-navbar-wrapper {
+  background-color: #381460;
+  height: 50px;
+}
+
+.links-navbar-row {
+  padding-top: 15px;
+}
+
+/* .links-navbar-company {
+  padding-left: 100px;
+} */
+
+.links-navbar-company h6 {
+  font-weight: 300;
+  text-align: right;
+}
+
+.links-navbar-wrapper h6 {
+  color: #ffffff;
+}
+
+.light-text {
+  font-weight: 300;
+}
+
+.medium-text {
+  font-weight: 700;
 }
 
 .main-wrapper {
