@@ -7,12 +7,14 @@ import Navbar from "./components/navbar";
 import TestForm from "./components/testForm";
 import MainWrapper from "./components/mainWrapper";
 import LinksNavbar from "./components/linksNavbar";
+import AlgoPageHeader from "./components/algoPageHeader";
 
 function App() {
   return (
     <div>
       <Navbar />
       <LinksNavbar />
+      <AlgoPageHeader />
       <MainWrapper>
         <TestForm />
       </MainWrapper>

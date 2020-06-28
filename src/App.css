@@ -12,7 +12,7 @@ body {
 .navbar-wrapper {
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 120px;
+  padding-left: 150px;
   padding-right: 120px;
 }
 
@@ -74,6 +74,26 @@ body {
 
 .links-navbar-wrapper h6 {
   color: #ffffff;
+}
+
+.algo-page-header-wrapper {
+  padding-top: 40px;
+}
+
+.algo-page-header-wrapper h2 {
+  color: #d63447;
+  text-decoration: underline;
+}
+
+.algo-page-category-link {
+  text-align: center;
+  border: 1px solid #381460;
+  border-radius: 10px;
+  color: #381460;
+}
+
+.algo-page-category-link-wrapper {
+  margin-top: 11px;
 }
 
 .light-text {
