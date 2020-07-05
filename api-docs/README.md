@@ -6,6 +6,16 @@
 
 > GET
 
+Returns all algorithms available for a specific programming language
+
+#### Input Params
+
+```
+{
+    'language': 'java'
+}
+```
+
 ```
 {
     'id': 'id',
@@ -16,8 +26,3 @@
     'attempts:' 5 (int)
 }
 ```
-
-
-
-
-
