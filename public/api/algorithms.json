@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": "aaaaaaa",
+      "name": "Bubble Sort",
+      "type": "Algorithm",
+      "category": "Sorting",
+      "description": "Iterative Sorting Algorithm",
+      "difficulty": 3,
+      "attempts": 5
+    },
+    {
+      "id": "bbbbbbb",
+      "name": "Merge Sort",
+      "type": "Algorithm",
+      "category": "Sorting",
+      "description": "Recursive Sorting Algorithm",
+      "difficulty": 3,
+      "attempts": 5
+    }
+  ]
+}
