@@ -11,7 +11,7 @@ Returns all algorithms available for a specific programming language
 #### Input Params
 
 ```
-'lang=java&grouped=false(default)'
+'lang=java'
 ```
 
 #### Output (unsorted)
