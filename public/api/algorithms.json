@@ -17,6 +17,15 @@
       "description": "Recursive Sorting Algorithm",
       "difficulty": 3,
       "attempts": 5
+    },
+    {
+      "id": "ccccccc",
+      "name": "Depth First Traversal",
+      "type": "Algorithm",
+      "category": "Graphs",
+      "description": "Recursive Sorting Algorithm",
+      "difficulty": 3,
+      "attempts": 5
     }
   ]
 }

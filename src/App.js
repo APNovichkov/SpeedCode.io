@@ -2,22 +2,31 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+// Import router
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 // Import components
 import Navbar from "./components/navbar";
-import TestForm from "./components/testForm";
-import MainWrapper from "./components/mainWrapper";
 import LinksNavbar from "./components/linksNavbar";
-import AlgoPageHeader from "./components/algoPageHeader";
+
+// Import pages
+import AlgorithmsPage from "./pages/algorithms";
 
 function App() {
   return (
     <div>
       <Navbar />
       <LinksNavbar />
-      <AlgoPageHeader />
-      <MainWrapper>
-        <TestForm />
-      </MainWrapper>
+      <Router>
+        <div>
+          <Link to="/algorithms"></Link>
+        </div>
+        <Switch>
+          <Route path="/algorithms">
+            <AlgorithmsPage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

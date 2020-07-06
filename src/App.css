@@ -77,7 +77,8 @@ body {
 }
 
 .algo-page-header-wrapper {
-  padding-top: 40px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .algo-page-header-wrapper h2 {
@@ -117,32 +118,66 @@ body {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Overview Card */
+.overview-card-group {
+  margin-top: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.overview-card-group .icon {
+  font-size: 27px;
+  padding-right: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.overview-card-group .overview-header {
+  margin-bottom: 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.overview-card-group-cards-wrapper {
+  display: grid;
+  grid-gap: 7px;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 40px;
+}
+
+/* OverviewGroups */
+
+.overview-card {
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 25px;
+  color: #eeeeee;
+}
+
+.overview-card .attempts {
+  float: right;
+}
+
+/* Sorting */
+.overview-card-group.sorting .h2 {
+  color: #381460;
+}
+
+.overview-card-group.sorting .icon {
+  color: #381460;
+}
+
+.overview-card.sorting {
+  color: #eeeeee;
+  border-color: #41186f;
+  background-color: #41186f;
+}
+
+/* Graphs */
+.overview-card-group.graphs .h2 {
+  color: #10375c;
+}
+
+.overview-card-group.graphs .icon {
+  color: #10375c;
+}
+
+.overview-card.graphs {
+  color: #eeeeee;
+  border-color: #10375c;
+  background-color: #10375c;
 }
