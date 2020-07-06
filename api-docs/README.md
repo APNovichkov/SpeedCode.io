@@ -14,9 +14,11 @@ Returns all algorithms available for a specific programming language
 'lang=java&grouped=false(default)'
 ```
 
+#### Output (unsorted)
+
 ```
 {
-    'Sorting': [
+    data: [
         {
             'id': 'id',
             'name': 'Bubble Sort',
@@ -26,9 +28,6 @@ Returns all algorithms available for a specific programming language
             'difficulty': 3 (int),
             'attempts:' 5 (int)
         },
-        ....
-    ],
-    'Graphs': [
         {
             'id': 'id',
             'name': 'Depth First Traversal',
@@ -39,18 +38,6 @@ Returns all algorithms available for a specific programming language
             'attempts:' 5 (int)
         },
         ...
-    ],
-    'Trees': [
-        {
-            'id': 'id',
-            'name': 'In-order traversal',
-            'type': 'Algorithm',
-            'category': 'Trees',
-            'description': 'Recursive Traversal Algorithm',
-            'difficulty': 2 (int),
-            'attempts:' 0 (int)
-        },
-        ...
-    ],
+    ]
 }
 ```
