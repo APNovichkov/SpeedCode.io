@@ -397,6 +397,10 @@ body {
   padding-right: 25px;
 }
 
+.algo-detail-input-text{
+  height: 100px;
+}
+
 .algo-detail-input-text-ta{
   width: 100%;
   border-color: #ffffff;

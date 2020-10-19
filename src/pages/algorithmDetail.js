@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from "react";
+import AceEditor from "react-ace";
+import Timer from 'react-compound-timer'
 
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/ext-language_tools"
 
 // Import components
 import Stars from "./../components/stars";
@@ -32,7 +37,7 @@ const AlgorithmDetail = (props) => {
         <div className="algo-detail-title-row-wrapper">
           <div className="d-flex justify-content-left">
             <div className="algo-detail-title-wrapper">
-                <h2 className="algo-detail-title">{name}</h2>
+              <h2 className="algo-detail-title">{name}</h2>
             </div>
             <div className="algo-detail-difficulty-wrapper">
               <Stars numStars={difficulty}></Stars>
@@ -42,18 +47,16 @@ const AlgorithmDetail = (props) => {
         <div className="algo-detail-attributes-row-wrapper">
           <div className="d-flex justify-content-left">
             <div className="algo-detail-big-o-wrapper">
-                <div className="algo-detail-big-o">{bigO}</div>
+              <div className="algo-detail-big-o">{bigO}</div>
             </div>
             <div className="algo-detail-category-wrapper">
-                <div className="algo-detail-category">{category}</div>
+              <div className="algo-detail-category">{category}</div>
             </div>
           </div>
         </div>
         <div className="algo-detail-description-row-wrapper">
           <div className="algo-detail-description-wrapper">
-            <p className="algo-detail-description">
-               {longDescription}
-            </p>
+            <p className="algo-detail-description">{longDescription}</p>
           </div>
         </div>
       </div>
@@ -68,20 +71,39 @@ const AlgorithmDetail = (props) => {
                   </div>
                 </div>
                 <div className="algo-detail-timer-wrapper">
-                  <div className="algo-detail-timer">00:00</div>
+                    {hasStarted && (
+                        <div className="algo-detail-timer">
+                            <Timer startImmediately={true}>
+                                <Timer.Minutes />:<Timer.Seconds/>
+                            </Timer>
+                        </div>
+                    )}
                 </div>
               </div>
             </div>
           </div>
           {!hasStarted ? (
             <div className="start-button-wrapper" id="start-button">
-                <button onClick={handleStartClick} className="start-button">Start</button>
-            </div>) : (
-                <div className="algo-detail-input-text-wrapper">
-                    <div className="algo-detail-input-text">
-                        <textarea rows="17" className="algo-detail-input-text-ta"></textarea>
-                    </div>
-                </div>
+              <button onClick={handleStartClick} className="start-button">
+                Start
+              </button>
+            </div>
+          ) : (
+            <div className="algo-detail-input-text-wrapper">
+              <div className="algo-detail-input-text">
+                <AceEditor
+                    mode="python"
+                    theme="github"
+                    height="400px"
+                    width="100%"
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                    }}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

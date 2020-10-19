@@ -9,6 +9,8 @@
     "axios": "^0.19.2",
     "lodash": "^4.17.15",
     "react": "^16.13.1",
+    "react-ace": "^9.1.4",
+    "react-compound-timer": "^1.2.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
