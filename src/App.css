@@ -73,6 +73,10 @@ body {
   font-weight: 800;
 }
 
+.links-light-flex h6{
+  font-weight: 300;
+}
+
 /* .links-navbar-company {
   padding-left: 100px;
 } */
@@ -215,7 +219,24 @@ body {
   font-weight: 300;
   font-size: 18px;
   color: #4d4d4d;
-  
+}
+
+.overview-card.sorting .practice-button{
+  background-color: transparent;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #38CB60;
+  border-color: #38CB60;
+}
+
+.overview-card.sorting .practice-button:hover{
+  background-color: #38CB60;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 /* Graphs */
@@ -233,11 +254,24 @@ body {
   background-color: #10375c;
 }
 
+.overview-card.graphs .overview-card-title{
+  font-weight: 500;
+  font-size: 20px;
+  color: #ffffff;
+  /* border-bottom: 2px solid #414141; */
+}
+
+.overview-card.graphs .overview-card-description {
+  font-weight: 300;
+  font-size: 18px;
+  color: #eeeeee;
+}
+
 .overview-card-buttons-wrapper{
   margin-top: 12px;
 }
 
-.practice-button{
+.overview-card.graphs .practice-button{
   background-color: transparent;
   border: 1px solid #272727;
   border-radius: 5px;
@@ -246,12 +280,12 @@ body {
   border-color: #38CB60;
 }
 
-.practice-button:hover{
+.overview-card.graphs .practice-button:hover{
   background-color: #38CB60;
   border: 1px solid #272727;
   border-radius: 5px;
   height: 30px;
   color: #ffffff;
-  border-color: #ffffff;
+  border-color: #38CB60;
 }
 

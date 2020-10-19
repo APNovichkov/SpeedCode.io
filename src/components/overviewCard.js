@@ -21,7 +21,7 @@ const OverviewCard = (props) => {
       <div className="overview-card-description">{description}</div>
 
       <div>
-        <Stars numStars={1}></Stars>
+        <Stars numStars={difficulty}></Stars>
         <span className="attempts">
           {attempts} {attempts == 1 ? "Attempt" : "Attempts"}
         </span>

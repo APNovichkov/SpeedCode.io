@@ -6,8 +6,8 @@
       "type": "Algorithm",
       "category": "Sorting",
       "description": "Iterative Sorting Algorithm",
-      "difficulty": 3,
-      "attempts": 5
+      "difficulty": 1,
+      "attempts": 2
     },
     {
       "id": "bbbbbbb",
@@ -24,8 +24,8 @@
       "type": "Algorithm",
       "category": "Graphs",
       "description": "Recursive Sorting Algorithm",
-      "difficulty": 3,
-      "attempts": 5
+      "difficulty": 2,
+      "attempts": 1
     }
   ]
 }
