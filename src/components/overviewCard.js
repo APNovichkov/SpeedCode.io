@@ -1,14 +1,24 @@
 import React from "react";
 
+// Import components
+import Stars from "./stars";
+
+// Declare constants
+
+
 const OverviewCard = (props) => {
   let { name, description, difficulty, attempts, groupClass } = props;
 
   return (
-    <div className={`card overview-card ${groupClass.toLowerCase()}`}>
-      <h3>{name}</h3>
-      <h5>{description}</h5>
+    <div className={`overview-card ${groupClass.toLowerCase()}`}>
       <div>
-        <span>{difficulty}</span>
+        <span className="overview-card-title">{name}</span>
+      </div>
+      <div>
+        <span className="overview-card-description">{description}</span>
+      </div>
+      <div>
+        <Stars numStars={1}></Stars>
         <span className="attempts">attemps: {attempts}</span>
       </div>
     </div>

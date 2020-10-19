@@ -89,17 +89,18 @@ body {
 /* ALGORITHMS PAGE STUFF */
 
 .algorithms-wrapper{
-  background-color: #eeeeee;
+  padding-top: 40px;
+  padding-left: 164px;
+  padding-right: 120px;
+  background-color: #fffcf4;
 }
 
 .algo-page-header-wrapper {
-  padding-top: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.algo-page-header-wrapper h2 {
+.algo-page-header-text{
   color: #d63447;
-  text-decoration: underline;
 }
 
 .algo-page-category-link {
@@ -134,7 +135,7 @@ body {
   pointer-events: none;
 }
 
-/* Overview Card */
+/* Overview Card Group */
 .overview-card-group {
   margin-top: 10px;
 }
@@ -155,36 +156,41 @@ body {
   padding-bottom: 40px;
 }
 
-/* OverviewGroups */
+/* Overview Card */
 
 .overview-card {
   margin-right: 20px;
   padding: 20px;
-  border-radius: 25px;
-  color: #eeeeee;
+  border-radius: 7px;
+  box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
 }
 
 .overview-card .attempts {
   float: right;
 }
 
+.stars-wrapper{
+  color: #FFCE00;
+  font-weight: 600;
+}
+
 /* Sorting */
-.overview-card-group.sorting .h2 {
+.overview-card-group.sorting .h3 {
   color: #381460;
 }
 
 .overview-card-group.sorting .icon {
-  color: #381460;
+  /* color: #381460; */
 }
 
-.overview-card.sorting {
-  color: #eeeeee;
+.overview-card .sorting {
+  color: #27272727;
   border-color: #41186f;
-  background-color: #41186f;
+  /* background-color: #41186f; */
 }
 
 /* Graphs */
-.overview-card-group.graphs .h2 {
+.overview-card-group.graphs .h3 {
   color: #10375c;
 }
 
@@ -197,3 +203,4 @@ body {
   border-color: #10375c;
   background-color: #10375c;
 }
+
