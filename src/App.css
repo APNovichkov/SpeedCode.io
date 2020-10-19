@@ -160,13 +160,18 @@ body {
 
 .overview-card {
   margin-right: 20px;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-radius: 7px;
   box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
 }
 
 .overview-card .attempts {
-  float: right;
+  padding-left: 10px;
+  font-weight: 600;
+  color: #d63447;
 }
 
 .stars-wrapper{
@@ -174,19 +179,33 @@ body {
   font-weight: 600;
 }
 
-/* Sorting */
+/* SORTING CARD */
 .overview-card-group.sorting .h3 {
   color: #381460;
 }
 
 .overview-card-group.sorting .icon {
-  /* color: #381460; */
+  color: #381460;
 }
 
 .overview-card .sorting {
   color: #27272727;
   border-color: #41186f;
-  /* background-color: #41186f; */
+  background-color: #ffffff;
+}
+
+.overview-card.sorting .overview-card-title{
+  font-weight: 500;
+  font-size: 20px;
+  color: #272727;
+  /* border-bottom: 2px solid #414141; */
+}
+
+.overview-card.sorting .overview-card-description {
+  font-weight: 300;
+  font-size: 18px;
+  color: #4d4d4d;
+  
 }
 
 /* Graphs */
@@ -202,5 +221,27 @@ body {
   color: #eeeeee;
   border-color: #10375c;
   background-color: #10375c;
+}
+
+.overview-card-buttons-wrapper{
+  margin-top: 12px;
+}
+
+.practice-button{
+  background-color: transparent;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #38CB60;
+  border-color: #38CB60;
+}
+
+.practice-button:hover{
+  background-color: #38CB60;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #ffffff;
+  border-color: #ffffff;
 }
 

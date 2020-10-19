@@ -9,17 +9,27 @@ import Stars from "./stars";
 const OverviewCard = (props) => {
   let { name, description, difficulty, attempts, groupClass } = props;
 
+  const practiceButtonClicked = (event) => {
+    event.preventDefault();
+    console.log(`Clicked practice for ${name}`);
+  };
+
+
   return (
     <div className={`overview-card ${groupClass.toLowerCase()}`}>
-      <div>
-        <span className="overview-card-title">{name}</span>
-      </div>
-      <div>
-        <span className="overview-card-description">{description}</span>
-      </div>
+      <div className="overview-card-title">{name}</div>
+      <div className="overview-card-description">{description}</div>
+
       <div>
         <Stars numStars={1}></Stars>
-        <span className="attempts">attemps: {attempts}</span>
+        <span className="attempts">
+          {attempts} {attempts == 1 ? "Attempt" : "Attempts"}
+        </span>
+      </div>
+      <div className="overview-card-buttons-wrapper">
+        <button onClick={practiceButtonClicked} className="practice-button">
+          Practice
+        </button>
       </div>
     </div>
   );

@@ -15,9 +15,9 @@ const Stars = (props) => {
   let { numStars } = props;
 
   return (
-    <div className="stars-wrapper">
+    <span className="stars-wrapper">
       <span className={STAR_CLASS}></span> {numStarsToLevel[numStars]}
-    </div>
+    </span>
   );
 };
 
