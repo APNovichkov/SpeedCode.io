@@ -5,15 +5,15 @@ body {
 }
 
 .navbar-home {
-  height: 60px;
+  height: 30px;
   background-color: #f9fcfb;
 }
 
 .navbar-wrapper {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 150px;
-  padding-right: 120px;
+  padding-top: 5px;
+  padding-bottom: 33px;
+  margin-left: 150px;
+  margin-right: 120px;
 }
 
 .navbar-logo {
@@ -55,12 +55,22 @@ body {
 }
 
 .links-navbar-wrapper {
-  background-color: #381460;
+  background-color: #D56576;
   height: 50px;
 }
 
 .links-navbar-row {
   padding-top: 15px;
+  margin-left: 150px;
+  margin-right: 120px;
+}
+
+.links-flex a{
+  color: #ffffff;
+}
+
+.links-flex h6 {
+  font-weight: 800;
 }
 
 /* .links-navbar-company {
@@ -76,8 +86,14 @@ body {
   color: #ffffff;
 }
 
+/* ALGORITHMS PAGE STUFF */
+
+.algorithms-wrapper{
+  background-color: #eeeeee;
+}
+
 .algo-page-header-wrapper {
-  margin-top: 40px;
+  padding-top: 40px;
   margin-bottom: 20px;
 }
 

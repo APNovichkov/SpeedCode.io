@@ -7,8 +7,14 @@ import MainWrapper from "./../components/mainWrapper";
 import AlgoPageHeader from "./../components/algoPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
 
-//import data providers
+// Import data providers
 import { getAllAlgorithms } from "./../dataProviders/algorithms";
+
+// Set Constants
+const algoTypeToIcon = {
+  Sorting: "fas fa-stream",
+  Graphs: "fas fa-project-diagram"
+};
 
 const AlgorithmsPage = () => {
   const [algos, updateAlgos] = useState([]);
@@ -27,14 +33,14 @@ const AlgorithmsPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="algorithms-wrapper">
       <AlgoPageHeader />
       {algos.map((category, index) => {
         let categoryName = category[0].category;
         return (
           <OverviewCardGroup
             name={categoryName}
-            iconClass="fas fa-project-diagram"
+            iconClass={algoTypeToIcon[categoryName]}
             groupClass={categoryName}
             data={category}
           />

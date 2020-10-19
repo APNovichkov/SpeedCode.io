@@ -16,8 +16,8 @@ function App() {
   return (
     <div>
       <Navbar />
-      <LinksNavbar />
       <Router>
+        <LinksNavbar />
         <div>
           <Link to="/algorithms"></Link>
         </div>
