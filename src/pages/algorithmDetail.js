@@ -107,9 +107,7 @@ const AlgorithmDetail = (props) => {
                           {hasStarted && (
                             <div className="algo-detail-done-button-wrapper">
                               <button
-                                onClick={(event) =>
-                                  handleSubmitCodeClick(event, stop, getTime)
-                                }
+                                onClick={(event) => handleSubmitCodeClick(event, stop, getTime)}
                                 className="algo-detail-submit-button"
                               >
                                 Submit
@@ -159,11 +157,9 @@ const AlgorithmDetail = (props) => {
       </div>
       <Modal show={showSubmissionModal} onHide={handleHideModalClick}>
         <Modal.Header closeButton>
-          <Modal.Title>Congradulations!</Modal.Title>
+          <Modal.Title>Congratulations!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-            You have successfully submitted your code in {timeForSubmission}
-        </Modal.Body>
+        <Modal.Body>You have successfully submitted your code in {timeForSubmission} milliseconds</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleHideModalClick}>
             Close
