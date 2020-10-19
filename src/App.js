@@ -11,20 +11,21 @@ import LinksNavbar from "./components/linksNavbar";
 
 // Import pages
 import AlgorithmsPage from "./pages/algorithms";
+import AlgorithmDetail from "./pages/algorithmDetail";
 
 function App() {
   return (
     <div>
-      <Navbar />
       <Router>
+        <Navbar />
         <LinksNavbar />
-        <div>
+        {/* <div>
           <Link to="/algorithms"></Link>
-        </div>
+        </div> */}
         <Switch>
-          <Route path="/algorithms">
-            <AlgorithmsPage />
-          </Route>
+          <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
+          <Route path="/algorithms/bubblesort" component={AlgorithmDetail}></Route>
+          <Route path="/algorithms/mergesort" component={AlgorithmDetail}></Route>
         </Switch>
       </Router>
     </div>

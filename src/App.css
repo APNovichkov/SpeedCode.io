@@ -77,10 +77,6 @@ body {
   font-weight: 300;
 }
 
-/* .links-navbar-company {
-  padding-left: 100px;
-} */
-
 .links-navbar-company h6 {
   font-weight: 300;
   text-align: right;
@@ -289,3 +285,59 @@ body {
   border-color: #38CB60;
 }
 
+
+/* ALGO DETAIL STUFF */
+
+.algo-detail-wrapper{
+  padding-top: 20px;
+  padding-left: 164px;
+  padding-right: 120px;
+  background-color: #fffcf4;
+}
+
+.algo-detail-title-wrapper{
+  color: #d63447;
+}
+
+.algo-detail-difficulty-wrapper{
+  font-size: 20px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.algo-detail-attributes-row-wrapper{
+  margin-top: 10px;
+}
+
+.algo-detail-big-o{
+  border: 1px solid #1DFF14;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #38CB60;
+}
+
+.algo-detail-category-wrapper{
+  margin-left: 15px;
+}
+
+.algo-detail-category{
+  border: 1px solid #381460;
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #381460;
+}
+
+.algo-detail-description-row-wrapper{
+  margin-top: 13px;
+}
+
+.algo-detail-description{
+  color: #d63447;
+  font-size: 17px;
+}

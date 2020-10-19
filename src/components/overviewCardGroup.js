@@ -19,6 +19,7 @@ const OverviewCardGroup = (props) => {
             <OverviewCard
               key={card.id}
               name={card.name}
+              urlName={card.urlName}
               description={card.description}
               difficulty={card.difficulty}
               attempts={card.attempts}

@@ -1,19 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { Link, Redirect } from "react-router-dom";
 
 // Import components
 import Stars from "./stars";
 
 // Declare constants
 
-
 const OverviewCard = (props) => {
-  let { name, description, difficulty, attempts, groupClass } = props;
-
-  const practiceButtonClicked = (event) => {
-    event.preventDefault();
-    console.log(`Clicked practice for ${name}`);
-  };
-
+  let { name, urlName, description, difficulty, attempts, groupClass } = props;
 
   return (
     <div className={`overview-card ${groupClass.toLowerCase()}`}>
@@ -27,9 +21,11 @@ const OverviewCard = (props) => {
         </span>
       </div>
       <div className="overview-card-buttons-wrapper">
-        <button onClick={practiceButtonClicked} className="practice-button">
-          Practice
-        </button>
+        <Link to={`/algorithms/${urlName}`}>
+          <button className="practice-button">
+            Practice
+          </button>
+        </Link>
       </div>
     </div>
   );

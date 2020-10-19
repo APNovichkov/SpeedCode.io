@@ -3,6 +3,7 @@
     {
       "id": "aaaaaaa",
       "name": "Bubble Sort",
+      "urlName": "bubblesort",
       "type": "Algorithm",
       "category": "Sorting",
       "description": "Iterative Sorting Algorithm",
@@ -12,6 +13,7 @@
     {
       "id": "bbbbbbb",
       "name": "Merge Sort",
+      "urlName": "mergesort",
       "type": "Algorithm",
       "category": "Sorting",
       "description": "Recursive Sorting Algorithm",
@@ -21,6 +23,7 @@
     {
       "id": "ccccccc",
       "name": "Depth First Traversal",
+      "urlName": "depthfirsttraversal",
       "type": "Algorithm",
       "category": "Graphs",
       "description": "Recursive Sorting Algorithm",
