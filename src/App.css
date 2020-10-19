@@ -89,14 +89,25 @@ body {
 /* ALGORITHMS PAGE STUFF */
 
 .algorithms-wrapper{
-  padding-top: 40px;
+  padding-top: 20px;
   padding-left: 164px;
   padding-right: 120px;
   background-color: #fffcf4;
 }
 
 .algo-page-header-wrapper {
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+.algo-header-line-break {
+  margin-bottom: 40px;
+  border-color: #fcdee2;
+}
+
+.algo-page-subheader{
+  font-weight: 400;
+  font-size: 15px;
+  color: #d63447;
 }
 
 .algo-page-header-text{
@@ -165,7 +176,7 @@ body {
   padding-top: 15px;
   padding-bottom: 15px;
   border-radius: 7px;
-  box-shadow: 0px 0px 40px -15px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
 }
 
 .overview-card .attempts {
@@ -180,7 +191,7 @@ body {
 }
 
 /* SORTING CARD */
-.overview-card-group.sorting .h3 {
+.overview-card-group.sorting .h4 {
   color: #381460;
 }
 
@@ -189,8 +200,7 @@ body {
 }
 
 .overview-card .sorting {
-  color: #27272727;
-  border-color: #41186f;
+  border: 1px solid #41186f;
   background-color: #ffffff;
 }
 
@@ -209,7 +219,7 @@ body {
 }
 
 /* Graphs */
-.overview-card-group.graphs .h3 {
+.overview-card-group.graphs .h4 {
   color: #10375c;
 }
 

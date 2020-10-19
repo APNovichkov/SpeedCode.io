@@ -7,16 +7,13 @@ const AlgoPageHeader = (props) => {
         <div className="col-md-4">
           <h2 className="algo-page-header-text">Choose an Algorithm</h2>
         </div>
-        <div className="col-md-1 algo-page-category-link-wrapper">
-          {/* <p className="algo-page-category-link">Sorting</p> */}
-        </div>
-        <div className="col-md-1 algo-page-category-link-wrapper">
-          {/* <p className="algo-page-category-link">Graphs</p> */}
-        </div>
-        <div className="col-md-1 algo-page-category-link-wrapper">
-          {/* <p className="algo-page-category-link">Trees</p> */}
-        </div>
-        <div className="col-md-4"></div>
+      </div>
+      <div>
+        <p className="algo-page-subheader">
+          
+          See your progress, and practice SpeedCode algorithms to improve how fast you can write code, and <br></br> memorize implementations of basic algorithms. <b>Happy Coding!</b>
+        
+        </p>
       </div>
     </div>
   );

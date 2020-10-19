@@ -35,6 +35,7 @@ const AlgorithmsPage = () => {
   return (
     <div className="algorithms-wrapper">
       <AlgoPageHeader />
+      <hr className="algo-header-line-break"></hr>
       {algos.map((category, index) => {
         let categoryName = category[0].category;
         return (

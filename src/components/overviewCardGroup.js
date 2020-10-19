@@ -8,10 +8,10 @@ const OverviewCardGroup = (props) => {
 
   return (
     <div className={`overview-card-group ${groupClass.toLowerCase()}`}>
-      <div className="overview-header">
+      <h4 className="overview-header h4">
         <span className={`icon ${iconClass}`}></span>
-        <span className="h3">{name}</span>
-      </div>
+        {name}
+      </h4>
 
       <div className="overview-card-group-cards-wrapper">
         {data.map((card) => {
@@ -28,7 +28,6 @@ const OverviewCardGroup = (props) => {
         })}
       </div>
     </div>
-    
   );
 };
 
