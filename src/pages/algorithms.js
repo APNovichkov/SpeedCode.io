@@ -19,17 +19,21 @@ const algoTypeToIcon = {
 const AlgorithmsPage = () => {
   const [algos, updateAlgos] = useState([]);
 
-  useEffect(async () => {
-    let response = await getAllAlgorithms();
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await getAllAlgorithms();
 
-    // Group by category
-    let groupedResponse = _.groupBy(response.data.data, "category");
-    let algosByCategory = [];
-    for (let category in groupedResponse) {
-      algosByCategory.push(groupedResponse[category]);
-    }
-    console.log(algosByCategory);
-    updateAlgos(algosByCategory);
+      // Group by category
+      let groupedResponse = _.groupBy(response.data.data, "category");
+      let algosByCategory = [];
+      for (let category in groupedResponse) {
+        algosByCategory.push(groupedResponse[category]);
+      }
+      console.log(algosByCategory);
+      updateAlgos(algosByCategory);
+    };
+
+    fetchData();
   }, []);
 
   return (

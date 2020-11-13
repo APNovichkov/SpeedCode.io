@@ -28,6 +28,9 @@ if __name__ == '__main__':
 \tbubble_sort(ls)`;
 
 const AlgorithmDetail = (props) => {
+  // TODO - set instead of update
+  // TODO - update let's to const
+
   let [hasStarted, updateHasStarted] = useState(false);
   let [hasFinished, updateHasFinished] = useState(false);
   let [showSubmissionModal, updateShowSubmissionModal] = useState(false);
@@ -47,7 +50,7 @@ const AlgorithmDetail = (props) => {
 
     const currentTime = getTime();
 
-    console.log(`Current time: `, currentTime );
+    console.log(`Current time: `, currentTime);
 
     updateTimeForSubmission(currentTime);
 

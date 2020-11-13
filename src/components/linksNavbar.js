@@ -10,7 +10,9 @@ const LinksNavbar = (props) => {
             <Link to="/algorithms">
               <h6>Algorithms</h6>
             </Link>
-            <h6>Data Structures</h6>
+            <Link to="/datastructures">
+              <h6>Data Structures</h6>
+            </Link>
             <h6>Dashboard</h6>
             <h6>Communities</h6>
           </div>
