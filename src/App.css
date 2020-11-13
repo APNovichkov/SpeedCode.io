@@ -437,13 +437,21 @@ body {
 
 .typed-code{
   color: #10375c;
+  letter-spacing: 1px;
 }
 
 .current-letter{
-  color: #38CB60;
+  /* color: #38CB60; */
+  /* letter-spacing: 1px; */
+  font-weight: 700;
+  padding: 1px;
+  border: 1px solid #FFCE00;
+  border-radius: 5px;
+  background-color: #FFCE00;
 }
 
 .untyped-code{
   color: #8b8b8b;
+  letter-spacing: 1px;
 }
 

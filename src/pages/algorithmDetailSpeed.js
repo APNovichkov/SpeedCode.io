@@ -21,7 +21,7 @@ const bigO = "n^2";
 const category = "Sorting";
 
 // Default code for bubble sort
-const bubbleSortCode = `def bubble_sort(ls):
+const bubbleSortCode = `def buble_sort(ls):
 # Your Implementation goes here
 
 if __name__ == '__main__':
@@ -40,10 +40,24 @@ const AlgorithmDetailSpeed = (props) => {
   const [currentLetterIndex, setCurrentLetterIndex] = useState("");
   const [untypedCode, setUntypedCode] = useState("");
 
+  const [pressedKeyTrigger, setPressedKeyTrigger] = useState(true);
+  const [keyPressed, setKeyPressed] = useState("");
+  const [keyPressedLong, setKeyPressedLong] = useState("");
+
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   // set default
   useEffect(() => {
     setCharArray(bubbleSortCode.split(""));
+
+    // Handle key press
+    document.addEventListener("keypress", function (event) {
+      event.preventDefault();
+      let pressedChar = String.fromCharCode(event.keyCode);
+      console.log(`Key Pressed: ${pressedChar}`);
+      setKeyPressedLong(event.key);
+      setKeyPressed(pressedChar);
+    //   handleKeyPress(pressedChar);
+    });
   }, []);
 
   useEffect(() => {
@@ -51,22 +65,52 @@ const AlgorithmDetailSpeed = (props) => {
 
     setCurrentLetter(charArray[0]);
     setCurrentLetterIndex(0);
-    setUntypedCode(charArray.slice(getUntypedCodeStartIndex(), charArray.length));
+    setUntypedCode(charArray.slice(1, charArray.length));
   }, [charArray]);
 
-  // Handle key press
-  document.addEventListener("keypress", function (event) {
-    event.preventDefault();
-    pressedChar = String.fromCharCode(event.keyCode);
-    console.log(`Key Pressed: ${pressedChar}`);
+  // TODO - There is an issue with the same letter following each other
 
-    // Check if it matches current letter
-    if (keyChar == currentLetter) {
-      console.log(`Pressed key matches current letter`);
-    }
-  });
+    useEffect(() => {
+      console.log(`Key Pressed from use effect: ${keyPressed}`);
+      console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
 
-  
+      // If the key pressed is the same
+      if ((keyPressed == currentLetter) || (keyPressedLong == "Enter" && currentLetter == "\n")) {
+        const newLetterIndex = currentLetterIndex + 1;
+        setTypedCode(charArray.slice(0, newLetterIndex));
+        // console.log(`New typed code: `)
+        setCurrentLetter(charArray[currentLetterIndex + 1]);
+        setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+        setCurrentLetterIndex(newLetterIndex);
+        console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+        if (charArray[currentLetterIndex + 1] == "\n") {
+          console.log("Current letter is a new line");
+        }
+      }
+    }, [keyPressed]);
+
+
+  // THE CODE BELOW DOES NOT WORK
+//   const handleKeyPress = (keyPressed) => {
+//     console.log(`Key Pressed from use effect: ${keyPressed}`);
+
+//     // If the key pressed is the same
+
+//     if (keyPressed == currentLetter) {
+//       const newLetterIndex = currentLetterIndex + 1;
+//       setTypedCode(charArray.slice(0, newLetterIndex));
+//       // console.log(`New typed code: `)
+//       setCurrentLetter(charArray[currentLetterIndex + 1]);
+//       setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+//       setCurrentLetterIndex(newLetterIndex);
+//       console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+//       if (charArray[currentLetterIndex + 1] == "\n") {
+//         console.log("Current letter is a new line");
+//       }
+//     }    else    {
+//       console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
+//     }
+//   };
 
   // Page navigation stuff
   const handleStartClick = (event) => {
@@ -76,16 +120,16 @@ const AlgorithmDetailSpeed = (props) => {
   };
 
   // Helper functions
-  const getTypedCodeEndIndex = () => {
-    if (currentLetterIndex != 0) {
-      return currentLetterIndex - 1;
+  const getTypedCodeEndIndex = (index) => {
+    if (index != 0) {
+      return index - 1;
     } else {
       return 0;
     }
   };
 
-  const getUntypedCodeStartIndex = () => {
-    return currentLetterIndex + 1;
+  const getUntypedCodeStartIndex = (index) => {
+    return index + 1;
   };
 
   return (
