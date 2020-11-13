@@ -21,10 +21,8 @@ const OverviewCard = (props) => {
         </span>
       </div>
       <div className="overview-card-buttons-wrapper">
-        <Link to={`/algorithms/${urlName}`}>
-          <button className="practice-button">
-            Practice
-          </button>
+        <Link to={`/algorithms/${urlName}/speed`}>
+          <button className="practice-button">Practice</button>
         </Link>
       </div>
     </div>

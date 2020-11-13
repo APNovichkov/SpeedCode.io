@@ -12,6 +12,7 @@ import LinksNavbar from "./components/linksNavbar";
 // Import pages
 import AlgorithmsPage from "./pages/algorithms";
 import AlgorithmDetail from "./pages/algorithmDetail";
+import AlgorithmDetailSpeed from "./pages/algorithmDetailSpeed";
 import DataStructuresPage from "./pages/dataStructures";
 
 function App() {
@@ -20,16 +21,14 @@ function App() {
       <Router>
         <Navbar />
         <LinksNavbar />
-        {/* <div>
-          <Link to="/algorithms"></Link>
-        </div> */}
         <div className="body-wrapper">
           <Switch>
             <Route path="/" exact>
               <Redirect to="/algorithms"></Redirect>
             </Route>
             <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
-            <Route path="/algorithms/bubblesort" render={() => <AlgorithmDetail hi={"HI"} />}></Route>
+            <Route path="/algorithms/bubblesort" exact render={() => <AlgorithmDetail hi={"HI"} />}></Route>
+            <Route path="/algorithms/bubblesort/speed" component={AlgorithmDetailSpeed}></Route>
             <Route path="/algorithms/mergesort" component={AlgorithmDetail}></Route>
             <Route path="/datastructures" exact component={DataStructuresPage}></Route>
           </Switch>
