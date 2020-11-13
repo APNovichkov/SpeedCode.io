@@ -15,7 +15,6 @@ import AlgoDetailDescription from "./../components/algoDetailDescription";
 // Fake Data
 const name = "Bubble Sort";
 const difficulty = 2;
-const attempts = 1;
 const description = "Iterative Sorting Algorithm";
 const longDescription = "Bubble Sort is an Iterative Sorting Algorithm. It has best case scenario of N^2 time.";
 const bigO = "n^2";
@@ -30,39 +29,63 @@ if __name__ == '__main__':
 \tbubble_sort(ls)`;
 
 const AlgorithmDetailSpeed = (props) => {
-  // TODO - set instead of update
   // TODO - update let's to const
 
-  let [hasStarted, updateHasStarted] = useState(false);
-  let [hasFinished, updateHasFinished] = useState(false);
-  let [showSubmissionModal, updateShowSubmissionModal] = useState(false);
-  let [timeForSubmission, updateTimeForSubmission] = useState(0);
+  // This splits string into char array
+  const [charArray, setCharArray] = useState([]);
 
+  const [hasStarted, setHasStarted] = useState(false);
+  const [typedCode, setTypedCode] = useState("");
+  const [currentLetter, setCurrentLetter] = useState("");
+  const [currentLetterIndex, setCurrentLetterIndex] = useState("");
+  const [untypedCode, setUntypedCode] = useState("");
+
+  // LOGIC FOR HANDLING TYPING OVER TEMPLATE
+  // set default
+  useEffect(() => {
+    setCharArray(bubbleSortCode.split(""));
+  }, []);
+
+  useEffect(() => {
+    console.log("Char Array: ", charArray);
+
+    setCurrentLetter(charArray[0]);
+    setCurrentLetterIndex(0);
+    setUntypedCode(charArray.slice(getUntypedCodeStartIndex(), charArray.length));
+  }, [charArray]);
+
+  // Handle key press
+  document.addEventListener("keypress", function (event) {
+    event.preventDefault();
+    pressedChar = String.fromCharCode(event.keyCode);
+    console.log(`Key Pressed: ${pressedChar}`);
+
+    // Check if it matches current letter
+    if (keyChar == currentLetter) {
+      console.log(`Pressed key matches current letter`);
+    }
+  });
+
+  
+
+  // Page navigation stuff
   const handleStartClick = (event) => {
     event.preventDefault();
 
-    updateHasStarted(true);
-    console.log("Starting Time");
+    setHasStarted(true);
   };
 
-  const handleSubmitCodeClick = (event, stop, getTime) => {
-    event.preventDefault();
-
-    console.log("Finished time");
-
-    const currentTime = getTime();
-
-    console.log(`Current time: `, currentTime);
-
-    updateTimeForSubmission(currentTime);
-
-    stop();
-    updateHasFinished(true);
-    updateShowSubmissionModal(true);
+  // Helper functions
+  const getTypedCodeEndIndex = () => {
+    if (currentLetterIndex != 0) {
+      return currentLetterIndex - 1;
+    } else {
+      return 0;
+    }
   };
 
-  const handleHideModalClick = (event) => {
-    updateShowSubmissionModal(false);
+  const getUntypedCodeStartIndex = () => {
+    return currentLetterIndex + 1;
   };
 
   return (
@@ -85,7 +108,11 @@ const AlgorithmDetailSpeed = (props) => {
               </button>
             </div>
           ) : (
-            <div className="algo-detail-input-text-wrapper"></div>
+            <div className="algo-detail-input-text-wrapper">
+              <span className="typed-code">{typedCode}</span>
+              <span className="current-letter">{currentLetter}</span>
+              <span className="untyped-code">{untypedCode}</span>
+            </div>
           )}
         </div>
       </div>

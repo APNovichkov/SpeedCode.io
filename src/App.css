@@ -432,3 +432,18 @@ body {
   border-radius: 5px;
 }
 
+
+/* ALGO DETAIL SPEED TYPING SPECIFIC */
+
+.typed-code{
+  color: #10375c;
+}
+
+.current-letter{
+  color: #38CB60;
+}
+
+.untyped-code{
+  color: #8b8b8b;
+}
+
