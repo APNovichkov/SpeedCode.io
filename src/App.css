@@ -449,9 +449,23 @@ body {
   /* letter-spacing: 1px; */
   font-weight: 700;
   padding: 1px;
-  border: 1px solid #afd9ff;
-  border-radius: 5px;
-  background-color: #afd9ff;
+  border-radius: 2px;
+}
+
+.correct-letter{
+  background-color: #63A583;
+  border: 1px solid #63A583;
+  color: #ffffff;
+}
+
+.idle-letter{
+  background-color: #FFCE00;
+  border: 1px solid #FFCE00;
+}
+
+.wrong-letter{
+  background-color: #D56576;
+  border: 1px solid #D56576;
 }
 
 .untyped-code{

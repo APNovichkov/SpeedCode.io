@@ -71,6 +71,7 @@ const AlgorithmDetailSpeed = (props) => {
           } else if (charPressed == "Enter" && localCharArray[skippedCurrentLetterIndex + 1] == "\n") {
             return skippedCurrentLetterIndex + 1;
           } else {
+            $(".current-letter").addClass("wrong-letter");
             return skippedCurrentLetterIndex;
           }
         } else {
@@ -79,7 +80,7 @@ const AlgorithmDetailSpeed = (props) => {
           } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
             return currentLetterIndex + 1;
           } else {
-
+            $(".current-letter").addClass("wrong-letter");
             return currentLetterIndex;
           }
         }
@@ -93,12 +94,19 @@ const AlgorithmDetailSpeed = (props) => {
 
     setCurrentLetter(charArray[0]);
     setUntypedCode(charArray.slice(1, charArray.length));
+    
   }, [charArray]);
+
+  
 
   // TODO - There is an issue with the same letter following each other
 
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
+
+    $(".current-letter").removeClass("idle-letter");
+    $(".current-letter").removeClass("wrong-letter");
+    $(".current-letter").addClass("correct-letter");
 
     setTypedCode(charArray.slice(0, currentLetterIndex + 1).join(""));
     setCurrentLetter(charArray[currentLetterIndex + 1]);
@@ -189,16 +197,17 @@ const AlgorithmDetailSpeed = (props) => {
             <div>
               <div className="algo-detail-input-text-wrapper">
                 <span className="typed-code">{typedCode}</span>
-                <span className="current-letter">{currentLetter}</span>
+                <span id="current-letter" className="current-letter idle-letter">
+                  {currentLetter}
+                </span>
                 <span className="untyped-code">{untypedCode}</span>
               </div>
-              
             </div>
           )}
         </div>
       </div>
     </div>
   );
-};;;;
+};
 
 export default AlgorithmDetailSpeed;
