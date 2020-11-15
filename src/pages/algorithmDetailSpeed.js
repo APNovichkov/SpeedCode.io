@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import Timer from "react-compound-timer";
 import { Modal, Button } from "react-bootstrap";
+import $ from 'jquery'
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-github";
@@ -34,13 +35,12 @@ const AlgorithmDetailSpeed = (props) => {
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
 
-
-
   const [hasStarted, setHasStarted] = useState(false);
   const [typedCode, setTypedCode] = useState("");
   const [currentLetter, setCurrentLetter] = useState("");
-  const [currentLetterIndex, setCurrentLetterIndex] = useState("");
   const [untypedCode, setUntypedCode] = useState("");
+
+  const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
 
   const [pressedKeyTrigger, setPressedKeyTrigger] = useState(true);
   const [keyPressed, setKeyPressed] = useState("");
@@ -49,75 +49,102 @@ const AlgorithmDetailSpeed = (props) => {
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   // set default
   useEffect(() => {
-    setCharArray(bubbleSortCode.split(""));
+    const localCharArray = bubbleSortCode.split("");
+    setCharArray(localCharArray);
 
     // Handle key press
     document.addEventListener("keypress", function (event) {
-      event.preventDefault();
-      let pressedChar = String.fromCharCode(event.keyCode);
-      console.log(`Key Pressed: ${pressedChar}`);
+      const charPressed = event.key;
 
-    //  Update index instead of key pressed, instead of key pressed
+      // console.log(`Key Pressed: ${charPressed}`);
+      // console.log(`Current Letter Index: ${currentLetterIndex}`)
+      // console.log(`Char val: ${localCharArray[currentLetterIndex + 1]}`)
 
-      setKeyPressedLong(event.key);
-      setKeyPressed(pressedChar);
+      // check if key matches value
+      setCurrentLetterIndex((currentLetterIndex) => {
+        if (localCharArray[currentLetterIndex + 1] == "\t") {
+          console.log("Next char is tab, so I am skipping it");
+          const skippedCurrentLetterIndex = currentLetterIndex + 2;
 
-    //   handleKeyPress(pressedChar);
+          if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
+            return skippedCurrentLetterIndex + 1;
+          } else if (charPressed == "Enter" && localCharArray[skippedCurrentLetterIndex + 1] == "\n") {
+            return skippedCurrentLetterIndex + 1;
+          } else {
+            return skippedCurrentLetterIndex;
+          }
+        } else {
+          if (charPressed === localCharArray[currentLetterIndex + 1]) {
+            return currentLetterIndex + 1;
+          } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
+            return currentLetterIndex + 1;
+          } else {
+
+            return currentLetterIndex;
+          }
+        }
+      });
+      // setKeyPressed(pressedChar);
     });
   }, []);
-
-  
 
   useEffect(() => {
     console.log("Char Array: ", charArray);
 
     setCurrentLetter(charArray[0]);
-    setCurrentLetterIndex(0);
     setUntypedCode(charArray.slice(1, charArray.length));
   }, [charArray]);
 
   // TODO - There is an issue with the same letter following each other
 
   useEffect(() => {
-    console.log(`Key Pressed from use effect: ${keyPressed}`);
-    console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
+    console.log(`Index was updated to: ${currentLetterIndex}`);
 
-    // If the key pressed is the same
-    if (keyPressed == currentLetter || (keyPressedLong == "Enter" && currentLetter == "\n")) {
-      const newLetterIndex = currentLetterIndex + 1;
-      setTypedCode(charArray.slice(0, newLetterIndex));
-      // console.log(`New typed code: `)
-      setCurrentLetter(charArray[currentLetterIndex + 1]);
-      setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-      setCurrentLetterIndex(newLetterIndex);
-      console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-      if (charArray[currentLetterIndex + 1] == "\n") {
-        console.log("Current letter is a new line");
-      }
-    }
-  }, [keyPressed]);
+    setTypedCode(charArray.slice(0, currentLetterIndex + 1).join(""));
+    setCurrentLetter(charArray[currentLetterIndex + 1]);
+    setUntypedCode(charArray.slice(currentLetterIndex + 2, charArray.length).join(""));
+  }, [currentLetterIndex]);
+
+  // useEffect(() => {
+  //   console.log(`Key Pressed from use effect: ${keyPressed}`);
+  //   console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
+
+  //   // If the key pressed is the same
+  //   if (keyPressed == currentLetter || (keyPressedLong == "Enter" && currentLetter == "\n")) {
+  //     const newLetterIndex = currentLetterIndex + 1;
+  //     setTypedCode(charArray.slice(0, newLetterIndex));
+  //     // console.log(`New typed code: `)
+  //     setCurrentLetter(charArray[currentLetterIndex + 1]);
+  //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+  //     setCurrentLetterIndex(newLetterIndex);
+  //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+  //     if (charArray[currentLetterIndex + 1] == "\n") {
+  //       console.log("Current letter is a new line");
+  //     }
+  //   }
+  // }, [keyPressed]);
 
   // THE CODE BELOW DOES NOT WORK
-    // const handleKeyPress = (keyPressed, c) => {
-    //   console.log(`Key Pressed from use effect: ${keyPressed}`);
+  // const handleKeyPress = (keyPressed, c) => {
+  //   console.log(`Key Pressed from use effect: ${keyPressed}`);
 
-    //   // If the key pressed is the same
+  //   // If the key pressed is the same
 
-    //   if (keyPressed == currentLetter) {
-    //     const newLetterIndex = currentLetterIndex + 1;
-    //     setTypedCode(charArray.slice(0, newLetterIndex));
-    //     // console.log(`New typed code: `)
-    //     setCurrentLetter(charArray[currentLetterIndex + 1]);
-    //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-    //     setCurrentLetterIndex(newLetterIndex);
-    //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-    //     if (charArray[currentLetterIndex + 1] == "\n") {
-    //       console.log("Current letter is a new line");
-    //     }
-    //   }    else    {
-    //     console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
-    //   }
-    // };
+  //   if (keyPressed == currentLetter) {
+  //     const newLetterIndex = currentLetterIndex + 1;
+  //     setTypedCode(charArray.slice(0, newLetterIndex));
+  //     // console.log(`New typed code: `)
+  //     setCurrentLetter(charArray[currentLetterIndex + 1]);
+  //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+  //     setCurrentLetterIndex(newLetterIndex);
+  //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+  //     if (charArray[currentLetterIndex + 1] == "\n") {
+  //       console.log("Current letter is a new line");
+  //     }
+  //   }    else    {
+  //     console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
+  //   }
+  // };
 
   // Page navigation stuff
   const handleStartClick = (event) => {
@@ -159,16 +186,19 @@ const AlgorithmDetailSpeed = (props) => {
               </button>
             </div>
           ) : (
-            <div className="algo-detail-input-text-wrapper">
-              <span className="typed-code">{typedCode}</span>
-              <span className="current-letter">{currentLetter}</span>
-              <span className="untyped-code">{untypedCode}</span>
+            <div>
+              <div className="algo-detail-input-text-wrapper">
+                <span className="typed-code">{typedCode}</span>
+                <span className="current-letter">{currentLetter}</span>
+                <span className="untyped-code">{untypedCode}</span>
+              </div>
+              
             </div>
           )}
         </div>
       </div>
     </div>
   );
-};
+};;;;
 
 export default AlgorithmDetailSpeed;
