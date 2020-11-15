@@ -21,7 +21,7 @@ const bigO = "n^2";
 const category = "Sorting";
 
 // Default code for bubble sort
-const bubbleSortCode = `def buble_sort(ls):
+const bubbleSortCode = `def bubble_sort(ls):
 # Your Implementation goes here
 
 if __name__ == '__main__':
@@ -33,6 +33,8 @@ const AlgorithmDetailSpeed = (props) => {
 
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
+
+
 
   const [hasStarted, setHasStarted] = useState(false);
   const [typedCode, setTypedCode] = useState("");
@@ -54,11 +56,17 @@ const AlgorithmDetailSpeed = (props) => {
       event.preventDefault();
       let pressedChar = String.fromCharCode(event.keyCode);
       console.log(`Key Pressed: ${pressedChar}`);
+
+    //  Update index instead of key pressed, instead of key pressed
+
       setKeyPressedLong(event.key);
       setKeyPressed(pressedChar);
+
     //   handleKeyPress(pressedChar);
     });
   }, []);
+
+  
 
   useEffect(() => {
     console.log("Char Array: ", charArray);
@@ -70,47 +78,46 @@ const AlgorithmDetailSpeed = (props) => {
 
   // TODO - There is an issue with the same letter following each other
 
-    useEffect(() => {
-      console.log(`Key Pressed from use effect: ${keyPressed}`);
-      console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
+  useEffect(() => {
+    console.log(`Key Pressed from use effect: ${keyPressed}`);
+    console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
 
-      // If the key pressed is the same
-      if ((keyPressed == currentLetter) || (keyPressedLong == "Enter" && currentLetter == "\n")) {
-        const newLetterIndex = currentLetterIndex + 1;
-        setTypedCode(charArray.slice(0, newLetterIndex));
-        // console.log(`New typed code: `)
-        setCurrentLetter(charArray[currentLetterIndex + 1]);
-        setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-        setCurrentLetterIndex(newLetterIndex);
-        console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-        if (charArray[currentLetterIndex + 1] == "\n") {
-          console.log("Current letter is a new line");
-        }
+    // If the key pressed is the same
+    if (keyPressed == currentLetter || (keyPressedLong == "Enter" && currentLetter == "\n")) {
+      const newLetterIndex = currentLetterIndex + 1;
+      setTypedCode(charArray.slice(0, newLetterIndex));
+      // console.log(`New typed code: `)
+      setCurrentLetter(charArray[currentLetterIndex + 1]);
+      setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+      setCurrentLetterIndex(newLetterIndex);
+      console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+      if (charArray[currentLetterIndex + 1] == "\n") {
+        console.log("Current letter is a new line");
       }
-    }, [keyPressed]);
-
+    }
+  }, [keyPressed]);
 
   // THE CODE BELOW DOES NOT WORK
-//   const handleKeyPress = (keyPressed) => {
-//     console.log(`Key Pressed from use effect: ${keyPressed}`);
+    // const handleKeyPress = (keyPressed, c) => {
+    //   console.log(`Key Pressed from use effect: ${keyPressed}`);
 
-//     // If the key pressed is the same
+    //   // If the key pressed is the same
 
-//     if (keyPressed == currentLetter) {
-//       const newLetterIndex = currentLetterIndex + 1;
-//       setTypedCode(charArray.slice(0, newLetterIndex));
-//       // console.log(`New typed code: `)
-//       setCurrentLetter(charArray[currentLetterIndex + 1]);
-//       setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-//       setCurrentLetterIndex(newLetterIndex);
-//       console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-//       if (charArray[currentLetterIndex + 1] == "\n") {
-//         console.log("Current letter is a new line");
-//       }
-//     }    else    {
-//       console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
-//     }
-//   };
+    //   if (keyPressed == currentLetter) {
+    //     const newLetterIndex = currentLetterIndex + 1;
+    //     setTypedCode(charArray.slice(0, newLetterIndex));
+    //     // console.log(`New typed code: `)
+    //     setCurrentLetter(charArray[currentLetterIndex + 1]);
+    //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
+    //     setCurrentLetterIndex(newLetterIndex);
+    //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
+    //     if (charArray[currentLetterIndex + 1] == "\n") {
+    //       console.log("Current letter is a new line");
+    //     }
+    //   }    else    {
+    //     console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
+    //   }
+    // };
 
   // Page navigation stuff
   const handleStartClick = (event) => {
