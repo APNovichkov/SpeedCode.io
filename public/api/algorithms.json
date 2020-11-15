@@ -11,14 +11,24 @@
       "attempts": 2
     },
     {
-      "id": "bbbbbbb",
-      "name": "Merge Sort",
-      "urlName": "mergesort",
+      "id": "dddd",
+      "name": "Quick Sort",
+      "urlName": "quicksort",
       "type": "Algorithm",
       "category": "Sorting",
       "description": "Recursive Sorting Algorithm",
-      "difficulty": 3,
-      "attempts": 5
+      "difficulty": 1,
+      "attempts": 2
+    },
+    {
+      "id": "hkjsdf",
+      "name": "Radix Sort",
+      "urlName": "radixsort",
+      "type": "Algorithm",
+      "category": "Sorting",
+      "description": "Recursive Sorting Algorithm",
+      "difficulty": 1,
+      "attempts": 2
     },
     {
       "id": "ccccccc",
@@ -29,6 +39,16 @@
       "description": "Recursive Sorting Algorithm",
       "difficulty": 2,
       "attempts": 1
+    },
+    {
+      "id": "bbbbbbb",
+      "name": "Merge Sort",
+      "urlName": "mergesort",
+      "type": "Algorithm",
+      "category": "Sorting",
+      "description": "Recursive Sorting Algorithm",
+      "difficulty": 3,
+      "attempts": 5
     }
   ]
 }
