@@ -475,3 +475,109 @@ body {
   letter-spacing: 1px;
 }
 
+.finished-blueprint-iframe-wrapper{
+  text-align: center;
+}
+
+.finished-blueprint-iframe{
+  width: 650px;
+  height: 350px;
+  display:block;
+  position:absolute;
+  margin-left: 11%;
+  top:200px;
+  z-index:999;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 100px 40px rgba(0,0,0,0.6);
+  color: #10375c;
+  text-align: left;
+  padding: 20px;
+}
+
+.finished-blueprint-title{
+  font-size: 25px;
+  color: #d63447;
+  font-weight: 600;
+}
+
+.finished-blueprint-subtitle{
+  font-size: 15px;
+  color: #D56576;
+  font-weight: 400;
+}
+
+
+.finished-blueprint-stats-card-wrapper{
+  margin-top: 20px;
+}
+
+.finished-blueprint-stat-card{
+  width: 180px;
+  margin-right: 20px;
+  border: 1px solid #FFD1D1;
+  background-color: #FFFCFC;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.finished-blueprint-stat-card-title{
+  color: #d63447;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.finished-blueprint-stat-card-value{
+  color: #d63447;
+  font-weight: 700;
+  font-size: 27px;
+}
+
+.finished-blueprint-stats-see-more-stats{
+  color: #d63447;
+  margin-top: 25px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.finished-blueprint-stats-see-more-stats:hover{
+  color: #d63447;
+  margin-top: 25px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.finished-blueprint-stat-card-buttons-wrapper{
+  margin-top: 50px;
+}
+
+.finished-blueprint-go-home-button{
+  border: 1px solid #707070;
+  background-color: #381460;
+  color: #ffffff;
+  width: 120px;
+  margin-right: 20px;
+}
+
+.finished-blueprint-go-home-button:hover{
+  border: 1px solid #707070;
+  background-color: #4e3769;
+  color: #ffffff;
+  width: 120px;
+  margin-right: 20px;
+}
+
+.finished-blueprint-try-again-button{
+  border: 1px solid #63A583;
+  background-color: #ffffff;
+  color: #63A583;
+  width: 120px;
+}
+
+.finished-blueprint-try-again-button:hover{
+  border: 1px solid #63A583;
+  background-color: #63A583;
+  color: #ffffff;
+  width: 120px;
+}

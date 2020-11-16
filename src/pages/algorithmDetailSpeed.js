@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AceEditor from "react-ace";
 import Timer from "react-compound-timer";
 import { Modal, Button } from "react-bootstrap";
-import $ from 'jquery'
+import $ from "jquery";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-github";
@@ -46,7 +46,6 @@ const AlgorithmDetailSpeed = (props) => {
   const [hasStarted, setHasStarted] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
 
-
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   // set default
   useEffect(() => {
@@ -63,7 +62,7 @@ const AlgorithmDetailSpeed = (props) => {
       setCurrentLetterIndex((currentLetterIndex) => {
         if (localCharArray[currentLetterIndex + 2] == "\t") {
           console.log("Next char is tab, so I am skipping it");
-          console.log("Current letter index: ", currentLetterIndex+1);
+          console.log("Current letter index: ", currentLetterIndex + 1);
           const skippedCurrentLetterIndex = currentLetterIndex + 2;
 
           if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
@@ -94,18 +93,16 @@ const AlgorithmDetailSpeed = (props) => {
 
     setCurrentLetter(charArray[0]);
     setUntypedCode(charArray.slice(1, charArray.length));
-    
   }, [charArray]);
-
-  
 
   // TODO - There is an issue with the same letter following each other
 
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
 
-    if(currentLetterIndex == charArray.length-1){
-      
+    if (currentLetterIndex == charArray.length - 1 && charArray.length != 0) {
+      console.log("FINISHED IMPLEMENTATIONS");
+      setHasEnded(true);
     }
 
     $(".current-letter").removeClass("idle-letter");
@@ -168,6 +165,33 @@ const AlgorithmDetailSpeed = (props) => {
             </div>
           )}
         </div>
+      </div>
+      <div className="finished-blueprint-iframe-wrapper">
+        {hasEnded && (
+          <div className="finished-blueprint-iframe">
+            <div className="finished-blueprint-title">Congratulations! <span className="far fa-thumbs-up"></span></div>
+            <div className="finished-blueprint-subtitle">
+              You have successfully completed the Bubble Sort Implementation
+            </div>
+            <div className="d-flex justify-content-left finished-blueprint-stats-card-wrapper">
+              <div className="finished-blueprint-stat-card text-center">
+                <div className="finished-blueprint-stat-card-title">Time Taken</div>
+                <div className="finished-blueprint-stat-card-value">03:15</div>
+              </div>
+              <div className="finished-blueprint-stat-card text-center">
+                <div className="finished-blueprint-stat-card-title">Mistakes Made</div>
+                <div className="finished-blueprint-stat-card-value">13</div>
+              </div>
+            </div>
+            <a href="google.com"><div className="finished-blueprint-stats-see-more-stats">See more stats <span className="fas fa-angle-right"></span></div></a>
+            <div className="finished-blueprint-stat-card-buttons-wrapper">
+              <div className="d-flex justify-content-left">
+                <button className="btn finished-blueprint-go-home-button">Go Home</button>
+                <button className="btn finished-blueprint-try-again-button">Try Again</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
