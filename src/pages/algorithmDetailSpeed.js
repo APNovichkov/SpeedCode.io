@@ -29,22 +29,23 @@ if __name__ == '__main__':
 \tls = [4,3,2,1]
 \tbubble_sort(ls)`;
 
-const AlgorithmDetailSpeed = (props) => {
-  // TODO - update let's to const
+// const bubbleSortCode = `hello
+// \tworld`;
 
+const AlgorithmDetailSpeed = (props) => {
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
 
-  const [hasStarted, setHasStarted] = useState(false);
+  // Typing over blueprint text stuff
   const [typedCode, setTypedCode] = useState("");
   const [currentLetter, setCurrentLetter] = useState("");
   const [untypedCode, setUntypedCode] = useState("");
-
   const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
 
-  const [pressedKeyTrigger, setPressedKeyTrigger] = useState(true);
-  const [keyPressed, setKeyPressed] = useState("");
-  const [keyPressedLong, setKeyPressedLong] = useState("");
+  // Page navigation stuff
+  const [hasStarted, setHasStarted] = useState(false);
+  const [hasEnded, setHasEnded] = useState(false);
+
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   // set default
@@ -52,18 +53,17 @@ const AlgorithmDetailSpeed = (props) => {
     const localCharArray = bubbleSortCode.split("");
     setCharArray(localCharArray);
 
+    console.log(localCharArray);
+
     // Handle key press
     document.addEventListener("keypress", function (event) {
       const charPressed = event.key;
 
-      // console.log(`Key Pressed: ${charPressed}`);
-      // console.log(`Current Letter Index: ${currentLetterIndex}`)
-      // console.log(`Char val: ${localCharArray[currentLetterIndex + 1]}`)
-
       // check if key matches value
       setCurrentLetterIndex((currentLetterIndex) => {
-        if (localCharArray[currentLetterIndex + 1] == "\t") {
+        if (localCharArray[currentLetterIndex + 2] == "\t") {
           console.log("Next char is tab, so I am skipping it");
+          console.log("Current letter index: ", currentLetterIndex+1);
           const skippedCurrentLetterIndex = currentLetterIndex + 2;
 
           if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
@@ -104,6 +104,10 @@ const AlgorithmDetailSpeed = (props) => {
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
 
+    if(currentLetterIndex == charArray.length-1){
+      
+    }
+
     $(".current-letter").removeClass("idle-letter");
     $(".current-letter").removeClass("wrong-letter");
     $(".current-letter").addClass("correct-letter");
@@ -112,47 +116,6 @@ const AlgorithmDetailSpeed = (props) => {
     setCurrentLetter(charArray[currentLetterIndex + 1]);
     setUntypedCode(charArray.slice(currentLetterIndex + 2, charArray.length).join(""));
   }, [currentLetterIndex]);
-
-  // useEffect(() => {
-  //   console.log(`Key Pressed from use effect: ${keyPressed}`);
-  //   console.log(`Key Pressed LONG from use effect: ${keyPressedLong}`);
-
-  //   // If the key pressed is the same
-  //   if (keyPressed == currentLetter || (keyPressedLong == "Enter" && currentLetter == "\n")) {
-  //     const newLetterIndex = currentLetterIndex + 1;
-  //     setTypedCode(charArray.slice(0, newLetterIndex));
-  //     // console.log(`New typed code: `)
-  //     setCurrentLetter(charArray[currentLetterIndex + 1]);
-  //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-  //     setCurrentLetterIndex(newLetterIndex);
-  //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-  //     if (charArray[currentLetterIndex + 1] == "\n") {
-  //       console.log("Current letter is a new line");
-  //     }
-  //   }
-  // }, [keyPressed]);
-
-  // THE CODE BELOW DOES NOT WORK
-  // const handleKeyPress = (keyPressed, c) => {
-  //   console.log(`Key Pressed from use effect: ${keyPressed}`);
-
-  //   // If the key pressed is the same
-
-  //   if (keyPressed == currentLetter) {
-  //     const newLetterIndex = currentLetterIndex + 1;
-  //     setTypedCode(charArray.slice(0, newLetterIndex));
-  //     // console.log(`New typed code: `)
-  //     setCurrentLetter(charArray[currentLetterIndex + 1]);
-  //     setUntypedCode(charArray.slice(newLetterIndex + 1, charArray.length));
-  //     setCurrentLetterIndex(newLetterIndex);
-  //     console.log(`New current letter: `, charArray[currentLetterIndex + 1]);
-  //     if (charArray[currentLetterIndex + 1] == "\n") {
-  //       console.log("Current letter is a new line");
-  //     }
-  //   }    else    {
-  //     console.log(`Key pressed: ${keyPressed} does not match current letter: ${currentLetter}`);
-  //   }
-  // };
 
   // Page navigation stuff
   const handleStartClick = (event) => {
