@@ -14,7 +14,7 @@ import ObjectDetailHeader from "./../components/objectDetailHeader";
 import CompletedSpeedImplementation from "../components/completedSpeedImplementation";
 
 // Import Utils
-import { formatTime } from "./../utils/stringUtils"; 
+import { formatTime } from "./../utils/stringUtils";
 
 // Fake Data
 const name = "Bubble Sort";
@@ -25,15 +25,18 @@ const bigO = "n^2";
 const category = "Sorting";
 
 // Default code for bubble sort
-const bubbleSortCode = `def bubble_sort(ls):
-# Your Implementation goes here
+// const bubbleSortCode = `def bubble_sort(ls):
+// # Your Implementation goes here
 
-if __name__ == '__main__':
-\tls = [4,3,2,1]
-\tbubble_sort(ls)`;
+// if __name__ == '__main__':
+// \tls = [4,3,2,1]
+// \tbubble_sort(ls)`;
 
-// const bubbleSortCode = `hello
-// \tworld`;
+const bubbleSortCode = `hello
+\tworld`;
+
+let minutes = 0;
+let seconds = 0;
 
 const AlgorithmDetailSpeed = (props) => {
   // This splits string into char array
@@ -46,22 +49,24 @@ const AlgorithmDetailSpeed = (props) => {
   const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
 
   // Timer stuff
-  let minutes = 0;
-  let seconds = 0;
+  const [minutes, setMinutes] = useState();
+  const [seconds, setSeconds] = useState();
+  console.log("Algo Detail Rerender");
 
-  const setMinutes = (minutes) => {
-    console.log(`Setting minutes to: ${minutes}`)
-    minutes = minutes;
-  }
+  // const setMinutes = (inputMinutes) => {
+  //   // console.log(`Setting minutes to: ${inputMinutes}`);
+  //   minutes = inputMinutes;
+  // };
 
-  const setSeconds = (seconds) => {
-    console.log(`Setting seconds to: ${seconds}`)
-    seconds = seconds;
-  }
-  
+  // const setSeconds = (inputSeconds) => {
+  //   // console.log(`Setting seconds to: ${inputSeconds}`);
+  //   seconds = inputSeconds;
+  // };
+
   // Page navigation stuff
   const [hasStarted, setHasStarted] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
+  const [toShowDialog, setToShowDialog] = useState(true);
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   // set default
@@ -120,6 +125,7 @@ const AlgorithmDetailSpeed = (props) => {
     if (currentLetterIndex == charArray.length - 1 && charArray.length != 0) {
       console.log("FINISHED IMPLEMENTATIONS");
       setHasEnded(true);
+      setToShowDialog(true);
     }
 
     $(".current-letter").removeClass("idle-letter");
@@ -159,8 +165,19 @@ const AlgorithmDetailSpeed = (props) => {
     console.log("Try again");
   };
 
+  const handleCloseDialogClick = (event) => {
+    event.preventDefault();
+    setToShowDialog(false);
+  };
+
   return (
-    <div className="algo-detail-wrapper">
+    <div
+      onClick={() => {
+        console.log("Clicked on outside");
+        setToShowDialog(false);
+      }}
+      className="algo-detail-wrapper"
+    >
       <ObjectDetailHeader
         name={name}
         description={description}
@@ -171,7 +188,12 @@ const AlgorithmDetailSpeed = (props) => {
       />
       <div className="algo-detail-input-wrapper">
         <div className="algo-detail-input">
-          <AlgoDetailInputHeader  setMinutes={setMinutes} setSeconds={setSeconds}    />
+          <AlgoDetailInputHeader
+            hasStarted={hasStarted}
+            hasEnded={hasEnded}
+            setMinutesParent={setMinutes}
+            setSecondsParent={setSeconds}
+          />
           {!hasStarted ? (
             <div className="start-button-wrapper" id="start-button">
               <button onClick={handleStartClick} className="start-button">
@@ -191,17 +213,18 @@ const AlgorithmDetailSpeed = (props) => {
           )}
         </div>
       </div>
-      <div className="finished-blueprint-iframe-wrapper">
-        {hasEnded && (
+
+      {hasEnded && toShowDialog && (
+        <div className="finished-blueprint-iframe-wrapper">
           <CompletedSpeedImplementation
             problemName={name}
-            timeTaken={formatTime(AlgoDetailInputHeader.getMinutes(), seconds)}
+            timeTaken={formatTime(minutes, seconds)}
             mistakesMade={14}
             goHome={goHome}
             tryAgain={tryAgain}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

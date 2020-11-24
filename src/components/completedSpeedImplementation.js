@@ -4,7 +4,12 @@ const CompletedSpeedImplementation = (props) => {
   let { problemName, timeTaken, mistakesMade, goHome, tryAgain } = props;
 
   return (
-    <div className="finished-blueprint-iframe">
+    <div
+      onClick={(event) => {
+        event.stopPropagation();
+      }}
+      className="finished-blueprint-iframe"
+    >
       <div className="finished-blueprint-title">
         Congratulations! <span className="far fa-thumbs-up"></span>
       </div>
