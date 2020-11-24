@@ -9,9 +9,12 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 // Import components
-import Stars from "./../components/stars";
 import AlgoDetailInputHeader from "./../components/algoDetailInputHeader";
-import AlgoDetailDescription from "./../components/algoDetailDescription";
+import ObjectDetailHeader from "./../components/objectDetailHeader";
+import CompletedSpeedImplementation from "../components/completedSpeedImplementation";
+
+// Import Utils
+import { formatTime } from "./../utils/stringUtils"; 
 
 // Fake Data
 const name = "Bubble Sort";
@@ -42,6 +45,20 @@ const AlgorithmDetailSpeed = (props) => {
   const [untypedCode, setUntypedCode] = useState("");
   const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
 
+  // Timer stuff
+  let minutes = 0;
+  let seconds = 0;
+
+  const setMinutes = (minutes) => {
+    console.log(`Setting minutes to: ${minutes}`)
+    minutes = minutes;
+  }
+
+  const setSeconds = (seconds) => {
+    console.log(`Setting seconds to: ${seconds}`)
+    seconds = seconds;
+  }
+  
   // Page navigation stuff
   const [hasStarted, setHasStarted] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
@@ -134,9 +151,17 @@ const AlgorithmDetailSpeed = (props) => {
     return index + 1;
   };
 
+  const goHome = () => {
+    console.log("Going home");
+  };
+
+  const tryAgain = () => {
+    console.log("Try again");
+  };
+
   return (
     <div className="algo-detail-wrapper">
-      <AlgoDetailDescription
+      <ObjectDetailHeader
         name={name}
         description={description}
         difficulty={difficulty}
@@ -146,7 +171,7 @@ const AlgorithmDetailSpeed = (props) => {
       />
       <div className="algo-detail-input-wrapper">
         <div className="algo-detail-input">
-          <AlgoDetailInputHeader />
+          <AlgoDetailInputHeader  setMinutes={setMinutes} setSeconds={setSeconds}    />
           {!hasStarted ? (
             <div className="start-button-wrapper" id="start-button">
               <button onClick={handleStartClick} className="start-button">
@@ -168,29 +193,13 @@ const AlgorithmDetailSpeed = (props) => {
       </div>
       <div className="finished-blueprint-iframe-wrapper">
         {hasEnded && (
-          <div className="finished-blueprint-iframe">
-            <div className="finished-blueprint-title">Congratulations! <span className="far fa-thumbs-up"></span></div>
-            <div className="finished-blueprint-subtitle">
-              You have successfully completed the Bubble Sort Implementation
-            </div>
-            <div className="d-flex justify-content-left finished-blueprint-stats-card-wrapper">
-              <div className="finished-blueprint-stat-card text-center">
-                <div className="finished-blueprint-stat-card-title">Time Taken</div>
-                <div className="finished-blueprint-stat-card-value">03:15</div>
-              </div>
-              <div className="finished-blueprint-stat-card text-center">
-                <div className="finished-blueprint-stat-card-title">Mistakes Made</div>
-                <div className="finished-blueprint-stat-card-value">13</div>
-              </div>
-            </div>
-            <a href="google.com"><div className="finished-blueprint-stats-see-more-stats">See more stats <span className="fas fa-angle-right"></span></div></a>
-            <div className="finished-blueprint-stat-card-buttons-wrapper">
-              <div className="d-flex justify-content-left">
-                <button className="btn finished-blueprint-go-home-button">Go Home</button>
-                <button className="btn finished-blueprint-try-again-button">Try Again</button>
-              </div>
-            </div>
-          </div>
+          <CompletedSpeedImplementation
+            problemName={name}
+            timeTaken={formatTime(AlgoDetailInputHeader.getMinutes(), seconds)}
+            mistakesMade={14}
+            goHome={goHome}
+            tryAgain={tryAgain}
+          />
         )}
       </div>
     </div>

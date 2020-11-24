@@ -17,7 +17,7 @@ const Stars = (props) => {
   return (
     <span className="stars-wrapper">
       {Array.from(Array(numStars)).map((index) => (
-        <span className={STAR_CLASS}></span>
+        <span key={index} className={STAR_CLASS}></span>
       ))}{" "}
       {numStarsToLevel[numStars]}
     </span>

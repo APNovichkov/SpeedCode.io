@@ -9,6 +9,8 @@ import "ace-builds/src-noconflict/ext-language_tools";
 
 // Import components
 import Stars from "./../components/stars";
+import ObjectDetailHeader from "../components/objectDetailHeader";
+
 
 // Fake Data
 const name = "Bubble Sort";
@@ -65,33 +67,13 @@ const AlgorithmDetail = (props) => {
 
   return (
     <div className="algo-detail-wrapper">
-      <div className="algo-detail-header-wrapper">
-        <div className="algo-detail-title-row-wrapper">
-          <div className="d-flex justify-content-left">
-            <div className="algo-detail-title-wrapper">
-              <h2 className="algo-detail-title">{name}</h2>
-            </div>
-            <div className="algo-detail-difficulty-wrapper">
-              <Stars numStars={difficulty}></Stars>
-            </div>
-          </div>
-        </div>
-        <div className="algo-detail-attributes-row-wrapper">
-          <div className="d-flex justify-content-left">
-            <div className="algo-detail-big-o-wrapper">
-              <div className="algo-detail-big-o">{bigO}</div>
-            </div>
-            <div className="algo-detail-category-wrapper">
-              <div className="algo-detail-category">{category}</div>
-            </div>
-          </div>
-        </div>
-        <div className="algo-detail-description-row-wrapper">
-          <div className="algo-detail-description-wrapper">
-            <p className="algo-detail-description">{longDescription}</p>
-          </div>
-        </div>
-      </div>
+      <ObjectDetailHeader
+        name={name}
+        difficulty={difficulty}
+        bigO={bigO}
+        category={category}
+        longDescription={longDescription}
+      ></ObjectDetailHeader>
       <div className="algo-detail-input-wrapper">
         <div className="algo-detail-input">
           <div className="algo-detail-input-header-wrapper">

@@ -44,6 +44,7 @@ const AlgorithmsPage = () => {
         let categoryName = category[0].category;
         return (
           <OverviewCardGroup
+            key={categoryName}
             name={categoryName}
             iconClass={algoTypeToIcon[categoryName]}
             groupClass={categoryName}
