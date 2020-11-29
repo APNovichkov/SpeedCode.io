@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { Link } from "react-router-dom";
 
 const CompletedSpeedImplementation = (props) => {
-  let { problemName, timeTaken, mistakesMade, goHome, tryAgain } = props;
+  let { problemName, timeTaken, mistakesMade, wordsPerMinute, goHome, tryAgain } = props;
 
   return (
     <div
@@ -20,6 +22,10 @@ const CompletedSpeedImplementation = (props) => {
         <div className="finished-blueprint-stat-card text-center">
           <div className="finished-blueprint-stat-card-title">Time Taken</div>
           <div className="finished-blueprint-stat-card-value">{timeTaken}</div>
+        </div>
+        <div className="finished-blueprint-stat-card text-center">
+          <div className="finished-blueprint-stat-card-title">Words Per Minute</div>
+          <div className="finished-blueprint-stat-card-value">{wordsPerMinute}</div>
         </div>
         <div className="finished-blueprint-stat-card text-center">
           <div className="finished-blueprint-stat-card-title">Mistakes Made</div>

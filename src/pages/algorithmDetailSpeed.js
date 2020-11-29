@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AceEditor from "react-ace";
-import Timer from "react-compound-timer";
-import { Modal, Button } from "react-bootstrap";
+import { Link, Redirect } from "react-router-dom";
 import $ from "jquery";
 
 import "ace-builds/src-noconflict/mode-python";
@@ -15,6 +13,7 @@ import CompletedSpeedImplementation from "../components/completedSpeedImplementa
 
 // Import Utils
 import { formatTime } from "./../utils/stringUtils";
+import {getWordsPerMinute} from "./../utils/statsUtils";
 
 // Fake Data
 const name = "Bubble Sort";
@@ -25,15 +24,15 @@ const bigO = "n^2";
 const category = "Sorting";
 
 // Default code for bubble sort
-// const bubbleSortCode = `def bubble_sort(ls):
-// # Your Implementation goes here
+const bubbleSortCode = `def bubble_sort(ls):
+# Your Implementation goes here
 
-// if __name__ == '__main__':
-// \tls = [4,3,2,1]
-// \tbubble_sort(ls)`;
+if __name__ == '__main__':
+\tls = [4,3,2,1]
+\tbubble_sort(ls)`;
 
-const bubbleSortCode = `hello
-\tworld`;
+// const bubbleSortCode = `hello
+// \tworld`;
 
 let minutes = 0;
 let seconds = 0;
@@ -41,6 +40,7 @@ let seconds = 0;
 const AlgorithmDetailSpeed = (props) => {
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
+  const [numWords, setNumWords] = useState(0);
 
   // Typing over blueprint text stuff
   const [typedCode, setTypedCode] = useState("");
@@ -48,37 +48,36 @@ const AlgorithmDetailSpeed = (props) => {
   const [untypedCode, setUntypedCode] = useState("");
   const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
 
+  // Stats stuff
+  const [mistakesMade, setMistakesMade] = useState(0);
+
   // Timer stuff
   const [minutes, setMinutes] = useState();
   const [seconds, setSeconds] = useState();
-  console.log("Algo Detail Rerender");
-
-  // const setMinutes = (inputMinutes) => {
-  //   // console.log(`Setting minutes to: ${inputMinutes}`);
-  //   minutes = inputMinutes;
-  // };
-
-  // const setSeconds = (inputSeconds) => {
-  //   // console.log(`Setting seconds to: ${inputSeconds}`);
-  //   seconds = inputSeconds;
-  // };
 
   // Page navigation stuff
   const [hasStarted, setHasStarted] = useState(false);
   const [hasEnded, setHasEnded] = useState(false);
-  const [toShowDialog, setToShowDialog] = useState(true);
+  const [toShowDialog, setToShowDialog] = useState(false);
+  const [toGoHome, setToGoHome] = useState(false);
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
-  // set default
   useEffect(() => {
     const localCharArray = bubbleSortCode.split("");
     setCharArray(localCharArray);
+    setNumWords(bubbleSortCode.split(" ").length);
+
+    console.log(`Number of words: ${bubbleSortCode.split(" ").length}`)
 
     console.log(localCharArray);
+
+    $(".current-letter").addClass("idle-letter");
 
     // Handle key press
     document.addEventListener("keypress", function (event) {
       const charPressed = event.key;
+
+      console.log(`Key was pressed: ${event.key}`)
 
       // check if key matches value
       setCurrentLetterIndex((currentLetterIndex) => {
@@ -93,6 +92,10 @@ const AlgorithmDetailSpeed = (props) => {
             return skippedCurrentLetterIndex + 1;
           } else {
             $(".current-letter").addClass("wrong-letter");
+
+            console.log('SETTING MISTAKES MADE TO: ', mistakesMade+1)
+            setMistakesMade(mistakesMade => {return (mistakesMade + 1)})
+
             return skippedCurrentLetterIndex;
           }
         } else {
@@ -101,7 +104,12 @@ const AlgorithmDetailSpeed = (props) => {
           } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
             return currentLetterIndex + 1;
           } else {
+            // TODO For some reason this is getting called twice
+            console.log('Setting mistakes made to: ', mistakesMade+1)
+            setMistakesMade(mistakesMade => {return (mistakesMade + 1)})
+
             $(".current-letter").addClass("wrong-letter");
+
             return currentLetterIndex;
           }
         }
@@ -110,17 +118,26 @@ const AlgorithmDetailSpeed = (props) => {
     });
   }, []);
 
+
+  useEffect(() => {
+    console.log("Mistakes made is updated to: ", mistakesMade)
+  }, [mistakesMade])
+
   useEffect(() => {
     console.log("Char Array: ", charArray);
-
     setCurrentLetter(charArray[0]);
     setUntypedCode(charArray.slice(1, charArray.length));
   }, [charArray]);
 
-  // TODO - There is an issue with the same letter following each other
+  
 
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
+
+    // Check if index is set to 0, if so, then begin time
+    if (currentLetterIndex == 0){
+      setHasStarted(true);
+    }
 
     if (currentLetterIndex == charArray.length - 1 && charArray.length != 0) {
       console.log("FINISHED IMPLEMENTATIONS");
@@ -157,12 +174,28 @@ const AlgorithmDetailSpeed = (props) => {
     return index + 1;
   };
 
+  // Handle Go Home Functionality
   const goHome = () => {
     console.log("Going home");
-  };
 
+    setToGoHome(true);
+  };
+  if (toGoHome) {
+    return <Redirect to="/algorithms"></Redirect>;
+  }
+
+
+  // Handle Try Again Functionality
   const tryAgain = () => {
     console.log("Try again");
+
+    setHasStarted(false);
+    setHasEnded(false);
+    setToShowDialog(false);
+    setCurrentLetter("");
+    setCurrentLetterIndex(-1);
+    setTypedCode("");
+    setUntypedCode("");
   };
 
   const handleCloseDialogClick = (event) => {
@@ -194,14 +227,7 @@ const AlgorithmDetailSpeed = (props) => {
             setMinutesParent={setMinutes}
             setSecondsParent={setSeconds}
           />
-          {!hasStarted ? (
-            <div className="start-button-wrapper" id="start-button">
-              <button onClick={handleStartClick} className="start-button">
-                Start
-              </button>
-            </div>
-          ) : (
-            <div>
+          <div>
               <div className="algo-detail-input-text-wrapper">
                 <span className="typed-code">{typedCode}</span>
                 <span id="current-letter" className="current-letter idle-letter">
@@ -210,7 +236,15 @@ const AlgorithmDetailSpeed = (props) => {
                 <span className="untyped-code">{untypedCode}</span>
               </div>
             </div>
-          )}
+          {/* {!hasStarted ? (
+            <div className="start-button-wrapper" id="start-button">
+              <button onClick={handleStartClick} className="start-button">
+                Start
+              </button>
+            </div>
+          ) : (
+            
+          )} */}
         </div>
       </div>
 
@@ -219,7 +253,8 @@ const AlgorithmDetailSpeed = (props) => {
           <CompletedSpeedImplementation
             problemName={name}
             timeTaken={formatTime(minutes, seconds)}
-            mistakesMade={14}
+            wordsPerMinute={getWordsPerMinute(minutes, seconds, numWords)}
+            mistakesMade={mistakesMade/2}
             goHome={goHome}
             tryAgain={tryAgain}
           />

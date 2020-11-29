@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 // Import Components
 import Stopwatch from "./stopwatch";
@@ -11,11 +11,11 @@ const AlgoDetailInputHeader = (props) => {
 
   const setMinutes = (minutes) => {
     setMinutesParent(minutes);
-  } 
+  };
 
   const setSeconds = (seconds) => {
     setSecondsParent(seconds);
-  }
+  };
   // const getMinutes = () => {
   //   return minutes;
   // };
@@ -24,26 +24,33 @@ const AlgoDetailInputHeader = (props) => {
   //   return seconds;
   // };
 
-  const t1 = () => {
+  const t1 = () => {};
 
-  }
-
-  const t2 = () => {
-
-  }
+  const t2 = () => {};
 
   // let hasStarted=true;
 
-  console.log("Algo Header Rerender")
+  console.log("Algo Header Rerender");
 
   return (
     <div className="algo-detail-input-header-wrapper">
       <div className="algo-detail-input-header">
         <div className="d-flex justify-content-between">
-          <div className="algo-detail-language-type">
-            Python <span className="fas fa-angle-down"></span>
+          <div className="d-flex justify-content-left">
+            <div className="algo-detail-language-type">
+              Python <span className="fas fa-angle-down"></span>
+            </div>
+            {!hasStarted && (
+              <div className="algo-detail-start-typing-message">
+              Start typing to start timer!
+            </div>
+            )}
+            
           </div>
-          {hasStarted && <Stopwatch hasEnded={hasEnded} setMinutes={setMinutesParent} setSeconds={setSecondsParent}></Stopwatch>}
+
+          {hasStarted && (
+            <Stopwatch hasEnded={hasEnded} setMinutes={setMinutesParent} setSeconds={setSecondsParent}></Stopwatch>
+          )}
 
           {/* {seconds} */}
         </div>

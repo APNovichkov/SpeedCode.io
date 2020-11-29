@@ -487,6 +487,11 @@ body {
   letter-spacing: 1px;
 }
 
+.algo-detail-start-typing-message{
+  margin-left: 40px;
+  font-weight: 300;
+}
+
 .finished-blueprint-iframe-wrapper{
   text-align: center;
   width: 100%;
@@ -497,7 +502,7 @@ body {
   left: 0;
   top: 0;
   position:absolute;
-  background-color: rgba(0,0,0,0.4);
+  /* background-color: rgba(0,0,0,0.4); */
 }
 
 .finished-blueprint-iframe{
