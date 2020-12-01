@@ -99,15 +99,19 @@ const AlgorithmDetailSpeed = (props) => {
             return skippedCurrentLetterIndex;
           }
         } else {
+          console.log("IN ELSE");
           if (charPressed === localCharArray[currentLetterIndex + 1]) {
             return currentLetterIndex + 1;
           } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
             return currentLetterIndex + 1;
           } else {
             // TODO For some reason this is getting called twice
-            console.log('Setting mistakes made to: ', mistakesMade+1)
-            setMistakesMade(mistakesMade => {return (mistakesMade + 1)})
+            console.log("Setting mistakes made to: ", mistakesMade + 1);
+            setMistakesMade((mistakesMade) => {
+              return mistakesMade + 1;
+            });
 
+            // TODO - Fix This
             $(".current-letter").addClass("wrong-letter");
 
             return currentLetterIndex;

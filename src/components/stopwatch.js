@@ -7,8 +7,6 @@ import { formatTime } from "./../utils/stringUtils";
 const Stopwatch = (props) => {
   let { setMinutes, setSeconds, hasEnded } = props;
 
-  console.log("Stopwatch rerender");
-
   let limit = "00:30:00";
 
   if (hasEnded) {
