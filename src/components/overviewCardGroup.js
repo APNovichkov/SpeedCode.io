@@ -14,16 +14,19 @@ const OverviewCardGroup = (props) => {
       </h4>
 
       <div className="overview-card-group-cards-wrapper">
-        {data.map((card) => {
+        {data.map((dataItem) => {
           return (
             <OverviewCard
-              key={card.id}
-              name={card.name}
-              urlName={card.urlName}
-              description={card.description}
-              difficulty={card.difficulty}
-              attempts={card.attempts}
+              key={dataItem._id['$oid']}
+              name={dataItem.name}
+              urlName={dataItem.urlName}
+              description={dataItem.description}
+              longDescription={dataItem.longDescription}
+              timeComplexity={dataItem.timeComplexity}
+              difficulty={dataItem.difficulty}
+              attempts={dataItem.attempts}
               groupClass={groupClass.toLowerCase()}
+              code={dataItem.code}
             />
           );
         })}

@@ -13,15 +13,15 @@ import CompletedSpeedImplementation from "../components/completedSpeedImplementa
 
 // Import Utils
 import { formatTime } from "./../utils/stringUtils";
-import {getWordsPerMinute} from "./../utils/statsUtils";
+import { getWordsPerMinute } from "./../utils/statsUtils";
 
 // Fake Data
-const name = "Bubble Sort";
-const difficulty = 2;
-const description = "Iterative Sorting Algorithm";
+// const name = "Bubble Sort";
+// const difficulty = 2;
+// const description = "Iterative Sorting Algorithm";
 const longDescription = "Bubble Sort is an Iterative Sorting Algorithm. It has best case scenario of N^2 time.";
 const bigO = "n^2";
-const category = "Sorting";
+// const category = "Sorting";
 
 // Default code for bubble sort
 const bubbleSortCode = `def bubble_sort(ls):
@@ -38,6 +38,19 @@ let minutes = 0;
 let seconds = 0;
 
 const AlgorithmDetailSpeed = (props) => {
+  // Get input data
+  let {
+    name,
+    description,
+    longDescription,
+    timeComplexity,
+    difficulty,
+    attempts,
+    groupClass,
+    code,
+  } = props.location.state.algorithmData;
+  let urlName = props.match.params.name;
+
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
   const [numWords, setNumWords] = useState(0);
@@ -63,69 +76,73 @@ const AlgorithmDetailSpeed = (props) => {
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   useEffect(() => {
-    const localCharArray = bubbleSortCode.split("");
-    setCharArray(localCharArray);
-    setNumWords(bubbleSortCode.split(" ").length);
+    if (code) {
 
-    console.log(`Number of words: ${bubbleSortCode.split(" ").length}`)
+      const localCharArray = code.python.split("");
+      setCharArray(localCharArray);
+      setNumWords(bubbleSortCode.split(" ").length);
 
-    console.log(localCharArray);
+      console.log(`Number of words: ${bubbleSortCode.split(" ").length}`);
 
-    $(".current-letter").addClass("idle-letter");
+      console.log(localCharArray);
 
-    // Handle key press
-    document.addEventListener("keypress", function (event) {
-      const charPressed = event.key;
+      $(".current-letter").addClass("idle-letter");
 
-      console.log(`Key was pressed: ${event.key}`)
+      // Handle key press
+      document.addEventListener("keypress", function (event) {
+        const charPressed = event.key;
 
-      // check if key matches value
-      setCurrentLetterIndex((currentLetterIndex) => {
-        if (localCharArray[currentLetterIndex + 2] == "\t") {
-          console.log("Next char is tab, so I am skipping it");
-          console.log("Current letter index: ", currentLetterIndex + 1);
-          const skippedCurrentLetterIndex = currentLetterIndex + 2;
+        console.log(`Key was pressed: ${event.key}`);
 
-          if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
-            return skippedCurrentLetterIndex + 1;
-          } else if (charPressed == "Enter" && localCharArray[skippedCurrentLetterIndex + 1] == "\n") {
-            return skippedCurrentLetterIndex + 1;
+        // check if key matches value
+        setCurrentLetterIndex((currentLetterIndex) => {
+          if (localCharArray[currentLetterIndex + 2] == "\t") {
+            console.log("Next char is tab, so I am skipping it");
+            console.log("Current letter index: ", currentLetterIndex + 1);
+            const skippedCurrentLetterIndex = currentLetterIndex + 2;
+
+            if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
+              return skippedCurrentLetterIndex + 1;
+            } else if (charPressed == "Enter" && localCharArray[skippedCurrentLetterIndex + 1] == "\n") {
+              return skippedCurrentLetterIndex + 1;
+            } else {
+              $(".current-letter").addClass("wrong-letter");
+
+              console.log("SETTING MISTAKES MADE TO: ", mistakesMade + 1);
+              setMistakesMade((mistakesMade) => {
+                return mistakesMade + 1;
+              });
+
+              return skippedCurrentLetterIndex;
+            }
           } else {
-            $(".current-letter").addClass("wrong-letter");
+            console.log("IN ELSE");
+            if (charPressed === localCharArray[currentLetterIndex + 1]) {
+              return currentLetterIndex + 1;
+            } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
+              return currentLetterIndex + 1;
+            } else {
+              // TODO For some reason this is getting called twice
+              console.log("Setting mistakes made to: ", mistakesMade + 1);
+              setMistakesMade((mistakesMade) => {
+                return mistakesMade + 1;
+              });
 
-            console.log('SETTING MISTAKES MADE TO: ', mistakesMade+1)
-            setMistakesMade(mistakesMade => {return (mistakesMade + 1)})
+              // TODO - Fix This
+              $(".current-letter").addClass("wrong-letter");
 
-            return skippedCurrentLetterIndex;
+              return currentLetterIndex;
+            }
           }
-        } else {
-          console.log("IN ELSE");
-          if (charPressed === localCharArray[currentLetterIndex + 1]) {
-            return currentLetterIndex + 1;
-          } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
-            return currentLetterIndex + 1;
-          } else {
-            // TODO For some reason this is getting called twice
-            console.log("Setting mistakes made to: ", mistakesMade + 1);
-            setMistakesMade((mistakesMade) => {
-              return mistakesMade + 1;
-            });
-
-            // TODO - Fix This
-            $(".current-letter").addClass("wrong-letter");
-
-            return currentLetterIndex;
-          }
-        }
+        });
+        // setKeyPressed(pressedChar);
       });
-      // setKeyPressed(pressedChar);
-    });
-  }, []);
-
+    }
+  }, [code]);
 
   useEffect(() => {
-    console.log("Mistakes made is updated to: ", mistakesMade)
-  }, [mistakesMade])
+    console.log("Mistakes made is updated to: ", mistakesMade);
+  }, [mistakesMade]);
 
   useEffect(() => {
     console.log("Char Array: ", charArray);
@@ -133,13 +150,11 @@ const AlgorithmDetailSpeed = (props) => {
     setUntypedCode(charArray.slice(1, charArray.length));
   }, [charArray]);
 
-  
-
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
 
     // Check if index is set to 0, if so, then begin time
-    if (currentLetterIndex == 0){
+    if (currentLetterIndex == 0) {
       setHasStarted(true);
     }
 
@@ -188,7 +203,6 @@ const AlgorithmDetailSpeed = (props) => {
     return <Redirect to="/algorithms"></Redirect>;
   }
 
-
   // Handle Try Again Functionality
   const tryAgain = () => {
     console.log("Try again");
@@ -219,8 +233,8 @@ const AlgorithmDetailSpeed = (props) => {
         name={name}
         description={description}
         difficulty={difficulty}
-        bigO={bigO}
-        category={category}
+        bigO={timeComplexity}
+        category={groupClass}
         longDescription={longDescription}
       />
       <div className="algo-detail-input-wrapper">
@@ -232,14 +246,14 @@ const AlgorithmDetailSpeed = (props) => {
             setSecondsParent={setSeconds}
           />
           <div>
-              <div className="algo-detail-input-text-wrapper">
-                <span className="typed-code">{typedCode}</span>
-                <span id="current-letter" className="current-letter idle-letter">
-                  {currentLetter}
-                </span>
-                <span className="untyped-code">{untypedCode}</span>
-              </div>
+            <div className="algo-detail-input-text-wrapper">
+              <span className="typed-code">{typedCode}</span>
+              <span id="current-letter" className="current-letter idle-letter">
+                {currentLetter}
+              </span>
+              <span className="untyped-code">{untypedCode}</span>
             </div>
+          </div>
           {/* {!hasStarted ? (
             <div className="start-button-wrapper" id="start-button">
               <button onClick={handleStartClick} className="start-button">
@@ -258,7 +272,7 @@ const AlgorithmDetailSpeed = (props) => {
             problemName={name}
             timeTaken={formatTime(minutes, seconds)}
             wordsPerMinute={getWordsPerMinute(minutes, seconds, numWords)}
-            mistakesMade={mistakesMade/2}
+            mistakesMade={mistakesMade / 2}
             goHome={goHome}
             tryAgain={tryAgain}
           />

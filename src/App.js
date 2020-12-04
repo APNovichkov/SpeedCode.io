@@ -27,8 +27,9 @@ function App() {
               <Redirect to="/algorithms"></Redirect>
             </Route>
             <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
-            <Route path="/algorithms/bubblesort" exact render={() => <AlgorithmDetail hi={"HI"} />}></Route>
-            <Route path="/algorithms/bubblesort/speed" component={AlgorithmDetailSpeed}></Route>
+            {/* <Route path="/algorithms/bubblesort" exact render={() => <AlgorithmDetail hi={"HI"} />}></Route> */}
+            {/* <Route path="/algorithms/bubblesort/speed" component={AlgorithmDetailSpeed}></Route> */}
+            <Route path="/algorithms/speed/:name" component={AlgorithmDetailSpeed}></Route>
             <Route path="/algorithms/mergesort" component={AlgorithmDetail}></Route>
             <Route path="/datastructures" exact component={DataStructuresPage}></Route>
           </Switch>

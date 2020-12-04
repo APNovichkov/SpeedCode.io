@@ -7,7 +7,7 @@ import Stars from "./stars";
 // Declare constants
 
 const OverviewCard = (props) => {
-  let { name, urlName, description, difficulty, attempts, groupClass } = props;
+  let { name, urlName, description, longDescription, timeComplexity, difficulty, attempts, groupClass, code } = props;
 
   return (
     <div className={`overview-card ${groupClass.toLowerCase()}`}>
@@ -21,7 +21,25 @@ const OverviewCard = (props) => {
         </span>
       </div>
       <div className="overview-card-buttons-wrapper">
-        <Link to={`/algorithms/${urlName}/speed`}>
+        <Link
+          to={{
+            pathname: `/algorithms/speed/${urlName}`,
+            state: {
+              from: "createMrnaForm",
+              toShowNotification: true,
+              algorithmData: {
+                name: name,
+                description: description,
+                longDescription: longDescription,
+                timeComplexity: timeComplexity,
+                difficulty: difficulty,
+                attempts: attempts,
+                groupClass: groupClass,
+                code: code
+              },
+            },
+          }}
+        >
           <button className="practice-button">Practice</button>
         </Link>
       </div>

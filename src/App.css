@@ -410,6 +410,8 @@ body {
 .algo-detail-input-text-wrapper{
   padding-left: 25px;
   padding-right: 25px;
+  overflow-y: scroll;
+  max-height: 400px;
 }
 
 .algo-detail-input-text{
