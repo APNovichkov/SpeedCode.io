@@ -4,6 +4,95 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+/* LOGIN STUFF */
+
+.login-header{
+  font-size: 30px;
+  font-weight: 600;
+  color: #d63447;
+}
+
+.login-wrapper{
+  height: 90vh;
+  padding-top: 12%;
+}
+
+.login-form-wrapper{
+  margin-top: 25px;
+}
+
+.login-input-wrapper{
+  margin-top: 5px;
+}
+
+.login-button-wrapper{
+  margin-top: 20px;
+}
+
+.login-input-wrapper input{
+  border: 1px solid #d85b6a;
+  background-color: transparent;
+}
+
+.login-button{
+  background-color: transparent;
+  border: 1px solid #d63447;
+  border-radius: 4px;
+  color: #d63447;
+}
+
+.login-button:hover{
+  background-color: #d85b6a;
+  border: 1px solid #d85b6a;
+  border-radius: 4x;
+  color: #ffffff;
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
+}
+
+.login-sign-up-wrapper{
+  margin-left: 20px;
+  color: #d63447;
+  margin-top: 6px;
+}
+
+.login-sign-up-wrapper a {
+  font-weight: 600;
+  color: #d63447;
+}
+
+.login-error-wrapper{
+  font-weight: 600;
+  font-size: 20px;
+  color: #381460;
+}
+
+/* FOOTER STUFF */
+
+.footer-wrapper{
+  background-color: #381460;
+  color: #ffffff;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-link-wrapper{
+  margin-left: 20px;
+}
+
+.footer-link-wrapper a{
+  font-weight: 500;
+}
+
+.footer-links-wrapper{
+  margin-top: 22px;
+}
+
+.footer-made-with-wrapper{
+  margin-top: 8px;
+}
+
 /* LANDING PAGE STUFF */
 
 .landing-hero-wrapper{
@@ -66,7 +155,7 @@ body {
 }
 
 .landing-description-row-wrapper{
-  margin-bottom: 150px;
+  padding-bottom: 150px;
 }
 
 .landing-image{
@@ -126,7 +215,9 @@ body {
   margin-top: 10px;
 }
 
-
+.landing-navbar-welcome a{
+  color: #d63447;
+}
 
 /* NAVBAR STUFF */
 

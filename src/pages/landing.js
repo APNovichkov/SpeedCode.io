@@ -87,8 +87,7 @@ const Landing = (props) => {
                     Your Skills
                   </div>
                   <div className="landing-description-item-text">
-                    Choose from our curated collection of the most popular algorithms and data structures sorted by
-                    category
+                    Track your progress over time, get meaningful insights and watch yourself grow!
                   </div>
                 </div>
               </div>
