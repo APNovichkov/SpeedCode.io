@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import _ from "underscore";
 
 // Import utils
-import {getAlgorithmsUrl } from "./../utils/urlUtils";
+import { getAlgorithmsUrl } from "./../utils/urlUtils";
 
 // Import components
 import MainWrapper from "./../components/mainWrapper";
 import AlgoPageHeader from "./../components/algoPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
+import Navbar from "./../components/navbar";
+import LinksNavbar from "./../components/linksNavbar";
 
 // Import data providers
 import { getAllAlgorithms } from "./../dataProviders/algorithms";
@@ -17,7 +18,7 @@ import { getAllAlgorithms } from "./../dataProviders/algorithms";
 // Set Constants
 const algoTypeToIcon = {
   Sorting: "fas fa-stream",
-  Graphs: "fas fa-project-diagram"
+  Graphs: "fas fa-project-diagram",
 };
 
 const AlgorithmsPage = () => {
@@ -44,21 +45,25 @@ const AlgorithmsPage = () => {
   }, []);
 
   return (
-    <div className="algorithms-wrapper">
-      <AlgoPageHeader />
-      <hr className="algo-header-line-break"></hr>
-      {algos.map((algosByCategory, index) => {
-        let categoryName = algosByCategory[0].category;
-        return (
-          <OverviewCardGroup
-            key={categoryName}
-            name={categoryName}
-            iconClass={algoTypeToIcon[categoryName]}
-            groupClass={categoryName}
-            data={algosByCategory}
-          />
-        );
-      })}
+    <div>
+      <Navbar />
+      <LinksNavbar />
+      <div className="algorithms-wrapper">
+        <AlgoPageHeader />
+        <hr className="algo-header-line-break"></hr>
+        {algos.map((algosByCategory, index) => {
+          let categoryName = algosByCategory[0].category;
+          return (
+            <OverviewCardGroup
+              key={categoryName}
+              name={categoryName}
+              iconClass={algoTypeToIcon[categoryName]}
+              groupClass={categoryName}
+              data={algosByCategory}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

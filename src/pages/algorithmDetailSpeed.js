@@ -10,6 +10,8 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import AlgoDetailInputHeader from "./../components/algoDetailInputHeader";
 import ObjectDetailHeader from "./../components/objectDetailHeader";
 import CompletedSpeedImplementation from "../components/completedSpeedImplementation";
+import Navbar from "./../components/navbar";
+import LinksNavbar from "./../components/linksNavbar";
 
 // Import Utils
 import { formatTime } from "./../utils/stringUtils";
@@ -78,22 +80,21 @@ const AlgorithmDetailSpeed = (props) => {
     let out = 0;
     let index = startIndex;
 
-    console.log("START CHAR: ", )
+    console.log("START CHAR: ");
 
     // Find num tabs in sequential order starting at the start index
-    while(charArray[index] == "\t"){
-      console.log("IN SEQUENTIAL TAB WHILE")
+    while (charArray[index] == "\t") {
+      console.log("IN SEQUENTIAL TAB WHILE");
       out += 1;
       index += 1;
     }
 
     return out;
-  }
+  };
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   useEffect(() => {
     if (code) {
-
       const localCharArray = code.python.split("");
       setCharArray(localCharArray);
       setNumWords(bubbleSortCode.split(" ").length);
@@ -112,8 +113,7 @@ const AlgorithmDetailSpeed = (props) => {
 
         // check if key matches value
         setCurrentLetterIndex((currentLetterIndex) => {
-
-          let potentialFirstTabIndex = currentLetterIndex + 2; 
+          let potentialFirstTabIndex = currentLetterIndex + 2;
 
           if (localCharArray[potentialFirstTabIndex] == "\t") {
             let numTabs = getNumSequentialTabs(potentialFirstTabIndex, localCharArray);
@@ -246,48 +246,51 @@ const AlgorithmDetailSpeed = (props) => {
       onClick={() => {
         setToShowDialog(false);
       }}
-      className="algo-detail-wrapper"
     >
-      <ObjectDetailHeader
-        name={name}
-        description={description}
-        difficulty={difficulty}
-        bigO={timeComplexity}
-        category={groupClass}
-        longDescription={longDescription}
-      />
-      <div className="algo-detail-input-wrapper">
-        <div className="algo-detail-input">
-          <AlgoDetailInputHeader
-            hasStarted={hasStarted}
-            hasEnded={hasEnded}
-            setMinutesParent={setMinutes}
-            setSecondsParent={setSeconds}
-          />
-          <div>
-            <div className="algo-detail-input-text-wrapper">
-              <span className="typed-code">{typedCode}</span>
-              <span id="current-letter" className="current-letter idle-letter">
-                {currentLetter}
-              </span>
-              <span className="untyped-code">{untypedCode}</span>
+      <Navbar/>
+      <LinksNavbar />
+      <div className="algo-detail-wrapper">
+        <ObjectDetailHeader
+          name={name}
+          description={description}
+          difficulty={difficulty}
+          bigO={timeComplexity}
+          category={groupClass}
+          longDescription={longDescription}
+        />
+        <div className="algo-detail-input-wrapper">
+          <div className="algo-detail-input">
+            <AlgoDetailInputHeader
+              hasStarted={hasStarted}
+              hasEnded={hasEnded}
+              setMinutesParent={setMinutes}
+              setSecondsParent={setSeconds}
+            />
+            <div>
+              <div className="algo-detail-input-text-wrapper">
+                <span className="typed-code">{typedCode}</span>
+                <span id="current-letter" className="current-letter idle-letter">
+                  {currentLetter}
+                </span>
+                <span className="untyped-code">{untypedCode}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {hasEnded && toShowDialog && (
-        <div className="finished-blueprint-iframe-wrapper">
-          <CompletedSpeedImplementation
-            problemName={name}
-            timeTaken={formatTime(minutes, seconds)}
-            wordsPerMinute={getWordsPerMinute(minutes, seconds, numWords)}
-            mistakesMade={mistakesMade / 2}
-            goHome={goHome}
-            tryAgain={tryAgain}
-          />
-        </div>
-      )}
+        {hasEnded && toShowDialog && (
+          <div className="finished-blueprint-iframe-wrapper">
+            <CompletedSpeedImplementation
+              problemName={name}
+              timeTaken={formatTime(minutes, seconds)}
+              wordsPerMinute={getWordsPerMinute(minutes, seconds, numWords)}
+              mistakesMade={mistakesMade / 2}
+              goHome={goHome}
+              tryAgain={tryAgain}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

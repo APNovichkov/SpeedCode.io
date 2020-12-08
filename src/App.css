@@ -4,6 +4,119 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+/* LANDING PAGE STUFF */
+
+.landing-hero-wrapper{
+  /* background-image: linear-gradient(to top, #e9828c, #f9fcfb); */
+  background-color: #f9fcfb;
+  height: 400px;
+}
+
+.landing-hero-main-text{
+  font-size: 30px;
+  font-weight: 700;
+  color: #d63447;
+  margin-top: 120px;
+}
+
+.landing-hero-subtitle{
+  font-size: 15px;
+  font-weight: 500;
+  color: #d63447;
+  margin-top: 20px;
+}
+
+.landing-hero-button-wrapper{
+  margin-top: 50px;
+}
+
+.landing-hero-button{
+  background-color: transparent;
+  border: 1px solid #d63447;
+  border-radius: 10px;
+  color: #d63447;
+}
+
+.landing-hero-button:hover{
+  background-color: #d85b6a;
+  border: 1px solid #d85b6a;
+  border-radius: 10px;
+  color: #ffffff;
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
+}
+
+.landing-stats-row-wrapper{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #d63447;
+  margin-bottom: 100px;
+}
+
+.landing-stats-row-header{
+  margin-bottom: 40px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.stats-item{
+  font-size: 25px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.landing-description-row-wrapper{
+  margin-bottom: 150px;
+}
+
+.landing-image{
+  max-width: 80%;
+  /* margin-left: 50px; */
+  border: 1px solid #faecee;
+  border-radius: 10px;
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
+}
+
+.landing-description-item-title{
+  font-size: 25px;
+  font-weight: 800;
+  color: #d63447;
+}
+
+.landing-description-item-text{
+  font-size: 18px;
+  font-weight: 400;
+  color: #D56576;
+  margin-top: 10px;
+}
+
+.landing-description-wrapper{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* LANDING NAVBAR STUFF */
+
+.landing-navbar-link{
+  margin-left: 15px;
+}
+
+.landing-navbar-wrapper{
+  padding-top: 5px;
+  padding-bottom: 30px;
+  margin-left: 150px;
+  margin-right: 120px;
+}
+
+.landing-navbar-welcome{
+  color: #d63447;
+  margin-top: 10px;
+}
+
+
+
+/* NAVBAR STUFF */
+
 .navbar-home {
   height: 30px;
   background-color: #f9fcfb;

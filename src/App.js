@@ -14,18 +14,19 @@ import AlgorithmsPage from "./pages/algorithms";
 import AlgorithmDetail from "./pages/algorithmDetail";
 import AlgorithmDetailSpeed from "./pages/algorithmDetailSpeed";
 import DataStructuresPage from "./pages/dataStructures";
+import Landing from "./pages/landing";
 
 function App() {
   return (
     <div>
       <Router>
-        <Navbar />
-        <LinksNavbar />
+        
         <div className="body-wrapper">
           <Switch>
-            <Route path="/" exact>
+            <Route path="/" exact component={Landing}></Route>
+            {/* <Route path="/" exact>
               <Redirect to="/algorithms"></Redirect>
-            </Route>
+            </Route> */}
             <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
             {/* <Route path="/algorithms/bubblesort" exact render={() => <AlgorithmDetail hi={"HI"} />}></Route> */}
             {/* <Route path="/algorithms/bubblesort/speed" component={AlgorithmDetailSpeed}></Route> */}

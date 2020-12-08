@@ -10,7 +10,8 @@ import "ace-builds/src-noconflict/ext-language_tools";
 // Import components
 import Stars from "./../components/stars";
 import ObjectDetailHeader from "../components/objectDetailHeader";
-
+import Navbar from "./../components/navbar";
+import LinksNavbar from "./../components/linksNavbar";
 
 // Fake Data
 const name = "Bubble Sort";
@@ -66,91 +67,95 @@ const AlgorithmDetail = (props) => {
   };
 
   return (
-    <div className="algo-detail-wrapper">
-      <ObjectDetailHeader
-        name={name}
-        difficulty={difficulty}
-        bigO={bigO}
-        category={category}
-        longDescription={longDescription}
-      ></ObjectDetailHeader>
-      <div className="algo-detail-input-wrapper">
-        <div className="algo-detail-input">
-          <div className="algo-detail-input-header-wrapper">
-            <div className="algo-detail-input-header">
-              <Timer startImmediately={true}>
-                {({ stop, getTime }) => (
-                  <div className="d-flex justify-content-between">
-                    <div className="algo-detail-options-wrapper">
-                      <div className="row algo-detail-options-row">
-                        <div className="col-md-9">
-                          <div className="algo-detail-language-type">
-                            Python <span className="fas fa-angle-down"></span>
+    <div>
+      <Navbar />
+      <LinksNavbar />
+      <div className="algo-detail-wrapper">
+        <ObjectDetailHeader
+          name={name}
+          difficulty={difficulty}
+          bigO={bigO}
+          category={category}
+          longDescription={longDescription}
+        ></ObjectDetailHeader>
+        <div className="algo-detail-input-wrapper">
+          <div className="algo-detail-input">
+            <div className="algo-detail-input-header-wrapper">
+              <div className="algo-detail-input-header">
+                <Timer startImmediately={true}>
+                  {({ stop, getTime }) => (
+                    <div className="d-flex justify-content-between">
+                      <div className="algo-detail-options-wrapper">
+                        <div className="row algo-detail-options-row">
+                          <div className="col-md-9">
+                            <div className="algo-detail-language-type">
+                              Python <span className="fas fa-angle-down"></span>
+                            </div>
+                          </div>
+                          <div className="col-md-3">
+                            {hasStarted && (
+                              <div className="algo-detail-done-button-wrapper">
+                                <button
+                                  onClick={(event) => handleSubmitCodeClick(event, stop, getTime)}
+                                  className="algo-detail-submit-button"
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </div>
-                        <div className="col-md-3">
-                          {hasStarted && (
-                            <div className="algo-detail-done-button-wrapper">
-                              <button
-                                onClick={(event) => handleSubmitCodeClick(event, stop, getTime)}
-                                className="algo-detail-submit-button"
-                              >
-                                Submit
-                              </button>
-                            </div>
-                          )}
-                        </div>
+                      </div>
+                      <div className="algo-detail-timer-wrapper">
+                        {hasStarted && (
+                          <div className="algo-detail-timer">
+                            <Timer.Minutes />:<Timer.Seconds />
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="algo-detail-timer-wrapper">
-                      {hasStarted && (
-                        <div className="algo-detail-timer">
-                          <Timer.Minutes />:<Timer.Seconds />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </Timer>
-            </div>
-          </div>
-          {!hasStarted ? (
-            <div className="start-button-wrapper" id="start-button">
-              <button onClick={handleStartClick} className="start-button">
-                Start
-              </button>
-            </div>
-          ) : (
-            <div className="algo-detail-input-text-wrapper">
-              <div className="algo-detail-input-text">
-                <AceEditor
-                  mode="python"
-                  theme="github"
-                  height="400px"
-                  width="100%"
-                  value={bubbleSortCode}
-                  setOptions={{
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    enableSnippets: true,
-                  }}
-                />
+                  )}
+                </Timer>
               </div>
             </div>
-          )}
+            {!hasStarted ? (
+              <div className="start-button-wrapper" id="start-button">
+                <button onClick={handleStartClick} className="start-button">
+                  Start
+                </button>
+              </div>
+            ) : (
+              <div className="algo-detail-input-text-wrapper">
+                <div className="algo-detail-input-text">
+                  <AceEditor
+                    mode="python"
+                    theme="github"
+                    height="400px"
+                    width="100%"
+                    value={bubbleSortCode}
+                    setOptions={{
+                      enableBasicAutocompletion: true,
+                      enableLiveAutocompletion: true,
+                      enableSnippets: true,
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
+        <Modal show={showSubmissionModal} onHide={handleHideModalClick}>
+          <Modal.Header closeButton>
+            <Modal.Title>Congratulations!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>You have successfully submitted your code in {timeForSubmission} milliseconds</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleHideModalClick}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
-      <Modal show={showSubmissionModal} onHide={handleHideModalClick}>
-        <Modal.Header closeButton>
-          <Modal.Title>Congratulations!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>You have successfully submitted your code in {timeForSubmission} milliseconds</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleHideModalClick}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };
