@@ -74,6 +74,22 @@ const AlgorithmDetailSpeed = (props) => {
   const [toShowDialog, setToShowDialog] = useState(false);
   const [toGoHome, setToGoHome] = useState(false);
 
+  const getNumSequentialTabs = (startIndex, charArray) => {
+    let out = 0;
+    let index = startIndex;
+
+    console.log("START CHAR: ", )
+
+    // Find num tabs in sequential order starting at the start index
+    while(charArray[index] == "\t"){
+      console.log("IN SEQUENTIAL TAB WHILE")
+      out += 1;
+      index += 1;
+    }
+
+    return out;
+  }
+
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   useEffect(() => {
     if (code) {
@@ -96,10 +112,15 @@ const AlgorithmDetailSpeed = (props) => {
 
         // check if key matches value
         setCurrentLetterIndex((currentLetterIndex) => {
-          if (localCharArray[currentLetterIndex + 2] == "\t") {
-            console.log("Next char is tab, so I am skipping it");
-            console.log("Current letter index: ", currentLetterIndex + 1);
-            const skippedCurrentLetterIndex = currentLetterIndex + 2;
+
+          let potentialFirstTabIndex = currentLetterIndex + 2; 
+
+          if (localCharArray[potentialFirstTabIndex] == "\t") {
+            let numTabs = getNumSequentialTabs(potentialFirstTabIndex, localCharArray);
+            console.log("Number of sequential tabs is: ", numTabs);
+            console.log(`Next ${numTabs} chars are tabs, so I am skipping them`);
+            // console.log("Current letter index: ", currentLetterIndex + 1);
+            const skippedCurrentLetterIndex = currentLetterIndex + 1 + numTabs;
 
             if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
               return skippedCurrentLetterIndex + 1;
@@ -108,7 +129,7 @@ const AlgorithmDetailSpeed = (props) => {
             } else {
               $(".current-letter").addClass("wrong-letter");
 
-              console.log("SETTING MISTAKES MADE TO: ", mistakesMade + 1);
+              // console.log("SETTING MISTAKES MADE TO: ", mistakesMade + 1);
               setMistakesMade((mistakesMade) => {
                 return mistakesMade + 1;
               });
@@ -116,7 +137,6 @@ const AlgorithmDetailSpeed = (props) => {
               return skippedCurrentLetterIndex;
             }
           } else {
-            console.log("IN ELSE");
             if (charPressed === localCharArray[currentLetterIndex + 1]) {
               return currentLetterIndex + 1;
             } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
@@ -224,7 +244,6 @@ const AlgorithmDetailSpeed = (props) => {
   return (
     <div
       onClick={() => {
-        console.log("Clicked on outside");
         setToShowDialog(false);
       }}
       className="algo-detail-wrapper"
@@ -254,15 +273,6 @@ const AlgorithmDetailSpeed = (props) => {
               <span className="untyped-code">{untypedCode}</span>
             </div>
           </div>
-          {/* {!hasStarted ? (
-            <div className="start-button-wrapper" id="start-button">
-              <button onClick={handleStartClick} className="start-button">
-                Start
-              </button>
-            </div>
-          ) : (
-            
-          )} */}
         </div>
       </div>
 

@@ -30,7 +30,7 @@ const AlgoDetailInputHeader = (props) => {
 
   // let hasStarted=true;
 
-  console.log("Algo Header Rerender");
+  // console.log("Algo Header Rerender");
 
   return (
     <div className="algo-detail-input-header-wrapper">
