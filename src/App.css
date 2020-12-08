@@ -70,7 +70,7 @@ body {
 }
 
 .landing-image{
-  max-width: 80%;
+  max-width: 100%;
   /* margin-left: 50px; */
   border: 1px solid #faecee;
   border-radius: 10px;
@@ -90,9 +90,22 @@ body {
   margin-top: 10px;
 }
 
+.landing-description-background-wrapper{
+  background-color: #fcfbf6;
+}
+
 .landing-description-wrapper{
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.landing-description-item-wrapper{
+  margin-top: 40px;
+}
+
+
+.landing-description-item-wrapper-when-on-right{
+  margin-left: 40px;
 }
 
 /* LANDING NAVBAR STUFF */
