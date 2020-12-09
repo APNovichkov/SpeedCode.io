@@ -4,6 +4,26 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+/* SIGNUP STUFF */
+
+.signup-wrapper{
+  height: 90vh;
+  padding-top: 8%;
+}
+
+.signup-form-label{
+  color: #D56576;
+  font-size: 18px;
+}
+
+.signup-error-wrapper{
+  font-weight: 800;
+  font-size: 17px;
+  color: #381460;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
 /* LOGIN STUFF */
 
 .login-header{

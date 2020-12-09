@@ -15,7 +15,7 @@ const LandingNavbar = (props) => {
               <Link to="/login" className="medium-text landing-navbar-link">
                 Login
               </Link>
-              <a className="medium-text landing-navbar-link">Sign Up</a>
+              <Link to="/signup" className="medium-text landing-navbar-link">Sign Up</Link>
               <a className="light-text landing-navbar-link">Continue as Guest</a>
             </h5>
           </div>

@@ -5,6 +5,10 @@ export const getLoginUrl = () => {
   return `${BASE_URL}/login`;
 }
 
+export const getSignUpUrl = () => {
+  return `${BASE_URL}/signup`;
+}
+
 // GET REQUESTS
 export const getAlgorithmsUrl = () => {
   return `${BASE_URL}/algorithms`;

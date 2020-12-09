@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 
 // Import Components
 import LandingNavbar from "./../components/landingNavbar";
@@ -93,7 +93,7 @@ const Login = (props) => {
                     Login
                   </button>
                   <div className="login-sign-up-wrapper">
-                    Don't have an account? <a href="sign-up">Sign Up</a>
+                    Don't have an account? <Link to="/signup">Sign Up</Link>
                   </div>
                 </div>
               </div>

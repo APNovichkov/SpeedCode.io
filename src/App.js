@@ -15,7 +15,7 @@ import AlgorithmDetailSpeed from "./pages/algorithmDetailSpeed";
 import DataStructuresPage from "./pages/dataStructures";
 import Landing from "./pages/landing";
 import Login from "./pages/login";
-
+import SignUp from "./pages/signUp";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Landing}></Route>
             <Route path="/login" component={Login}></Route>
+            <Route path="/signup" component={SignUp}></Route>
             <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
             <Route path="/algorithms/speed/:name" component={AlgorithmDetailSpeed}></Route>
             <Route path="/algorithms/mergesort" component={AlgorithmDetail}></Route>
