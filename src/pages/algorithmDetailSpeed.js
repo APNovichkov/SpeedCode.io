@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import $ from "jquery";
+import axios from 'axios'
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-github";
@@ -16,6 +17,7 @@ import LinksNavbar from "./../components/linksNavbar";
 // Import Utils
 import { formatTime } from "./../utils/stringUtils";
 import { getWordsPerMinute } from "./../utils/statsUtils";
+import { getSubmitAlgosUrl } from "./../utils/urlUtils";
 
 // Fake Data
 // const name = "Bubble Sort";
@@ -26,23 +28,21 @@ const bigO = "n^2";
 // const category = "Sorting";
 
 // Default code for bubble sort
-const bubbleSortCode = `def bubble_sort(ls):
-# Your Implementation goes here
+// const bubbleSortCode = `def bubble_sort(ls):
+// # Your Implementation goes here
 
-if __name__ == '__main__':
-\tls = [4,3,2,1]
-\tbubble_sort(ls)`;
+// if __name__ == '__main__':
+// \tls = [4,3,2,1]
+// \tbubble_sort(ls)`;
 
-// const bubbleSortCode = `hello
-// \tworld`;
-
-let minutes = 0;
-let seconds = 0;
+const bubbleSortCode = `hello
+\tworld`;
 
 const AlgorithmDetailSpeed = (props) => {
   // Get input data
   let {
     name,
+    algoId,
     description,
     longDescription,
     timeComplexity,
@@ -51,6 +51,8 @@ const AlgorithmDetailSpeed = (props) => {
     groupClass,
     code,
   } = props.location.state.algorithmData;
+
+  let userObject = props.location.state.userObject;
   let urlName = props.match.params.name;
 
   // This splits string into char array
@@ -96,6 +98,7 @@ const AlgorithmDetailSpeed = (props) => {
   useEffect(() => {
     if (code) {
       const localCharArray = code.python.split("");
+      // const localCharArray = bubbleSortCode;
       setCharArray(localCharArray);
       setNumWords(bubbleSortCode.split(" ").length);
 
@@ -182,6 +185,23 @@ const AlgorithmDetailSpeed = (props) => {
       console.log("FINISHED IMPLEMENTATIONS");
       setHasEnded(true);
       setToShowDialog(true);
+
+      const formBody = {
+        algorithmId: algoId,
+        userObject: userObject,
+        statsObject: {
+          language: "python",
+          mistakesMade: mistakesMade,
+          timeSpent: formatTime(minutes, seconds),
+          wordsPerMinute: getWordsPerMinute(minutes, seconds, numWords)
+        }
+      }
+
+      axios.post(getSubmitAlgosUrl(), formBody).then(res => {
+        console.log("Got response from algo submit: ", res.data)
+      }).catch(err => {
+        console.log(err);
+      })
     }
 
     $(".current-letter").removeClass("idle-letter");
@@ -247,8 +267,8 @@ const AlgorithmDetailSpeed = (props) => {
         setToShowDialog(false);
       }}
     >
-      <Navbar/>
-      <LinksNavbar />
+      <Navbar userObject={userObject}/>
+      <LinksNavbar userObject={userObject} />
       <div className="algo-detail-wrapper">
         <ObjectDetailHeader
           name={name}

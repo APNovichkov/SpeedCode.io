@@ -1,6 +1,8 @@
 import React from "react";
 
 const Navbar = (props) => {
+  let { userObject } = props;
+
   return (
     <div className="navbar-wrapper">
       <nav class="navbar navbar-light navbar-home">
@@ -13,7 +15,7 @@ const Navbar = (props) => {
         </form>
         <div class="form-inline my-2 my-lg-0">
           <h5 className="navbar-welcome">
-            <span className="light-text">Welcome,</span> <span className="medium-text">Andrey!</span>
+            <span className="light-text">Welcome,</span> <span className="medium-text">{userObject && userObject.firstName}!</span>
           </h5>
           <img src="/assets/images/Profile_picture.jpg" className="navbar-profile-picture" width="45"></img>
         </div>

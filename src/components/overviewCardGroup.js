@@ -4,7 +4,7 @@ import React from "react";
 import OverviewCard from "./overviewCard";
 
 const OverviewCardGroup = (props) => {
-  let { name, groupClass, iconClass, data } = props;
+  let { name, groupClass, iconClass, data, userObject } = props;
 
   return (
     <div className={`overview-card-group ${groupClass.toLowerCase()}`}>
@@ -19,6 +19,7 @@ const OverviewCardGroup = (props) => {
             <OverviewCard
               key={dataItem._id['$oid']}
               name={dataItem.name}
+              algoId={dataItem._id['$oid']}
               urlName={dataItem.urlName}
               description={dataItem.description}
               longDescription={dataItem.longDescription}
@@ -27,6 +28,7 @@ const OverviewCardGroup = (props) => {
               attempts={dataItem.attempts}
               groupClass={groupClass.toLowerCase()}
               code={dataItem.code}
+              userObject={userObject}
             />
           );
         })}

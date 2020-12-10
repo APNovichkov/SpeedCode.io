@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import {Redirect, Link} from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 // Import Components
 import LandingNavbar from "./../components/landingNavbar";
 
 // Import Utils
-import { getLoginUrl} from "./../utils/urlUtils";
+import { getLoginUrl } from "./../utils/urlUtils";
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginSuccessfull, setIsLoginSuccessful] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
+
+  const [userObject, setUserObject] = useState({});
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -26,26 +28,41 @@ const Login = (props) => {
     console.log(`Logging in with username: ${username} and hashed password: ${passwordHash}`);
 
     const formBody = {
-        username: username,
-        password: password
-    }
+      username: username,
+      password: password,
+    };
 
-    axios.post(getLoginUrl(), formBody).then(res => {
-        console.log("Got Response from login: ", res.data)
-
-        if(res.data.login_successfull){
-            setIsLoginSuccessful(true);
-        }else{
-            setIsLoginError(true);
+    axios
+      .post(getLoginUrl(), formBody)
+      .then((res) => {
+        console.log("Got Response from login: ", res.data);
+        setUserObject(res.data.user_object);
+        if (res.data.login_successfull) {
+          setIsLoginSuccessful(true);
+        } else {
+          setIsLoginError(true);
         }
-    }).catch(err => {
+      })
+      .catch((err) => {
         console.log(err);
-    }) 
+      });
   };
 
-  if(isLoginSuccessfull){
-      console.log("Returning Redirect")
-      return <Redirect to="/algorithms"/>
+  if (isLoginSuccessfull) {
+    console.log("Returning Redirect");
+    console.log("User object from login: ", userObject);
+
+    return (
+      <Redirect
+        to={{
+          pathname: "/algorithms",
+          state: {
+            from: "login",
+            userObject: userObject
+          },
+        }}
+      />
+    );
   }
 
   return (
@@ -53,15 +70,9 @@ const Login = (props) => {
       <LandingNavbar isLoginOrSignUp={true}></LandingNavbar>
 
       <div className="login-wrapper text-center">
-        <div className="login-header">
-            Log In
-        </div>
-        {isLoginError && (
-            <div className="login-error-wrapper">
-                Invalid Credentials
-            </div>
-        )}
-        
+        <div className="login-header">Log In</div>
+        {isLoginError && <div className="login-error-wrapper">Invalid Credentials</div>}
+
         <div className="d-flex justify-content-center">
           <div className="login-form-wrapper">
             <form onSubmit={handleLogin}>

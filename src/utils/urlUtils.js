@@ -14,3 +14,13 @@ export const getAlgorithmsUrl = () => {
   return `${BASE_URL}/algorithms`;
 };
 
+export const getAlgoStatisticsUrl = (algoId, userId) => {
+  return `${BASE_URL}/algorithms/statistics?algoId=${algoId}&userId=${userId}`
+}
+
+// POST REQUEST
+export const getSubmitAlgosUrl = () => {
+  return `${BASE_URL}/algorithms/submit`
+}
+
+ 

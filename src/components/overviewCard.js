@@ -1,13 +1,30 @@
 import React, {useState, useEffect} from "react";
 import { Link, Redirect } from "react-router-dom";
+import axios from 'axios'
 
 // Import components
 import Stars from "./stars";
 
+// Import utils
+import { getAlgoStatisticsUrl } from "./../utils/urlUtils";
+
 // Declare constants
 
 const OverviewCard = (props) => {
-  let { name, urlName, description, longDescription, timeComplexity, difficulty, attempts, groupClass, code } = props;
+  let { name, algoId, urlName, description, longDescription, timeComplexity, difficulty, groupClass, code, userObject } = props;
+
+  const [attempts, setAttempts] = useState("");
+  const [statsObject, setStatsObjects] = useState({});
+
+  useEffect(() => {
+    axios.get(getAlgoStatisticsUrl(algoId, userObject['_id'])).then(res => {
+      console.log("Got statistics for this algorithm", res.data)
+      setAttempts(res.data.attempts);
+      setStatsObjects(res.data)
+    }).catch(err => {
+      console.log(err);
+    })
+  }, [])
 
   return (
     <div className={`overview-card ${groupClass.toLowerCase()}`}>
@@ -17,7 +34,7 @@ const OverviewCard = (props) => {
       <div>
         <Stars numStars={difficulty}></Stars>
         <span className="attempts">
-          {attempts} {attempts == 1 ? "Attempt" : "Attempts"}
+          {attempts ? attempts : 0} {attempts == 1 ? "Attempt" : "Attempts"}
         </span>
       </div>
       <div className="overview-card-buttons-wrapper">
@@ -29,6 +46,7 @@ const OverviewCard = (props) => {
               toShowNotification: true,
               algorithmData: {
                 name: name,
+                algoId: algoId,
                 description: description,
                 longDescription: longDescription,
                 timeComplexity: timeComplexity,
@@ -37,11 +55,21 @@ const OverviewCard = (props) => {
                 groupClass: groupClass,
                 code: code
               },
+              userObject: userObject
             },
           }}
         >
           <button className="practice-button">Practice</button>
         </Link>
+        <Link className="overview-card-statistics-link" to={{
+          pathname: '/algorithms/statistics',
+          state: {
+            statsObject: statsObject
+          }
+        }}><span className="overview-card-statistics">
+            <span className="fas fa-wave-square"></span> {" "}
+            <span className="">See Statistics</span>
+          </span></Link>
       </div>
     </div>
   );

@@ -21,7 +21,16 @@ const algoTypeToIcon = {
   Graphs: "fas fa-project-diagram",
 };
 
-const AlgorithmsPage = () => {
+const AlgorithmsPage = (props) => {
+  // Get state from link
+  const propsFromOutside = props.location.state;
+
+  console.log("Props from outside: ", propsFromOutside);
+
+  const userObject = propsFromOutside && propsFromOutside.userObject;
+
+  console.log("User object: ", userObject);
+
   const [algos, setAlgos] = useState([]);
 
   useEffect(() => {
@@ -46,7 +55,7 @@ const AlgorithmsPage = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar userObject={userObject}/>
       <LinksNavbar />
       <div className="algorithms-wrapper">
         <AlgoPageHeader />
@@ -60,6 +69,7 @@ const AlgorithmsPage = () => {
               iconClass={algoTypeToIcon[categoryName]}
               groupClass={categoryName}
               data={algosByCategory}
+              userObject={userObject}
             />
           );
         })}

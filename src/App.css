@@ -429,6 +429,37 @@ body {
   font-weight: 600;
 }
 
+.overview-card-statistics{
+  color: #D56576;
+  margin-left: 20px;
+}
+
+.overview-card-statistics-link{
+  text-decoration: None;
+}
+
+.overview-card-statistics-link:hover{
+  text-decoration: None;
+}
+
+.overview-card-statistics a:hover{
+  color: #D56576;
+  margin-left: 20px;
+  text-decoration: None;
+  font-weight: 600;
+}
+
+.overview-card-statistics:hover{
+  color: #D56576;
+  margin-left: 20px;
+  text-decoration: None;
+  font-weight: 500;
+}
+
+.overview-card-statistics-icon{
+  color: #D56576;
+}
+
 /* SORTING CARD */
 .overview-card-group.sorting .h4 {
   color: #381460;

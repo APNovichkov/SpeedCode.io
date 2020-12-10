@@ -2,15 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const LinksNavbar = (props) => {
+
+  let {userObject} = props;
+
   return (
     <div className="links-navbar-wrapper">
       <div className="row links-navbar-row">
         <div className="col-md-6">
           <div className="d-flex justify-content-between links-flex">
-            <Link to="/algorithms">
+            <Link to={{
+              pathname: "/algorithms",
+              state: {
+                userObject: userObject
+              }
+            }}>
               <h6>Algorithms</h6>
             </Link>
-            <Link to="/datastructures">
+            <Link to={{
+              pathname: "/datastructures",
+              state: {
+                userObject: userObject
+              }
+            }}>
               <h6>Data Structures</h6>
             </Link>
             <h6>Dashboard</h6>
