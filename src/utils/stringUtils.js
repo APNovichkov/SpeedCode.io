@@ -15,4 +15,10 @@ export const formatTime = (minutes, seconds) => {
   return formattedTime;
 };
 
+export const formatTimeToSeconds = (minutes, seconds) => {
+
+  let totalSeconds = seconds + (minutes*60);
+  return totalSeconds;
+}
+
 

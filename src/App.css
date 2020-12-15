@@ -885,7 +885,7 @@ body {
   padding-left: 164px;
   padding-right: 120px;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   background-color: #fffcf4;
 }
 
@@ -901,8 +901,10 @@ body {
 }
 
 .statistics-summary-wrapper{
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 20px;
+  border-left: 4px solid #d85b6a;
+  padding-left: 15px;
 }
 
 .statistics-summary-card{
@@ -916,8 +918,42 @@ body {
 .statistics-stat-card{
   width: auto;
   margin-right: 20px;
-  border: 1px solid #d85b6a;
-  background-color: transparent;
+  border: 1px solid #dfdfdf;
+  background-color: #fffefa;
   border-radius: 10px;
   padding: 10px;
+}
+
+.statistics-graph{
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fffefa;
+}
+
+.statistics-line-graph{
+  height: 400px;
+  width: auto;
+}
+
+.statistics-graph-wrapper{
+  margin-top: 30px;
+}
+
+.statistics-graph-header-wrapper{
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 24px;
+  color: #4e3769;
+}
+
+.statistics-summary-header-wrapper{
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.statistics-summary-header{
+  font-weight: 500;
+  font-size: 23px;
+  color: #d63447;
 }

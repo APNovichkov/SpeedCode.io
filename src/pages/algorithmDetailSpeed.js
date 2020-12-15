@@ -15,7 +15,7 @@ import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
 
 // Import Utils
-import { formatTime } from "./../utils/stringUtils";
+import { formatTime, formatTimeToSeconds } from "./../utils/stringUtils";
 import { getWordsPerMinute } from "./../utils/statsUtils";
 import { getSubmitAlgosUrl } from "./../utils/urlUtils";
 
@@ -194,7 +194,7 @@ const AlgorithmDetailSpeed = (props) => {
         statsObject: {
           language: "python",
           mistakesMade: mistakesMade,
-          timeSpent: formatTime(minutes, seconds),
+          timeSpent: formatTimeToSeconds(minutes, seconds),
           wordsPerMinute: getWordsPerMinute(minutes, seconds, numWords)
         }
       }
