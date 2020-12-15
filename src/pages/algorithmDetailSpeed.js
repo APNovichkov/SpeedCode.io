@@ -110,6 +110,8 @@ const AlgorithmDetailSpeed = (props) => {
 
       // Handle key press
       document.addEventListener("keypress", function (event) {
+        event.preventDefault();
+
         const charPressed = event.key;
 
         console.log(`Key was pressed: ${event.key}`);
