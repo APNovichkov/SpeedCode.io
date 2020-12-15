@@ -274,6 +274,7 @@ const AlgorithmDetailSpeed = (props) => {
       <div className="algo-detail-wrapper">
         <ObjectDetailHeader
           name={name}
+          attempts={attempts}
           description={description}
           difficulty={difficulty}
           bigO={timeComplexity}

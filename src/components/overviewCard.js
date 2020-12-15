@@ -7,6 +7,7 @@ import Stars from "./stars";
 
 // Import utils
 import { getAlgoStatisticsUrl } from "./../utils/urlUtils";
+import { diff } from "react-ace";
 
 // Declare constants
 
@@ -62,9 +63,16 @@ const OverviewCard = (props) => {
           <button className="practice-button">Practice</button>
         </Link>
         <Link className="overview-card-statistics-link" to={{
-          pathname: '/algorithms/statistics',
+          pathname: `/algorithms/${name}/statistics`,
           state: {
-            statsObject: statsObject
+            statsObject: statsObject,
+            userObject: userObject,
+            problemObject: {
+              name: name,
+              id: algoId,
+              attempts: attempts,
+              difficulty: difficulty
+            }
           }
         }}><span className="overview-card-statistics">
             <span className="fas fa-wave-square"></span> {" "}

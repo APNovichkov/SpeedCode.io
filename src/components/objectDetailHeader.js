@@ -4,7 +4,7 @@ import React from "react";
 import Stars from "./stars";
 
 const ObjectDetailHeader = (props) => {
-  let { name, difficulty, bigO, category, longDescription } = props;
+  let { name, attempts, difficulty, bigO, category, longDescription } = props;
 
   return (
     <div className="algo-detail-header-wrapper">
@@ -32,7 +32,7 @@ const ObjectDetailHeader = (props) => {
             </div>
           </div>
           <div className="algo-detail-badge-wrapper">
-            <div className="algo-detail-attempts algo-badge-card">{5} attempts</div>
+            <div className="algo-detail-attempts algo-badge-card">{attempts} attempts</div>
           </div>
           <div className="algo-detail-badge-wrapper">
             <div className="algo-detail-big-o algo-badge-card">{bigO}</div>
