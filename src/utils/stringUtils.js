@@ -16,9 +16,13 @@ export const formatTime = (minutes, seconds) => {
 };
 
 export const formatTimeToSeconds = (minutes, seconds) => {
-
   let totalSeconds = seconds + (minutes*60);
   return totalSeconds;
 }
 
 
+export const getNumWords = (str) => {
+  let lines = str.split("\n")
+  console.log("LINES: ", lines);
+  return 1
+}

@@ -15,7 +15,7 @@ import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
 
 // Import Utils
-import { formatTime, formatTimeToSeconds } from "./../utils/stringUtils";
+import { formatTime, formatTimeToSeconds, getNumWords } from "./../utils/stringUtils";
 import { getWordsPerMinute } from "./../utils/statsUtils";
 import { getSubmitAlgosUrl } from "./../utils/urlUtils";
 
@@ -101,9 +101,9 @@ const AlgorithmDetailSpeed = (props) => {
       const localCharArray = code.python.split("");
       // const localCharArray = bubbleSortCode;
       setCharArray(localCharArray);
-      setNumWords(bubbleSortCode.split(" ").length);
+      setNumWords(code.python.split(" ").length);
 
-      console.log(`Number of words: ${bubbleSortCode.split(" ").length}`);
+      console.log(`Number of words: ${code.python.split(" ").length}`);
 
       console.log(localCharArray);
 

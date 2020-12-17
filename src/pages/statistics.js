@@ -1,37 +1,65 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
+import axios from "axios";
 
 // Import Components
 import LinksNavbar from "./../components/linksNavbar";
 import Navbar from "./../components/navbar";
 import Stars from "./../components/stars";
 import LineGraph from "./../components/lineGraph";
+import BasicSpinner from "./../components/basicSpinner";
 
 // Import Utils
-import { formatLineGraphData } from "./../utils/graphUtils";
-import {getAlgoStatisticsUrl} from "./../utils/urlUtils";
+import { formatLineGraphData, formatOverviewGraphData } from "./../utils/graphUtils";
+import { getAlgoStatisticsUrl, getPerformanceOverviewUrl } from "./../utils/urlUtils";
 
 const Statistics = (props) => {
   let { problemId, problemObject, userObject } = props.location.state;
 
+  // Page Parameters
   const [timeTakenData, setTimeTakenData] = useState();
   const [mistakesMadeData, setMistakesMadeData] = useState([]);
   const [wordsPerMinuteData, setWordsPerMinuteData] = useState([]);
+  const [overviewData, setOverviewData] = useState([]);
   const [statsObject, setStatsObject] = useState({});
+  const [performanceOverview, setPerformanceOverview] = useState({});
 
-  
+  // Page Navigational/Functional parameters
+  const [isLoadingPerformanceOverview, setIsLoadingPerformanceOverview] = useState(false);
+
   // Initital Setup
   useEffect(() => {
     //Get Statistics for this algoId and userId
-    axios.get(getAlgoStatisticsUrl(problemId, userObject['_id'])).then(res => {
-      console.log("Got statistics for this problem", res.data)
-      setStatsObject(res.data)
-      setTimeTakenData(formatLineGraphData("Time Spent", "#d85b6a", res.data.time_spent, true));
-      setMistakesMadeData(formatLineGraphData("Mistakes Made", "#4e3769", res.data.mistakes_made, false));
-      setWordsPerMinuteData(formatLineGraphData("Words Per Minute", "", res.data.words_per_minute), false);
-    }).catch(err => {
-      console.log(err);
-    })
+    axios
+      .get(getAlgoStatisticsUrl(problemId, userObject["_id"]))
+      .then((res) => {
+        console.log("Got statistics for this problem", res.data);
+        setStatsObject(res.data);
+
+        let tmpTimeSpentData = formatLineGraphData("Time Spent", "#d85b6a", res.data.time_spent, true);
+        let tmpMistakesMadeData = formatLineGraphData("Mistakes Made", "#4e3769", res.data.mistakes_made, false);
+        let tmpWpmData = formatLineGraphData("Words Per Minute", "", res.data.words_per_minute, false);
+
+        setTimeTakenData(tmpTimeSpentData);
+        setMistakesMadeData(tmpMistakesMadeData);
+        setWordsPerMinuteData(tmpWpmData);
+
+        setOverviewData(formatOverviewGraphData(tmpTimeSpentData, tmpMistakesMadeData, tmpWpmData));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setIsLoadingPerformanceOverview(true);
+    axios
+      .get(getPerformanceOverviewUrl(problemId, userObject["_id"]))
+      .then((res) => {
+        console.log("Got performance overview for this problem: ", res.data);
+        setPerformanceOverview(res.data);
+        setIsLoadingPerformanceOverview(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -66,20 +94,52 @@ const Statistics = (props) => {
           </div>
           <div className="statistics-summary-cards-wrapper d-flex justify-content-left">
             <div className="statistics-stat-card text-center">
-              <div className="finished-blueprint-stat-card-title">Minimum Time Taken</div>
-              <div className="finished-blueprint-stat-card-value">{"1:14"}</div>
+              <div className="finished-blueprint-stat-card-title">Least Time Taken</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.min_time_spent}</div>
+              )}
             </div>
             <div className="statistics-stat-card text-center">
               <div className="finished-blueprint-stat-card-title">Average Time Spent</div>
-              <div className="finished-blueprint-stat-card-value">{"2:23"}</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.average_time_spent}</div>
+              )}
+            </div>
+            <div className="statistics-stat-card text-center">
+              <div className="finished-blueprint-stat-card-title">Highest Words per Minute</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.max_words_per_minute}</div>
+              )}
             </div>
             <div className="statistics-stat-card text-center">
               <div className="finished-blueprint-stat-card-title">Average Words Per Minute</div>
-              <div className="finished-blueprint-stat-card-value">{"4"}</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.average_words_per_minute}</div>
+              )}
+            </div>
+            <div className="statistics-stat-card text-center">
+              <div className="finished-blueprint-stat-card-title">Least Mistakes Made</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.min_mistakes_made}</div>
+              )}
             </div>
             <div className="statistics-stat-card text-center">
               <div className="finished-blueprint-stat-card-title">Average Mistakes Made</div>
-              <div className="finished-blueprint-stat-card-value">{"10"}</div>
+              {isLoadingPerformanceOverview ? (
+                <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
+              ) : (
+                <div className="finished-blueprint-stat-card-value">{performanceOverview.average_mistakes_made}</div>
+              )}
             </div>
           </div>
         </div>
@@ -110,7 +170,7 @@ const Statistics = (props) => {
               <div className="statistics-graph-wrapper">
                 <div className="statistics-graph-header-wrapper">
                   <div className="statistics-graph-header">
-                    <span className="fas fa-exclamation-circle"></span>
+                    <span className="fas fa-exclamation"></span>
                     {"  "}Mistakes Made
                   </div>
                 </div>

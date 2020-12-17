@@ -3,7 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const CompletedSpeedImplementation = (props) => {
-  let { problemName, timeTaken, mistakesMade, wordsPerMinute, goHome, tryAgain, userObject, problemId, problemObject } = props;
+  let {
+    problemName,
+    timeTaken,
+    mistakesMade,
+    wordsPerMinute,
+    goHome,
+    tryAgain,
+    userObject,
+    problemId,
+    problemObject,
+  } = props;
 
   return (
     <div
@@ -32,20 +42,22 @@ const CompletedSpeedImplementation = (props) => {
           <div className="finished-blueprint-stat-card-value">{mistakesMade}</div>
         </div>
       </div>
-      <a href="google.com">
-        <Link 
-        to={{
-          pathname: `/algorithms/${problemName}/statistics`,
-          state: {
-            userObject: userObject,
-            problemId: problemId,
-            problemObject: problemObject
-          }
-        }}
-        className="finished-blueprint-stats-see-more-stats">
+      <div className="finished-blueprint-stats-see-more-stats-wrapper">
+        <Link
+          to={{
+            pathname: `/algorithms/${problemName}/statistics`,
+            state: {
+              userObject: userObject,
+              problemId: problemId,
+              problemObject: problemObject,
+            },
+          }}
+          className="finished-blueprint-stats-see-more-stats"
+        >
           See more stats <span className="fas fa-angle-right"></span>
         </Link>
-      </a>
+      </div>
+
       <div className="finished-blueprint-stat-card-buttons-wrapper">
         <div className="d-flex justify-content-left">
           <button className="btn finished-blueprint-go-home-button" onClick={goHome}>

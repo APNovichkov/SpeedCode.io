@@ -29,6 +29,10 @@ export const formatLineGraphData = (name, color, inputData, isYTime) => {
     return [outputData];
 }
 
+export const formatOverviewGraphData = (timeData, mistakesData, wpmData) => {
+    return [timeData[0], mistakesData[0], wpmData[0]]
+}
+
 const formatSecondsToMinutes = (timeSeconds) => {
     let out = parseInt(timeSeconds)/60;
     return out.toFixed(2)

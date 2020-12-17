@@ -18,6 +18,10 @@ export const getAlgoStatisticsUrl = (algoId, userId) => {
   return `${BASE_URL}/algorithms/statistics?algoId=${algoId}&userId=${userId}`
 }
 
+export const getPerformanceOverviewUrl = (algoId, userId) => {
+  return `${BASE_URL}/algorithms/performance-overview?algoId=${algoId}&userId=${userId}`
+}
+
 // POST REQUEST
 export const getSubmitAlgosUrl = () => {
   return `${BASE_URL}/algorithms/submit`

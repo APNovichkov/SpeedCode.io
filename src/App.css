@@ -343,7 +343,7 @@ body {
 
 .algo-page-subheader{
   font-weight: 400;
-  font-size: 15px;
+  font-size: 18px;
   color: #d63447;
 }
 
@@ -831,6 +831,10 @@ body {
   font-size: 27px;
 }
 
+.finished-blueprint-stats-see-more-stats-wrapper{
+  margin-top: 25px;
+}
+
 .finished-blueprint-stats-see-more-stats{
   color: #d63447;
   margin-top: 25px;
@@ -932,7 +936,7 @@ body {
 }
 
 .statistics-line-graph{
-  height: 400px;
+  height: 300px;
   width: auto;
 }
 
@@ -942,8 +946,8 @@ body {
 
 .statistics-graph-header-wrapper{
   margin-bottom: 10px;
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 500;
+  font-size: 23px;
   color: #4e3769;
 }
 
@@ -956,4 +960,11 @@ body {
   font-weight: 500;
   font-size: 23px;
   color: #d63447;
+}
+
+.statistics-performance-overview-spinner{
+  color: #d63447;
+  height: 29px;
+  width: 29px;
+  margin-top: 9px;
 }
