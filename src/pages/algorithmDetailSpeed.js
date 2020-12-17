@@ -52,8 +52,9 @@ const AlgorithmDetailSpeed = (props) => {
     code,
   } = props.location.state.algorithmData;
 
-  let userObject = props.location.state.userObject;
-  let urlName = props.match.params.name;
+  let {userObject, problemId, problemObject} = props.location.state;
+
+  // let urlName = props.match.params.name;
 
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
@@ -310,6 +311,9 @@ const AlgorithmDetailSpeed = (props) => {
               mistakesMade={mistakesMade / 2}
               goHome={goHome}
               tryAgain={tryAgain}
+              userObject={userObject}
+              problemId={problemId}
+              problemObject={problemObject}
             />
           </div>
         )}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const CompletedSpeedImplementation = (props) => {
-  let { problemName, timeTaken, mistakesMade, wordsPerMinute, goHome, tryAgain } = props;
+  let { problemName, timeTaken, mistakesMade, wordsPerMinute, goHome, tryAgain, userObject, problemId, problemObject } = props;
 
   return (
     <div
@@ -33,9 +33,18 @@ const CompletedSpeedImplementation = (props) => {
         </div>
       </div>
       <a href="google.com">
-        <div className="finished-blueprint-stats-see-more-stats">
+        <Link 
+        to={{
+          pathname: `/algorithms/${problemName}/statistics`,
+          state: {
+            userObject: userObject,
+            problemId: problemId,
+            problemObject: problemObject
+          }
+        }}
+        className="finished-blueprint-stats-see-more-stats">
           See more stats <span className="fas fa-angle-right"></span>
-        </div>
+        </Link>
       </a>
       <div className="finished-blueprint-stat-card-buttons-wrapper">
         <div className="d-flex justify-content-left">

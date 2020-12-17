@@ -43,8 +43,7 @@ const OverviewCard = (props) => {
           to={{
             pathname: `/algorithms/speed/${urlName}`,
             state: {
-              from: "createMrnaForm",
-              toShowNotification: true,
+              from: "overviewCard",
               algorithmData: {
                 name: name,
                 algoId: algoId,
@@ -56,7 +55,14 @@ const OverviewCard = (props) => {
                 groupClass: groupClass,
                 code: code
               },
-              userObject: userObject
+              userObject: userObject,
+              problemId: algoId,
+              problemObject: {
+                name: name,
+                id: algoId,
+                attempts: attempts,
+                difficulty: difficulty  
+              }
             },
           }}
         >
@@ -65,7 +71,7 @@ const OverviewCard = (props) => {
         <Link className="overview-card-statistics-link" to={{
           pathname: `/algorithms/${name}/statistics`,
           state: {
-            statsObject: statsObject,
+            problemId: algoId,
             userObject: userObject,
             problemObject: {
               name: name,

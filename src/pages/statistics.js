@@ -1,85 +1,37 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios'
+
+// Import Components
 import LinksNavbar from "./../components/linksNavbar";
 import Navbar from "./../components/navbar";
 import Stars from "./../components/stars";
-
-// Import Components
 import LineGraph from "./../components/lineGraph";
 
 // Import Utils
 import { formatLineGraphData } from "./../utils/graphUtils";
+import {getAlgoStatisticsUrl} from "./../utils/urlUtils";
 
 const Statistics = (props) => {
-  let { statsObject, problemObject, userObject } = props.location.state;
+  let { problemId, problemObject, userObject } = props.location.state;
 
   const [timeTakenData, setTimeTakenData] = useState();
   const [mistakesMadeData, setMistakesMadeData] = useState([]);
   const [wordsPerMinuteData, setWordsPerMinuteData] = useState([]);
+  const [statsObject, setStatsObject] = useState({});
 
-  //   [
-  //     {
-  //       "id": "japan",
-  //       "color": "hsl(259, 70%, 50%)",
-  //       "data": [
-  //         {
-  //           "x": "plane",
-  //           "y": 195
-  //         },
-  //         {
-  //           "x": "helicopter",
-  //           "y": 58
-  //         },
-  //         {
-  //           "x": "boat",
-  //           "y": 21
-  //         },
-  //         {
-  //           "x": "train",
-  //           "y": 165
-  //         },
-  //         {
-  //           "x": "subway",
-  //           "y": 120
-  //         },
-  //         {
-  //           "x": "bus",
-  //           "y": 159
-  //         },
-  //         {
-  //           "x": "car",
-  //           "y": 192
-  //         },
-  //         {
-  //           "x": "moto",
-  //           "y": 202
-  //         },
-  //         {
-  //           "x": "bicycle",
-  //           "y": 70
-  //         },
-  //         {
-  //           "x": "horse",
-  //           "y": 112
-  //         },
-  //         {
-  //           "x": "skateboard",
-  //           "y": 64
-  //         },
-  //         {
-  //           "x": "others",
-  //           "y": 233
-  //         }
-  //       ]
-  //     }
-  //   ]
-
+  
+  // Initital Setup
   useEffect(() => {
-    console.log(`Stats Object: `, statsObject);
-    console.log("User Object:", userObject);
-
-    setTimeTakenData(formatLineGraphData("Time Spent", "#d85b6a", statsObject.time_spent, true));
-    setMistakesMadeData(formatLineGraphData("Mistakes Made", "#4e3769", statsObject.mistakes_made, false));
-    setWordsPerMinuteData(formatLineGraphData("Words Per Minute", "", statsObject.words_per_minute), false);
+    //Get Statistics for this algoId and userId
+    axios.get(getAlgoStatisticsUrl(problemId, userObject['_id'])).then(res => {
+      console.log("Got statistics for this problem", res.data)
+      setStatsObject(res.data)
+      setTimeTakenData(formatLineGraphData("Time Spent", "#d85b6a", res.data.time_spent, true));
+      setMistakesMadeData(formatLineGraphData("Mistakes Made", "#4e3769", res.data.mistakes_made, false));
+      setWordsPerMinuteData(formatLineGraphData("Words Per Minute", "", res.data.words_per_minute), false);
+    }).catch(err => {
+      console.log(err);
+    })
   }, []);
 
   useEffect(() => {
