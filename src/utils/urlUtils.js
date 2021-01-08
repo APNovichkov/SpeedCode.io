@@ -14,6 +14,10 @@ export const getAlgorithmsUrl = () => {
   return `${BASE_URL}/algorithms`;
 };
 
+export const getDataStructuresUrl = () => {
+  return `${BASE_URL}/datastructures`;
+}
+
 export const getAlgoStatisticsUrl = (algoId, userId) => {
   return `${BASE_URL}/algorithms/statistics?algoId=${algoId}&userId=${userId}`
 }
