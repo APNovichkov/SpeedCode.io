@@ -505,6 +505,52 @@ body {
   border-color: #ffffff;
 }
 
+/* basic */
+
+.overview-card-group.basic .h4 {
+  color: #381460;
+}
+
+.overview-card-group.basic .icon {
+  color: #381460;
+}
+
+.overview-card .basic {
+  border: 1px solid #41186f;
+  background-color: #ffffff;
+}
+
+.overview-card.basic .overview-card-title{
+  font-weight: 500;
+  font-size: 20px;
+  color: #272727;
+  /* border-bottom: 2px solid #414141; */
+}
+
+.overview-card.basic .overview-card-description {
+  font-weight: 300;
+  font-size: 18px;
+  color: #4d4d4d;
+}
+
+.overview-card.basic .practice-button{
+  background-color: transparent;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #38CB60;
+  border-color: #38CB60;
+}
+
+.overview-card.basic .practice-button:hover{
+  background-color: #38CB60;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
 /* Graphs */
 .overview-card-group.graphs .h4 {
   color: #10375c;

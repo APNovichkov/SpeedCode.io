@@ -19,6 +19,9 @@ import SignUp from "./pages/signUp";
 import Statistics from "./pages/statistics";
 
 function App() {
+
+  
+
   return (
     <div>
       <Router>
