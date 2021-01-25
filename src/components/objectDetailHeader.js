@@ -13,9 +13,6 @@ const ObjectDetailHeader = (props) => {
           <div className="algo-detail-title-wrapper">
             <h2 className="algo-detail-title">{name}</h2>
           </div>
-          {/* <div className="algo-detail-difficulty-wrapper">
-            <Stars numStars={difficulty}></Stars>
-          </div> */}
         </div>
       </div>
 
@@ -32,7 +29,7 @@ const ObjectDetailHeader = (props) => {
             </div>
           </div>
           <div className="algo-detail-badge-wrapper">
-            <div className="algo-detail-attempts algo-badge-card">{attempts} attempts</div>
+            <div className="algo-detail-attempts algo-badge-card">{attempts ? (attempts) : (0)} attempts</div>
           </div>
           <div className="algo-detail-badge-wrapper">
             <div className="algo-detail-big-o algo-badge-card">{bigO}</div>

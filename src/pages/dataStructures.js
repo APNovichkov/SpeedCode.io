@@ -7,7 +7,7 @@ import { getDataStructuresUrl } from "./../utils/urlUtils";
 
 // Import components
 import MainWrapper from "./../components/mainWrapper";
-import AlgoPageHeader from "./../components/algoPageHeader";
+import ObjectPageHeader from "./../components/objectPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
 import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
@@ -15,7 +15,6 @@ import LinksNavbar from "./../components/linksNavbar";
 // Set Constants
 const dsCategoryToIcon = {
   Basic: "fas fa-stream",
-  
 };
 
 const DataStructuresPage = (props) => {
@@ -43,7 +42,7 @@ const DataStructuresPage = (props) => {
       for (let category in groupedResponse) {
         dsByCategory.push(groupedResponse[category]);
       }
-      console.log(dsByCategory);
+      console.log("DS by category:", dsByCategory);
       setDs(dsByCategory);
     };
 
@@ -55,7 +54,7 @@ const DataStructuresPage = (props) => {
       <Navbar userObject={userObject}/>
       <LinksNavbar userObject={userObject}/>
       <div className="algorithms-wrapper">
-        <AlgoPageHeader />
+      <ObjectPageHeader objectType={"ds"}/>
         <hr className="algo-header-line-break"></hr>
         {ds.map((dsByCategory, index) => {
           let categoryName = dsByCategory[0].category;

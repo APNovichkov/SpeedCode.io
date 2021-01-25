@@ -7,7 +7,7 @@ import { getAlgorithmsUrl } from "./../utils/urlUtils";
 
 // Import components
 import MainWrapper from "./../components/mainWrapper";
-import AlgoPageHeader from "./../components/algoPageHeader";
+import ObjectPageHeader from "./../components/objectPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
 import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
@@ -58,7 +58,7 @@ const AlgorithmsPage = (props) => {
       <Navbar userObject={userObject}/>
       <LinksNavbar userObject={userObject}/>
       <div className="algorithms-wrapper">
-        <AlgoPageHeader />
+        <ObjectPageHeader objectType={"algo"}/>
         <hr className="algo-header-line-break"></hr>
         {algos.map((algosByCategory, index) => {
           let categoryName = algosByCategory[0].category;
