@@ -9,7 +9,7 @@ const STATIC_TEXT = {
   ds: {
     header: "Choose a Data Structure",
     subHeader:
-      "Data Structures are the backbone to any algorithm, and much of the codebase relies on different data structures to solve interesting and difficult problems. Practice and memorize the most popular Data Structures with Speedcode!",
+      "Data Structures are the backbone to any algorithm, and much of any codebase relies on different data structures to solve interesting and difficult problems. Practice and memorize the most popular Data Structures with Speedcode!",
   },
 };
 

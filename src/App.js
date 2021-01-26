@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -6,7 +7,10 @@ import "./App.css";
 import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 
 // Import components
-import Footer from "./components/footer"
+import Footer from "./components/footer";
+
+// Import Context
+import UserContext from "./context/userContext";
 
 // Import pages
 import AlgorithmsPage from "./pages/algorithms";
@@ -19,26 +23,27 @@ import SignUp from "./pages/signUp";
 import Statistics from "./pages/statistics";
 
 function App() {
-
-  
+  const [userObjectFromLogin, setUserObjectFromLogin] = useState({});
 
   return (
-    <div>
-      <Router>
-        <div className="body-wrapper">
-          <Switch>
-            <Route path="/" exact component={Landing}></Route>
-            <Route path="/login" component={Login}></Route>
-            <Route path="/signup" component={SignUp}></Route>
-            <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
-            <Route path="/algorithms/:name/statistics" component={Statistics}></Route>
-            <Route path="/algorithms/speed/:name" component={AlgorithmDetailSpeed}></Route>
-            <Route path="/datastructures" exact component={DataStructuresPage}></Route>
-          </Switch>
-          <Footer/>
-        </div>
-      </Router>
-    </div>
+    <UserContext.Provider value={{userObject: userObjectFromLogin}}>
+      <div>
+        <Router>
+          <div className="body-wrapper">
+            <Switch>
+              <Route path="/" exact component={Landing}></Route>
+              <Route path="/login" render={() => <Login onLogin={setUserObjectFromLogin} />}></Route>
+              <Route path="/signup" component={SignUp}></Route>
+              <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
+              <Route path="/algorithms/:name/statistics" component={Statistics}></Route>
+              <Route path="/algorithms/speed/:name" component={AlgorithmDetailSpeed}></Route>
+              <Route path="/datastructures" exact component={DataStructuresPage}></Route>
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </div>
+    </UserContext.Provider>
   );
 }
 

@@ -1,7 +1,12 @@
 import React from "react";
 
+// Import Context
+import UserContext from "./../context/userContext";
+
 const Navbar = (props) => {
   let { userObject } = props;
+
+  console.log("User Object from NAVBAR:", userObject);
 
   return (
     <div className="navbar-wrapper">

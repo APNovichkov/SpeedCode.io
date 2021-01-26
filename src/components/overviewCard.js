@@ -17,6 +17,8 @@ const OverviewCard = (props) => {
   const [attempts, setAttempts] = useState("");
   const [statsObject, setStatsObjects] = useState({});
 
+  console.log("User Object from OverviewCard: ", userObject);
+
   useEffect(() => {
     axios.get(getAlgoStatisticsUrl(algoId, userObject['_id'])).then(res => {
       console.log("Got statistics for this algorithm", res.data)

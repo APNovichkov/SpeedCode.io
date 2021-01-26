@@ -6,6 +6,8 @@ import OverviewCard from "./overviewCard";
 const OverviewCardGroup = (props) => {
   let { name, groupClass, iconClass, data, userObject } = props;
 
+  console.log("User Object from OverviewCardGroup: ", userObject);
+
   return (
     <div className={`overview-card-group ${groupClass.toLowerCase()}`}>
       <h4 className="overview-header h4">

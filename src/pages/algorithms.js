@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import _ from "underscore";
 
+import UserContext from "./../context/userContext";
+
 // Import utils
 import { getAlgorithmsUrl } from "./../utils/urlUtils";
 
@@ -24,12 +26,9 @@ const algoTypeToIcon = {
 const AlgorithmsPage = (props) => {
   // Get state from link
   const propsFromOutside = props.location.state;
+  // const userObject = propsFromOutside && propsFromOutside.userObject;
 
-  console.log("Props from outside: ", propsFromOutside);
-
-  const userObject = propsFromOutside && propsFromOutside.userObject;
-
-  console.log("User object: ", userObject);
+  // console.log("User object: ", userObject);
 
   const [algos, setAlgos] = useState([]);
 
@@ -54,27 +53,31 @@ const AlgorithmsPage = (props) => {
   }, []);
 
   return (
-    <div>
-      <Navbar userObject={userObject}/>
-      <LinksNavbar userObject={userObject}/>
-      <div className="algorithms-wrapper">
-        <ObjectPageHeader objectType={"algo"}/>
-        <hr className="algo-header-line-break"></hr>
-        {algos.map((algosByCategory, index) => {
-          let categoryName = algosByCategory[0].category;
-          return (
-            <OverviewCardGroup
-              key={categoryName}
-              name={categoryName}
-              iconClass={algoTypeToIcon[categoryName]}
-              groupClass={categoryName}
-              data={algosByCategory}
-              userObject={userObject}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <UserContext.Consumer>
+      {({ userObject, setUserObject }) => (
+        <div>
+          <Navbar userObject={userObject} />
+          <LinksNavbar userObject={userObject} />
+          <div className="algorithms-wrapper">
+            <ObjectPageHeader objectType={"algo"} />
+            <hr className="algo-header-line-break"></hr>
+            {algos.map((algosByCategory, index) => {
+              let categoryName = algosByCategory[0].category;
+              return (
+                <OverviewCardGroup
+                  key={categoryName}
+                  name={categoryName}
+                  iconClass={algoTypeToIcon[categoryName]}
+                  groupClass={categoryName}
+                  data={algosByCategory}
+                  userObject={userObject}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </UserContext.Consumer>
   );
 };
 

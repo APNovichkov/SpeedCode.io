@@ -3,6 +3,8 @@ import axios from "axios";
 import bcrypt from "bcryptjs";
 import { Redirect, Link } from "react-router-dom";
 
+import UserContext from "./../context/userContext";
+
 // Import Components
 import LandingNavbar from "./../components/landingNavbar";
 
@@ -10,6 +12,8 @@ import LandingNavbar from "./../components/landingNavbar";
 import { getLoginUrl } from "./../utils/urlUtils";
 
 const Login = (props) => {
+  let { onLogin } = props;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginSuccessfull, setIsLoginSuccessful] = useState(false);
@@ -37,6 +41,10 @@ const Login = (props) => {
       .then((res) => {
         console.log("Got Response from login: ", res.data);
         setUserObject(res.data.user_object);
+
+        // Update Context Here
+        onLogin(res.data.user_object);
+
         if (res.data.login_successfull) {
           setIsLoginSuccessful(true);
         } else {
@@ -58,7 +66,7 @@ const Login = (props) => {
           pathname: "/algorithms",
           state: {
             from: "login",
-            userObject: userObject
+            userObject: userObject,
           },
         }}
       />

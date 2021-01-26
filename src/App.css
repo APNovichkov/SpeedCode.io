@@ -677,7 +677,7 @@ body {
 }
 
 .algo-detail-input{
-  height: 500px;
+  /* height: 500px; */
   width: auto;
   border: 1px solid #fffcf4;
   border-radius: 7px;
@@ -724,8 +724,9 @@ body {
 .algo-detail-input-text-wrapper{
   padding-left: 25px;
   padding-right: 25px;
-  overflow-y: scroll;
-  max-height: 400px;
+  padding-bottom: 25px;
+  /* overflow-y: scroll; */
+  /* max-height: 400px; */
 }
 
 .algo-detail-input-text{

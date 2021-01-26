@@ -253,6 +253,7 @@ const AlgorithmDetailSpeed = (props) => {
     setHasStarted(false);
     setHasEnded(false);
     setToShowDialog(false);
+    setMistakesMade(0);
     setCurrentLetter("");
     setCurrentLetterIndex(-1);
     setTypedCode("");
