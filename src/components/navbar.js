@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 
 // Import Context
-import UserContext from "./../context/userContext";
+import {UserContext} from "../context/userProvider";
 
 const Navbar = (props) => {
-  let { userObject } = props;
+  
+  const [userObject] = useContext(UserContext);
 
   console.log("User Object from NAVBAR:", userObject);
 
@@ -12,15 +13,11 @@ const Navbar = (props) => {
     <div className="navbar-wrapper">
       <nav class="navbar navbar-light navbar-home">
         <img src="/assets/images/webLogo.jpg" className="navbar-logo" width="200" alt="logo" />
-        <form class="form-inline my-2 my-lg-0">
-          <input type="text" className="form-control navbar-search" placeholder="Search..."></input>
-          <button type="submit" className="navbar-search-button">
-            <span className="fas fa-search navbar-search-icon"></span>
-          </button>
-        </form>
+        <form class="form-inline my-2 my-lg-0"></form>
         <div class="form-inline my-2 my-lg-0">
           <h5 className="navbar-welcome">
-            <span className="light-text">Welcome,</span> <span className="medium-text">{userObject && userObject.firstName}!</span>
+            <span className="light-text">Welcome,</span>{" "}
+            <span className="medium-text">{userObject && userObject.firstName}!</span>
           </h5>
           <img src="/assets/images/Profile_picture.jpg" className="navbar-profile-picture" width="45"></img>
         </div>

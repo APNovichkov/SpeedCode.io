@@ -12,9 +12,7 @@ const Landing = (props) => {
           <div className="col-md-2"></div>
           <div className="col-md-8">
             <div className="landing-hero-main-text">
-              Learn and Memorize Algorithms and Data Structures.
-              <br />
-              Get Faster at Writing Code.
+              Learn and Memorize Algorithms and Data Structures. Get Faster at Writing Code.
             </div>
 
             <div className="landing-hero-button-wrapper">

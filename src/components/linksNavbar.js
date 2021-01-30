@@ -8,7 +8,7 @@ const LinksNavbar = (props) => {
   return (
     <div className="links-navbar-wrapper">
       <div className="row links-navbar-row">
-        <div className="col-md-6">
+        <div className="col-md-7">
           <div className="d-flex justify-content-between links-flex">
             <Link to={{
               pathname: "/algorithms",
@@ -30,7 +30,7 @@ const LinksNavbar = (props) => {
             <h6>Communities</h6>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
         <div className="col-md-3">
           <div className="d-flex justify-content-between links-light-flex">
             <h6>Pricing</h6>

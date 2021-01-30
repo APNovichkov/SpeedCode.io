@@ -9,8 +9,8 @@ import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-route
 // Import components
 import Footer from "./components/footer";
 
-// Import Context
-import UserContext from "./context/userContext";
+// Import Provider
+import {UserProvider} from "./context/userProvider";
 
 // Import pages
 import AlgorithmsPage from "./pages/algorithms";
@@ -23,16 +23,16 @@ import SignUp from "./pages/signUp";
 import Statistics from "./pages/statistics";
 
 function App() {
-  const [userObjectFromLogin, setUserObjectFromLogin] = useState({});
-
+  // const [userObjectFromLogin, setUserObjectFromLogin] = useState({});
+  
   return (
-    <UserContext.Provider value={{userObject: userObjectFromLogin}}>
+    <UserProvider>
       <div>
         <Router>
           <div className="body-wrapper">
             <Switch>
               <Route path="/" exact component={Landing}></Route>
-              <Route path="/login" render={() => <Login onLogin={setUserObjectFromLogin} />}></Route>
+              <Route path="/login" component={Login}></Route>
               <Route path="/signup" component={SignUp}></Route>
               <Route path="/algorithms" exact component={AlgorithmsPage}></Route>
               <Route path="/algorithms/:name/statistics" component={Statistics}></Route>
@@ -43,7 +43,7 @@ function App() {
           </div>
         </Router>
       </div>
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
 

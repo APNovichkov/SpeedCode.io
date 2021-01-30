@@ -19,30 +19,23 @@ const dsCategoryToIcon = {
 
 const DataStructuresPage = (props) => {
   // Get state from link
-  const propsFromOutside = props.location.state;
-
-  console.log("Props from outside: ", propsFromOutside);
-
-  const userObject = propsFromOutside && propsFromOutside.userObject;
-
+  console.log("Props from redirect: ", props.location.state);
+  const userObject = props.location.state.userObject;
   console.log("User object: ", userObject);
 
+  // Set Page Parameters
   const [ds, setDs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      // let response = await getAllAlgorithms();
       let response = await axios.get(getDataStructuresUrl());
 
-      console.log(`Response for get all ds:`, response.data);
-
-      // Group by category
+      // Group by DS category
       let groupedResponse = _.groupBy(response.data.datastructures, "category");
       let dsByCategory = [];
       for (let category in groupedResponse) {
         dsByCategory.push(groupedResponse[category]);
       }
-      console.log("DS by category:", dsByCategory);
       setDs(dsByCategory);
     };
 
@@ -51,12 +44,12 @@ const DataStructuresPage = (props) => {
 
   return (
     <div>
-      <Navbar userObject={userObject}/>
-      <LinksNavbar userObject={userObject}/>
+      <Navbar userObject={userObject} />
+      <LinksNavbar userObject={userObject} />
       <div className="algorithms-wrapper">
-      <ObjectPageHeader objectType={"ds"}/>
+        <ObjectPageHeader objectType={"ds"} />
         <hr className="algo-header-line-break"></hr>
-        {ds.map((dsByCategory, index) => {
+        {ds.map(dsByCategory => {
           let categoryName = dsByCategory[0].category;
           return (
             <OverviewCardGroup

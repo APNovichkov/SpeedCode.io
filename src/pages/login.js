@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { Redirect, Link } from "react-router-dom";
 
-import UserContext from "./../context/userContext";
+// Import Context
+import {UserContext} from "../context/userProvider";
 
 // Import Components
 import LandingNavbar from "./../components/landingNavbar";
@@ -12,14 +13,14 @@ import LandingNavbar from "./../components/landingNavbar";
 import { getLoginUrl } from "./../utils/urlUtils";
 
 const Login = (props) => {
-  let { onLogin } = props;
+  const [_, setUserObject] = useContext(UserContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginSuccessfull, setIsLoginSuccessful] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
+  const [localUserObject, setLocalUserObject] = useState({});
 
-  const [userObject, setUserObject] = useState({});
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -40,10 +41,11 @@ const Login = (props) => {
       .post(getLoginUrl(), formBody)
       .then((res) => {
         console.log("Got Response from login: ", res.data);
-        setUserObject(res.data.user_object);
+        setLocalUserObject(res.data.user_object);
 
         // Update Context Here
-        onLogin(res.data.user_object);
+        setUserObject(res.data.user_object);
+        // onLogin(res.data.user_object);
 
         if (res.data.login_successfull) {
           setIsLoginSuccessful(true);
@@ -58,7 +60,7 @@ const Login = (props) => {
 
   if (isLoginSuccessfull) {
     console.log("Returning Redirect");
-    console.log("User object from login: ", userObject);
+    console.log("User object from login: ", localUserObject);
 
     return (
       <Redirect
@@ -66,7 +68,7 @@ const Login = (props) => {
           pathname: "/algorithms",
           state: {
             from: "login",
-            userObject: userObject,
+            userObject: localUserObject,
           },
         }}
       />

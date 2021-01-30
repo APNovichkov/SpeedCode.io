@@ -16,8 +16,6 @@ const STATIC_TEXT = {
 const ObjectPageHeader = (props) => {
   let { objectType } = props;
 
-  console.log("OBJECT TYPE: ", objectType);
-
   return (
     <div className="algo-page-header-wrapper">
       <div className="row">
