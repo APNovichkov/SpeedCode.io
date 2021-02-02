@@ -4,9 +4,7 @@ import React from "react";
 import OverviewCard from "./overviewCard";
 
 const OverviewCardGroup = (props) => {
-  let { name, groupClass, iconClass, data, userObject } = props;
-
-  console.log("User Object from OverviewCardGroup: ", userObject);
+  let { name, groupClass, iconClass, data } = props;
 
   return (
     <div className={`overview-card-group ${groupClass.toLowerCase()}`}>
@@ -30,7 +28,6 @@ const OverviewCardGroup = (props) => {
               attempts={dataItem.attempts}
               groupClass={groupClass.toLowerCase()}
               code={dataItem.code}
-              userObject={userObject}
             />
           );
         })}

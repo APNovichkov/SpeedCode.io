@@ -6,7 +6,6 @@ import _ from "underscore";
 import { getDataStructuresUrl } from "./../utils/urlUtils";
 
 // Import components
-import MainWrapper from "./../components/mainWrapper";
 import ObjectPageHeader from "./../components/objectPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
 import Navbar from "./../components/navbar";
@@ -18,11 +17,6 @@ const dsCategoryToIcon = {
 };
 
 const DataStructuresPage = (props) => {
-  // Get state from link
-  console.log("Props from redirect: ", props.location.state);
-  const userObject = props.location.state.userObject;
-  console.log("User object: ", userObject);
-
   // Set Page Parameters
   const [ds, setDs] = useState([]);
 
@@ -44,8 +38,8 @@ const DataStructuresPage = (props) => {
 
   return (
     <div>
-      <Navbar userObject={userObject} />
-      <LinksNavbar userObject={userObject} />
+      <Navbar/>
+      <LinksNavbar/>
       <div className="algorithms-wrapper">
         <ObjectPageHeader objectType={"ds"} />
         <hr className="algo-header-line-break"></hr>
@@ -58,7 +52,6 @@ const DataStructuresPage = (props) => {
               iconClass={dsCategoryToIcon[categoryName]}
               groupClass={categoryName}
               data={dsByCategory}
-              userObject={userObject}
             />
           );
         })}

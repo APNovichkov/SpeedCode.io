@@ -7,8 +7,6 @@ const Navbar = (props) => {
   
   const [userObject] = useContext(UserContext);
 
-  console.log("User Object from NAVBAR:", userObject);
-
   return (
     <div className="navbar-wrapper">
       <nav class="navbar navbar-light navbar-home">

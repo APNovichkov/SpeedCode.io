@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import $ from "jquery";
 import axios from 'axios'
 
@@ -19,27 +19,12 @@ import { formatTime, formatTimeToSeconds, getNumWords } from "./../utils/stringU
 import { getWordsPerMinute } from "./../utils/statsUtils";
 import { getSubmitAlgosUrl } from "./../utils/urlUtils";
 
-// Fake Data
-// const name = "Bubble Sort";
-// const difficulty = 2;
-// const description = "Iterative Sorting Algorithm";
-const longDescription = "Bubble Sort is an Iterative Sorting Algorithm. It has best case scenario of N^2 time.";
-const bigO = "n^2";
-// const category = "Sorting";
+// Import Context
+import {UserContext} from "./../context/userProvider";
 
-// Default code for bubble sort
-// const bubbleSortCode = `def bubble_sort(ls):
-// # Your Implementation goes here
-
-// if __name__ == '__main__':
-// \tls = [4,3,2,1]
-// \tbubble_sort(ls)`;
-
-const bubbleSortCode = `hello
-\tworld`;
 
 const AlgorithmDetailSpeed = (props) => {
-  // Get input data
+  // Get input data from link
   let {
     name,
     algoId,
@@ -52,9 +37,10 @@ const AlgorithmDetailSpeed = (props) => {
     code,
   } = props.location.state.algorithmData;
 
-  let {userObject, problemId, problemObject} = props.location.state;
+  let {problemId, problemObject} = props.location.state;
 
-  // let urlName = props.match.params.name;
+  // Get User Object from Context
+  const [userObject] = useContext(UserContext);
 
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
@@ -83,15 +69,11 @@ const AlgorithmDetailSpeed = (props) => {
     let out = 0;
     let index = startIndex;
 
-    console.log("START CHAR: ");
-
     // Find num tabs in sequential order starting at the start index
     while (charArray[index] == "\t") {
-      console.log("IN SEQUENTIAL TAB WHILE");
       out += 1;
       index += 1;
     }
-
     return out;
   };
 
@@ -216,26 +198,6 @@ const AlgorithmDetailSpeed = (props) => {
     setUntypedCode(charArray.slice(currentLetterIndex + 2, charArray.length).join(""));
   }, [currentLetterIndex]);
 
-  // Page navigation stuff
-  const handleStartClick = (event) => {
-    event.preventDefault();
-
-    setHasStarted(true);
-  };
-
-  // Helper functions
-  const getTypedCodeEndIndex = (index) => {
-    if (index != 0) {
-      return index - 1;
-    } else {
-      return 0;
-    }
-  };
-
-  const getUntypedCodeStartIndex = (index) => {
-    return index + 1;
-  };
-
   // Handle Go Home Functionality
   const goHome = () => {
     console.log("Going home");
@@ -260,19 +222,14 @@ const AlgorithmDetailSpeed = (props) => {
     setUntypedCode("");
   };
 
-  const handleCloseDialogClick = (event) => {
-    event.preventDefault();
-    setToShowDialog(false);
-  };
-
   return (
     <div
       onClick={() => {
         setToShowDialog(false);
       }}
     >
-      <Navbar userObject={userObject}/>
-      <LinksNavbar userObject={userObject} />
+      <Navbar/>
+      <LinksNavbar/>
       <div className="algo-detail-wrapper">
         <ObjectDetailHeader
           name={name}
@@ -312,7 +269,6 @@ const AlgorithmDetailSpeed = (props) => {
               mistakesMade={mistakesMade / 2}
               goHome={goHome}
               tryAgain={tryAgain}
-              userObject={userObject}
               problemId={problemId}
               problemObject={problemObject}
             />

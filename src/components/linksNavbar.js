@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
+
+// Import context
+import {UserContext} from './../context/userProvider';
 
 const LinksNavbar = (props) => {
 
-  let {userObject} = props;
+  const [userObject] = useContext(UserContext);
 
   return (
     <div className="links-navbar-wrapper">

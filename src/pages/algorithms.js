@@ -55,7 +55,7 @@ const AlgorithmsPage = (props) => {
   return (
     <div>
       <Navbar />
-      <LinksNavbar userObject={userObject} />
+      <LinksNavbar/>
       <div className="algorithms-wrapper">
         <ObjectPageHeader objectType={"algo"} />
         <hr className="algo-header-line-break"></hr>

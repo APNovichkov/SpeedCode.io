@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {useState, useEffect, useContext} from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios'
 
 // Import components
@@ -7,23 +7,20 @@ import Stars from "./stars";
 
 // Import utils
 import { getAlgoStatisticsUrl } from "./../utils/urlUtils";
-import { diff } from "react-ace";
 
-// Declare constants
+// Import Context
+import {UserContext} from "./../context/userProvider";
 
 const OverviewCard = (props) => {
-  let { name, algoId, urlName, description, longDescription, timeComplexity, difficulty, groupClass, code, userObject } = props;
+  let { name, algoId, urlName, description, longDescription, timeComplexity, difficulty, groupClass, code } = props;
 
+  const [userObject] = useContext(UserContext);
   const [attempts, setAttempts] = useState("");
-  const [statsObject, setStatsObjects] = useState({});
-
-  console.log("User Object from OverviewCard: ", userObject);
-
+  
   useEffect(() => {
     axios.get(getAlgoStatisticsUrl(algoId, userObject['_id'])).then(res => {
       console.log("Got statistics for this algorithm", res.data)
       setAttempts(res.data.attempts);
-      setStatsObjects(res.data)
     }).catch(err => {
       console.log(err);
     })
@@ -57,7 +54,6 @@ const OverviewCard = (props) => {
                 groupClass: groupClass,
                 code: code
               },
-              userObject: userObject,
               problemId: algoId,
               problemObject: {
                 name: name,
@@ -74,7 +70,6 @@ const OverviewCard = (props) => {
           pathname: `/algorithms/${name}/statistics`,
           state: {
             problemId: algoId,
-            userObject: userObject,
             problemObject: {
               name: name,
               id: algoId,

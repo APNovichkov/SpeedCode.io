@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 
 // Import Components
@@ -12,8 +12,13 @@ import BasicSpinner from "./../components/basicSpinner";
 import { formatLineGraphData, formatOverviewGraphData } from "./../utils/graphUtils";
 import { getAlgoStatisticsUrl, getPerformanceOverviewUrl } from "./../utils/urlUtils";
 
+// Import Context
+import {UserContext} from "./../context/userProvider";
+
 const Statistics = (props) => {
-  let { problemId, problemObject, userObject } = props.location.state;
+  let { problemId, problemObject } = props.location.state;
+
+  const [userObject] = useContext(UserContext);
 
   // Page Parameters
   const [timeTakenData, setTimeTakenData] = useState();

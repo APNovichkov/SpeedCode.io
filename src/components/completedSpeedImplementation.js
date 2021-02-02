@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { Link } from "react-router-dom";
 
 const CompletedSpeedImplementation = (props) => {
@@ -10,7 +9,6 @@ const CompletedSpeedImplementation = (props) => {
     wordsPerMinute,
     goHome,
     tryAgain,
-    userObject,
     problemId,
     problemObject,
   } = props;
@@ -47,7 +45,6 @@ const CompletedSpeedImplementation = (props) => {
           to={{
             pathname: `/algorithms/${problemName}/statistics`,
             state: {
-              userObject: userObject,
               problemId: problemId,
               problemObject: problemObject,
             },
