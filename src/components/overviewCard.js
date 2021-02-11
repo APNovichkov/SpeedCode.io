@@ -6,7 +6,7 @@ import axios from 'axios'
 import Stars from "./stars";
 
 // Import utils
-import { getAlgoStatisticsUrl } from "./../utils/urlUtils";
+import { getProblemStatisticsUrl } from "./../utils/urlUtils";
 
 // Import Context
 import {UserContext} from "./../context/userProvider";
@@ -18,8 +18,8 @@ const OverviewCard = (props) => {
   const [attempts, setAttempts] = useState("");
   
   useEffect(() => {
-    axios.get(getAlgoStatisticsUrl(algoId, userObject['_id'])).then(res => {
-      console.log("Got statistics for this algorithm", res.data)
+    axios.get(getProblemStatisticsUrl(algoId, userObject['_id'])).then(res => {
+      console.log("Got statistics for this problem", res.data)
       setAttempts(res.data.attempts);
     }).catch(err => {
       console.log(err);

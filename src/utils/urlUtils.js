@@ -18,17 +18,17 @@ export const getDataStructuresUrl = () => {
   return `${BASE_URL}/datastructures`;
 }
 
-export const getAlgoStatisticsUrl = (algoId, userId) => {
-  return `${BASE_URL}/algorithms/statistics?algoId=${algoId}&userId=${userId}`
+export const getProblemStatisticsUrl = (problemId, userId) => {
+  return `${BASE_URL}/problem/statistics?problemId=${problemId}&userId=${userId}`
 }
 
-export const getPerformanceOverviewUrl = (algoId, userId) => {
-  return `${BASE_URL}/algorithms/performance-overview?algoId=${algoId}&userId=${userId}`
+export const getPerformanceOverviewUrl = (problemId, userId) => {
+  return `${BASE_URL}/problem/performance-overview?problemId=${problemId}&userId=${userId}`
 }
 
 // POST REQUEST
-export const getSubmitAlgosUrl = () => {
-  return `${BASE_URL}/algorithms/submit`
+export const getSubmitProblemUrl = () => {
+  return `${BASE_URL}/problem/submit`
 }
 
  

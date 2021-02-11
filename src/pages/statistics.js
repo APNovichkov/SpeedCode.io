@@ -10,7 +10,7 @@ import BasicSpinner from "./../components/basicSpinner";
 
 // Import Utils
 import { formatLineGraphData, formatOverviewGraphData } from "./../utils/graphUtils";
-import { getAlgoStatisticsUrl, getPerformanceOverviewUrl } from "./../utils/urlUtils";
+import { getProblemStatisticsUrl, getPerformanceOverviewUrl } from "./../utils/urlUtils";
 
 // Import Context
 import {UserContext} from "./../context/userProvider";
@@ -35,7 +35,7 @@ const Statistics = (props) => {
   useEffect(() => {
     //Get Statistics for this algoId and userId
     axios
-      .get(getAlgoStatisticsUrl(problemId, userObject["_id"]))
+      .get(getProblemStatisticsUrl(problemId, userObject["_id"]))
       .then((res) => {
         console.log("Got statistics for this problem", res.data);
         setStatsObject(res.data);

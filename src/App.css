@@ -828,8 +828,6 @@ body {
   height: 350px;
   display:block;
   margin-top: -100px;
-  
-  /* top:200px; */
   z-index:999;
   background-color: #ffffff;
   border: 1px solid #ffffff;

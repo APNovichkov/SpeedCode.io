@@ -24,12 +24,6 @@ const algoTypeToIcon = {
 };
 
 const AlgorithmsPage = (props) => {
-  // Get state from link
-  // const propsFromOutside = props.location.state;
-  const userObject = props.location.state.userObject;
-
-  // console.log("User object: ", userObject);
-
   const [algos, setAlgos] = useState([]);
 
   useEffect(() => {
@@ -68,7 +62,6 @@ const AlgorithmsPage = (props) => {
               iconClass={algoTypeToIcon[categoryName]}
               groupClass={categoryName}
               data={algosByCategory}
-              userObject={userObject}
             />
           );
         })}

@@ -17,7 +17,7 @@ import LinksNavbar from "./../components/linksNavbar";
 // Import Utils
 import { formatTime, formatTimeToSeconds, getNumWords } from "./../utils/stringUtils";
 import { getWordsPerMinute } from "./../utils/statsUtils";
-import { getSubmitAlgosUrl } from "./../utils/urlUtils";
+import { getSubmitProblemUrl } from "./../utils/urlUtils";
 
 // Import Context
 import {UserContext} from "./../context/userProvider";
@@ -172,7 +172,7 @@ const AlgorithmDetailSpeed = (props) => {
       setToShowDialog(true);
 
       const formBody = {
-        algorithmId: algoId,
+        problemId: algoId,
         userObject: userObject,
         statsObject: {
           language: "python",
@@ -182,7 +182,7 @@ const AlgorithmDetailSpeed = (props) => {
         }
       }
 
-      axios.post(getSubmitAlgosUrl(), formBody).then(res => {
+      axios.post(getSubmitProblemUrl(), formBody).then(res => {
         console.log("Got response from algo submit: ", res.data)
       }).catch(err => {
         console.log(err);
