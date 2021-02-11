@@ -2,9 +2,10 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { Redirect, Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 // Import Context
-import {UserContext} from "../context/userProvider";
+import { UserContext } from "../context/userProvider";
 
 // Import Components
 import LandingNavbar from "./../components/landingNavbar";
@@ -13,14 +14,14 @@ import LandingNavbar from "./../components/landingNavbar";
 import { getLoginUrl } from "./../utils/urlUtils";
 
 const Login = (props) => {
-  const [_, setUserObject] = useContext(UserContext);
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoginSuccessfull, setIsLoginSuccessful] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
   const [localUserObject, setLocalUserObject] = useState({});
 
+  const [_, setUserObject] = useContext(UserContext);
+  const [cookies, setCookie] = useCookies(["speedcode-cookiez"]);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -45,8 +46,10 @@ const Login = (props) => {
 
         // Update Context Here
         setUserObject(res.data.user_object);
-        // onLogin(res.data.user_object);
 
+        // Set cookie here
+        setCookie("speedcode-cookiez", res.data.user_object, {path: "/"});
+        
         if (res.data.login_successfull) {
           setIsLoginSuccessful(true);
         } else {

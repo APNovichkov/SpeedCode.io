@@ -20,7 +20,12 @@ const OverviewCard = (props) => {
   useEffect(() => {
     axios.get(getProblemStatisticsUrl(algoId, userObject['_id'])).then(res => {
       console.log("Got statistics for this problem", res.data)
-      setAttempts(res.data.attempts);
+
+      if(res.data != null){
+        setAttempts(res.data.attempts);
+      }else{
+        setAttempts(0);
+      }
     }).catch(err => {
       console.log(err);
     })

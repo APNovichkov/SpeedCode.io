@@ -9,10 +9,10 @@ const Navbar = (props) => {
 
   return (
     <div className="navbar-wrapper">
-      <nav class="navbar navbar-light navbar-home">
+      <nav className="navbar navbar-light navbar-home">
         <img src="/assets/images/webLogo.jpg" className="navbar-logo" width="200" alt="logo" />
-        <form class="form-inline my-2 my-lg-0"></form>
-        <div class="form-inline my-2 my-lg-0">
+        <form className="form-inline my-2 my-lg-0"></form>
+        <div className="form-inline my-2 my-lg-0">
           <h5 className="navbar-welcome">
             <span className="light-text">Welcome,</span>{" "}
             <span className="medium-text">{userObject && userObject.firstName}!</span>

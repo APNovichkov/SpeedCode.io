@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import _ from "underscore";
-
-import UserContext from "../context/userProvider";
+import { useCookies } from "react-cookie";
+import { UserContext } from "./../context/userProvider";
 
 // Import utils
 import { getAlgorithmsUrl } from "./../utils/urlUtils";
 
 // Import components
-import MainWrapper from "./../components/mainWrapper";
 import ObjectPageHeader from "./../components/objectPageHeader";
 import OverviewCardGroup from "./../components/overviewCardGroup";
 import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
-
-// Import data providers
-import { getAllAlgorithms } from "./../dataProviders/algorithms";
 
 // Set Constants
 const algoTypeToIcon = {
@@ -24,14 +20,24 @@ const algoTypeToIcon = {
 };
 
 const AlgorithmsPage = (props) => {
+  // Page Parameters
   const [algos, setAlgos] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // let response = await getAllAlgorithms();
-      let response = await axios.get(getAlgorithmsUrl());
+  // Cookies and Context
+  const [cookie] = useCookies("speedcode-cookiez");
+  const [userObject, setUserObject] = useContext(UserContext);
 
-      console.log(`Response for get all algorithms:`, response.data);
+  const updateUserObject = () => {
+    setUserObject(cookie["speedcode-cookiez"]);
+  };
+
+  useEffect(() => {
+    // Update User Object
+    updateUserObject();
+
+    // Fetch Data
+    const fetchData = async () => {
+      let response = await axios.get(getAlgorithmsUrl());
 
       // Group by category
       let groupedResponse = _.groupBy(response.data.algorithms, "category");
@@ -49,7 +55,7 @@ const AlgorithmsPage = (props) => {
   return (
     <div>
       <Navbar />
-      <LinksNavbar/>
+      <LinksNavbar />
       <div className="algorithms-wrapper">
         <ObjectPageHeader objectType={"algo"} />
         <hr className="algo-header-line-break"></hr>

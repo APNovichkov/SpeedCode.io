@@ -6,11 +6,11 @@ const LandingNavbar = (props) => {
 
   return (
     <div className="landing-navbar-wrapper">
-      <nav class="navbar navbar-light navbar-home">
+      <nav className="navbar navbar-light navbar-home">
         <img src="/assets/images/webLogo.jpg" className="navbar-logo" width="200" alt="logo" />
 
         {!isLoginOrSignUp ? (
-          <div class="form-inline my-2 my-lg-0">
+          <div className="form-inline my-2 my-lg-0">
             <h5 className="landing-navbar-welcome">
               <Link to="/login" className="medium-text landing-navbar-link">
                 Login
@@ -20,7 +20,7 @@ const LandingNavbar = (props) => {
             </h5>
           </div>
         ) : (
-          <div class="form-inline my-2 my-lg-0">
+          <div className="form-inline my-2 my-lg-0">
             <h5 className="landing-navbar-welcome">
               <a className="light-text landing-navbar-link">Continue as Guest</a>
             </h5>

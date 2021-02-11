@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import $ from "jquery";
-import axios from 'axios'
-
-import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/ext-language_tools";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 // Import components
 import AlgoDetailInputHeader from "./../components/algoDetailInputHeader";
@@ -20,8 +17,7 @@ import { getWordsPerMinute } from "./../utils/statsUtils";
 import { getSubmitProblemUrl } from "./../utils/urlUtils";
 
 // Import Context
-import {UserContext} from "./../context/userProvider";
-
+import { UserContext } from "./../context/userProvider";
 
 const AlgorithmDetailSpeed = (props) => {
   // Get input data from link
@@ -37,10 +33,7 @@ const AlgorithmDetailSpeed = (props) => {
     code,
   } = props.location.state.algorithmData;
 
-  let {problemId, problemObject} = props.location.state;
-
-  // Get User Object from Context
-  const [userObject] = useContext(UserContext);
+  let { problemId, problemObject } = props.location.state;
 
   // This splits string into char array
   const [charArray, setCharArray] = useState([]);
@@ -76,6 +69,18 @@ const AlgorithmDetailSpeed = (props) => {
     }
     return out;
   };
+
+  // Cookies and Context
+  const [cookie] = useCookies("speedcode-cookiez");
+  const [userObject, setUserObject] = useContext(UserContext);
+
+  const updateUserObject = () => {
+    setUserObject(cookie["speedcode-cookiez"]);
+  };
+
+  useEffect(() => {
+    updateUserObject();
+  }, []);
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   useEffect(() => {
@@ -178,15 +183,18 @@ const AlgorithmDetailSpeed = (props) => {
           language: "python",
           mistakesMade: mistakesMade,
           timeSpent: formatTimeToSeconds(minutes, seconds),
-          wordsPerMinute: getWordsPerMinute(minutes, seconds, numWords)
-        }
-      }
+          wordsPerMinute: getWordsPerMinute(minutes, seconds, numWords),
+        },
+      };
 
-      axios.post(getSubmitProblemUrl(), formBody).then(res => {
-        console.log("Got response from algo submit: ", res.data)
-      }).catch(err => {
-        console.log(err);
-      })
+      axios
+        .post(getSubmitProblemUrl(), formBody)
+        .then((res) => {
+          console.log("Got response from algo submit: ", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     $(".current-letter").removeClass("idle-letter");
@@ -228,8 +236,8 @@ const AlgorithmDetailSpeed = (props) => {
         setToShowDialog(false);
       }}
     >
-      <Navbar/>
-      <LinksNavbar/>
+      <Navbar />
+      <LinksNavbar />
       <div className="algo-detail-wrapper">
         <ObjectDetailHeader
           name={name}

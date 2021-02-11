@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import _ from "underscore";
+import {useCookies} from 'react-cookie';
 
 // Import utils
 import { getDataStructuresUrl } from "./../utils/urlUtils";
@@ -11,6 +12,9 @@ import OverviewCardGroup from "./../components/overviewCardGroup";
 import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
 
+// Import Context
+import {UserContext} from "./../context/userProvider";
+
 // Set Constants
 const dsCategoryToIcon = {
   Basic: "fas fa-stream",
@@ -20,7 +24,17 @@ const DataStructuresPage = (props) => {
   // Set Page Parameters
   const [ds, setDs] = useState([]);
 
+  // Cookies and Context
+  const [cookie] = useCookies("speedcode-cookiez");
+  const [userObject, setUserObject] = useContext(UserContext);
+
+  const updateUserObject = () => {
+    setUserObject(cookie["speedcode-cookiez"]);
+  };
+
   useEffect(() => {
+    updateUserObject();
+
     const fetchData = async () => {
       let response = await axios.get(getDataStructuresUrl());
 
