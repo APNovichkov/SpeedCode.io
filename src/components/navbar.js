@@ -10,7 +10,7 @@ const Navbar = (props) => {
   return (
     <div className="navbar-wrapper">
       <nav className="navbar navbar-light navbar-home">
-        <img src="/assets/images/webLogo.jpg" className="navbar-logo" width="200" alt="logo" />
+        <img src="/assets/images/black_speedcode_logo@2x.png" className="navbar-logo" width="200" alt="logo" />
         <form className="form-inline my-2 my-lg-0"></form>
         <div className="form-inline my-2 my-lg-0">
           <h5 className="navbar-welcome">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 // Import Components
 import LinksNavbar from "./../components/linksNavbar";
@@ -13,12 +14,10 @@ import { formatLineGraphData, formatOverviewGraphData } from "./../utils/graphUt
 import { getProblemStatisticsUrl, getPerformanceOverviewUrl } from "./../utils/urlUtils";
 
 // Import Context
-import {UserContext} from "./../context/userProvider";
+import { UserContext } from "./../context/userProvider";
 
 const Statistics = (props) => {
   let { problemId, problemObject } = props.location.state;
-
-  const [userObject] = useContext(UserContext);
 
   // Page Parameters
   const [timeTakenData, setTimeTakenData] = useState();
@@ -31,8 +30,18 @@ const Statistics = (props) => {
   // Page Navigational/Functional parameters
   const [isLoadingPerformanceOverview, setIsLoadingPerformanceOverview] = useState(false);
 
+  // Cookies and Context
+  const [cookie] = useCookies("speedcode-cookiez");
+  const [userObject, setUserObject] = useContext(UserContext);
+
+  const updateUserObject = () => {
+    setUserObject(cookie["speedcode-cookiez"]);
+  };
+
   // Initital Setup
   useEffect(() => {
+    updateUserObject();
+
     //Get Statistics for this algoId and userId
     axios
       .get(getProblemStatisticsUrl(problemId, userObject["_id"]))

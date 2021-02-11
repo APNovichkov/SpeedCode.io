@@ -28,17 +28,21 @@ body {
 
 .login-header{
   font-size: 30px;
-  font-weight: 600;
-  color: #d63447;
+  font-weight: 700;
+  color: #eeeeee;
+  margin-bottom: 10px;
 }
 
 .login-wrapper{
-  height: 90vh;
-  padding-top: 12%;
+  height: 100vh;
+  background-image: url("/assets/images/hero_1.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; 
+  background-size: cover; 
 }
 
 .login-form-wrapper{
-  margin-top: 25px;
+  margin-top: 14%;
 }
 
 .login-input-wrapper{
@@ -50,34 +54,43 @@ body {
 }
 
 .login-input-wrapper input{
-  border: 1px solid #d85b6a;
+  border: 1px solid #eeeeee;
   background-color: transparent;
+}
+
+.login-input{
+  background-color: transparent;
+  color: #eeeeee;
+}
+
+.login-input::placeholder{
+  color: #eeeeee;
 }
 
 .login-button{
   background-color: transparent;
-  border: 1px solid #d63447;
+  border: 1px solid #eeeeee;
   border-radius: 4px;
-  color: #d63447;
+  color: #eeeeee;
 }
 
 .login-button:hover{
-  background-color: #d85b6a;
-  border: 1px solid #d85b6a;
+  background-color: #f0f6ff;
+  border: 1px solid #f0f6ff;
   border-radius: 4x;
-  color: #ffffff;
+  color: #1C2B2D;
   box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
 }
 
 .login-sign-up-wrapper{
   margin-left: 20px;
-  color: #d63447;
+  color: #eeeeee;
   margin-top: 6px;
 }
 
 .login-sign-up-wrapper a {
   font-weight: 600;
-  color: #d63447;
+  color: #eeeeee;
 }
 
 .login-error-wrapper{
@@ -89,7 +102,7 @@ body {
 /* FOOTER STUFF */
 
 .footer-wrapper{
-  background-color: #381460;
+  background-color: #6c7a89;
   color: #ffffff;
   padding-left: 120px;
   padding-right: 120px;
@@ -116,22 +129,24 @@ body {
 /* LANDING PAGE STUFF */
 
 .landing-hero-wrapper{
-  /* background-image: linear-gradient(to top, #e9828c, #f9fcfb); */
-  background-color: #f9fcfb;
-  height: 600px;
+  background-image: url("/assets/images/hero_1.jpg");
+  height: 100vh;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; 
+  background-size: cover; 
 }
 
 .landing-hero-main-text{
-  font-size: 30px;
-  font-weight: 700;
-  color: #d63447;
-  margin-top: 120px;
+  font-size: 55px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: 15%;
 }
 
 .landing-hero-subtitle{
-  font-size: 15px;
-  font-weight: 500;
-  color: #d63447;
+  font-size: 25px;
+  font-weight: 700;
+  color: #eeeeee;
   margin-top: 20px;
 }
 
@@ -141,14 +156,14 @@ body {
 
 .landing-hero-button{
   background-color: transparent;
-  border: 1px solid #d63447;
+  border: 1px solid #eeeeee;
   border-radius: 10px;
-  color: #d63447;
+  color: #eeeeee;
 }
 
 .landing-hero-button:hover{
-  background-color: #d85b6a;
-  border: 1px solid #d85b6a;
+  background-color: #e2c854;
+  border: 1px solid #ffe761;
   border-radius: 10px;
   color: #ffffff;
   box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
@@ -157,7 +172,8 @@ body {
 .landing-stats-row-wrapper{
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: #d63447;
+  background-color: #eeeeee;
+  
   margin-bottom: 100px;
 }
 
@@ -165,13 +181,13 @@ body {
   margin-bottom: 40px;
   font-size: 28px;
   font-weight: 600;
-  color: #ffffff;
+  color: #d63447;
 }
 
 .stats-item{
   font-size: 25px;
   font-weight: 500;
-  color: #ffffff;
+  color: #d63447;
 }
 
 .landing-description-row-wrapper{
@@ -224,6 +240,7 @@ body {
 }
 
 .landing-navbar-wrapper{
+  background: none;
   padding-top: 5px;
   padding-bottom: 30px;
   margin-left: 150px;
@@ -231,12 +248,12 @@ body {
 }
 
 .landing-navbar-welcome{
-  color: #d63447;
+  color: #eeeeee;
   margin-top: 10px;
 }
 
 .landing-navbar-welcome a{
-  color: #d63447;
+  color: #eeeeee;
 }
 
 /* NAVBAR STUFF */
@@ -271,28 +288,28 @@ body {
 }
 
 .navbar-welcome {
-  color: #d63447;
+  color: #1C2B2D;
 }
 
 .navbar-search {
   border-radius: 30px;
-  border-color: #d63447;
+  border-color: #1C2B2D;
   background-color: transparent;
 }
 
 .navbar-search::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #d63447;
+  color: #1C2B2D;
 }
 
 .navbar-profile-picture {
-  border: 1px solid #d63447;
+  border: 1px solid #1C2B2D;
   border-radius: 60px;
   margin-left: 10px;
 }
 
 .links-navbar-wrapper {
-  background-color: #D56576;
+  background-color: #6c7a89;
   height: 50px;
 }
 
@@ -326,30 +343,41 @@ body {
 /* ALGORITHMS PAGE STUFF */
 
 .algorithms-wrapper{
-  padding-top: 20px;
+  padding-top: 30px;
   padding-left: 164px;
   padding-right: 120px;
-  background-color: #fffcf4;
+  background-color: #f4f4f4;
 }
 
 .algo-page-header-wrapper {
-  margin-bottom: 10px;
+  padding-top: 22px;
+  padding-bottom: 3px;
+  padding-left: 164px;
+  padding-right: 120px;
+  /* background-color: #e7e7e7; */
+  background-color: #e8edf1;
 }
 
 .algo-header-line-break {
   margin-bottom: 40px;
+  border: none;
   border-color: #fcdee2;
+}
+
+.algo-page-header-text{
+  color: #414141;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .algo-page-subheader{
   font-weight: 400;
-  font-size: 18px;
-  color: #d63447;
+  font-size: 16px;
+  max-width: 80%;
+  color: #1C2B2D;  
 }
 
-.algo-page-header-text{
-  color: #d63447;
-}
+
 
 .algo-page-category-link {
   text-align: center;
@@ -609,13 +637,22 @@ body {
   padding-bottom: 20px;
   padding-left: 164px;
   padding-right: 120px;
-  background-color: #fffcf4;
+  background-color: #f4f4f4;
+}
+
+.algo-detail-title{
+  font-weight: 600;
+  font-size: 27px;
 }
 
 .algo-detail-title-wrapper{
-  color: #d63447;
-  /* text-decoration: underline; */
-  /* color: #272727; */
+  color: #1C2B2D;
+}
+
+.algo-detail-description{
+  color: #1C2B2D;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .algo-detail-difficulty-wrapper{
@@ -666,10 +703,7 @@ body {
   margin-top: 0px;
 }
 
-.algo-detail-description{
-  color: #d63447;
-  font-size: 19px;
-}
+
 
 .algo-detail-input-wrapper{
   margin-top: 30px;
@@ -681,7 +715,7 @@ body {
   width: auto;
   border: 1px solid #fffcf4;
   border-radius: 7px;
-  background-color: #fffcf4;
+  background-color: #f8f8f8;
   box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
 }
 
@@ -692,7 +726,7 @@ body {
 }
 
 .algo-detail-input-header{
-  color: #d63447;
+  color: #1C2B2D;
   font-weight: 600;
 }
 

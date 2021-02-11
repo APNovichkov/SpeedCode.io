@@ -6,15 +6,14 @@ import LandingNavbar from "./../components/landingNavbar";
 const Landing = (props) => {
   return (
     <div>
-      <LandingNavbar></LandingNavbar>
+      
       <div className="landing-hero-wrapper text-center">
+      <LandingNavbar></LandingNavbar>
         <div className="row">
           <div className="col-md-2"></div>
           <div className="col-md-8">
-            <div className="landing-hero-main-text">
-              Learn and Memorize Algorithms and Data Structures. Get Faster at Writing Code.
-            </div>
-
+            <div className="landing-hero-main-text">Learn and Memorize Algorithms and Data Structures.</div>
+            <div className="landing-hero-subtitle">Get Faster at Writing Code.</div>
             <div className="landing-hero-button-wrapper">
               <button className="btn landing-hero-button">Learn More</button>
             </div>
@@ -22,7 +21,7 @@ const Landing = (props) => {
           <div className="col-md-2"></div>
         </div>
       </div>
-      <div className="landing-stats-row-wrapper text-center">
+      {/* <div className="landing-stats-row-wrapper text-center">
         <div className="landing-stats-row-header">Our Results</div>
         <div className="row">
           <div className="col-md-3 stats-item">10%</div>
@@ -30,7 +29,7 @@ const Landing = (props) => {
           <div className="col-md-3 stats-item">+200%</div>
           <div className="col-md-3 stats-item">20/20</div>
         </div>
-      </div>
+      </div> */}
       <div className="landing-description-background-wrapper">
         <div className="landing-description-wrapper">
           <div className="landing-description-row-wrapper">
@@ -63,7 +62,8 @@ const Landing = (props) => {
                     Writing Data Structures and Algorithms
                   </div>
                   <div className="landing-description-item-text">
-                    Choose a language and type over curated implementations of data structures and algorithms in an interactive console
+                    Choose a language and type over curated implementations of data structures and algorithms in an
+                    interactive console
                   </div>
                 </div>
               </div>

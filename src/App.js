@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import { CookiesProvider } from "react-cookie";
-import { useCookies } from "react-cookie";
 
 // Import components
 import Footer from "./components/footer";
@@ -14,7 +13,7 @@ import { UserProvider } from "./context/userProvider";
 
 // Import pages
 import AlgorithmsPage from "./pages/algorithms";
-import AlgorithmDetailSpeed from "./pages/algorithmDetailSpeed";
+import AlgorithmDetailSpeed from "./pages/problemSpeed";
 import DataStructuresPage from "./pages/dataStructures";
 import Landing from "./pages/landing";
 import Login from "./pages/login";
@@ -22,10 +21,6 @@ import SignUp from "./pages/signUp";
 import Statistics from "./pages/statistics";
 
 function App() {
-  // const [userObjectFromLogin, setUserObjectFromLogin] = useState({});
-
-  const [cookie, setCookie] = useCookies("speedcode-cookiez")
-  console.log("Speedcode Cookie:", cookie);
   
   return (
     <UserProvider>

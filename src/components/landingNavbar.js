@@ -6,8 +6,8 @@ const LandingNavbar = (props) => {
 
   return (
     <div className="landing-navbar-wrapper">
-      <nav className="navbar navbar-light navbar-home">
-        <img src="/assets/images/webLogo.jpg" className="navbar-logo" width="200" alt="logo" />
+      <nav className="navbar landing-navbar">
+        <img src="assets/images/speedcode-white-logo@2x.png" className="navbar-logo" width="200" alt="logo" />
 
         {!isLoginOrSignUp ? (
           <div className="form-inline my-2 my-lg-0">
@@ -15,7 +15,9 @@ const LandingNavbar = (props) => {
               <Link to="/login" className="medium-text landing-navbar-link">
                 Login
               </Link>
-              <Link to="/signup" className="medium-text landing-navbar-link">Sign Up</Link>
+              <Link to="/signup" className="medium-text landing-navbar-link">
+                Sign Up
+              </Link>
               <a className="light-text landing-navbar-link">Continue as Guest</a>
             </h5>
           </div>

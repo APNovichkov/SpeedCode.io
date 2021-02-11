@@ -18,10 +18,11 @@ const ObjectPageHeader = (props) => {
 
   return (
     <div className="algo-page-header-wrapper">
-      <div className="row">
-        <div className="col-md-5">
-          <h2 className="algo-page-header-text">{STATIC_TEXT[objectType]["header"]}</h2>
-        </div>
+      <div className="d-flex justify-content-left">
+        <h2 className="algo-page-header-text">
+          {" "}
+          {STATIC_TEXT[objectType]["header"]} <span className="fas fa-laptop-code"></span>
+        </h2>
       </div>
       <div>
         <p className="algo-page-subheader">{STATIC_TEXT[objectType]["subHeader"]}</p>

@@ -11,7 +11,7 @@ const ObjectDetailHeader = (props) => {
       <div className="algo-detail-title-row-wrapper">
         <div className="d-flex justify-content-left">
           <div className="algo-detail-title-wrapper">
-            <h2 className="algo-detail-title">{name}</h2>
+            <div className="algo-detail-title">{name}</div>
           </div>
         </div>
       </div>

@@ -56,9 +56,8 @@ const AlgorithmsPage = (props) => {
     <div>
       <Navbar />
       <LinksNavbar />
+      <ObjectPageHeader objectType={"algo"} />
       <div className="algorithms-wrapper">
-        <ObjectPageHeader objectType={"algo"} />
-        <hr className="algo-header-line-break"></hr>
         {algos.map((algosByCategory, index) => {
           let categoryName = algosByCategory[0].category;
           return (

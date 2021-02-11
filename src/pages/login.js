@@ -48,8 +48,8 @@ const Login = (props) => {
         setUserObject(res.data.user_object);
 
         // Set cookie here
-        setCookie("speedcode-cookiez", res.data.user_object, {path: "/"});
-        
+        setCookie("speedcode-cookiez", res.data.user_object, { path: "/" });
+
         if (res.data.login_successfull) {
           setIsLoginSuccessful(true);
         } else {
@@ -80,14 +80,13 @@ const Login = (props) => {
 
   return (
     <div>
-      <LandingNavbar isLoginOrSignUp={true}></LandingNavbar>
-
       <div className="login-wrapper text-center">
-        <div className="login-header">Log In</div>
-        {isLoginError && <div className="login-error-wrapper">Invalid Credentials</div>}
+        <LandingNavbar isLoginOrSignUp={true}></LandingNavbar>
+        <div className="login-form-wrapper">
+          <div className="login-header">Log In</div>
+          {isLoginError && <div className="login-error-wrapper">Invalid Credentials</div>}
 
-        <div className="d-flex justify-content-center">
-          <div className="login-form-wrapper">
+          <div className="d-flex justify-content-center">
             <form onSubmit={handleLogin}>
               <div className="login-input-wrapper">
                 <input

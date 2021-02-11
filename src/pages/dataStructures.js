@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import _ from "underscore";
-import {useCookies} from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 // Import utils
 import { getDataStructuresUrl } from "./../utils/urlUtils";
@@ -13,7 +13,7 @@ import Navbar from "./../components/navbar";
 import LinksNavbar from "./../components/linksNavbar";
 
 // Import Context
-import {UserContext} from "./../context/userProvider";
+import { UserContext } from "./../context/userProvider";
 
 // Set Constants
 const dsCategoryToIcon = {
@@ -52,12 +52,12 @@ const DataStructuresPage = (props) => {
 
   return (
     <div>
-      <Navbar/>
-      <LinksNavbar/>
+      <Navbar />
+      <LinksNavbar />
+      <ObjectPageHeader objectType={"ds"} />
       <div className="algorithms-wrapper">
-        <ObjectPageHeader objectType={"ds"} />
         <hr className="algo-header-line-break"></hr>
-        {ds.map(dsByCategory => {
+        {ds.map((dsByCategory) => {
           let categoryName = dsByCategory[0].category;
           return (
             <OverviewCardGroup

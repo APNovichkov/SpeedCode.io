@@ -5,19 +5,19 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 
 // Import components
-import AlgoDetailInputHeader from "./../components/algoDetailInputHeader";
-import ObjectDetailHeader from "./../components/objectDetailHeader";
+import AlgoDetailInputHeader from "../components/algoDetailInputHeader";
+import ObjectDetailHeader from "../components/objectDetailHeader";
 import CompletedSpeedImplementation from "../components/completedSpeedImplementation";
-import Navbar from "./../components/navbar";
-import LinksNavbar from "./../components/linksNavbar";
+import Navbar from "../components/navbar";
+import LinksNavbar from "../components/linksNavbar";
 
 // Import Utils
-import { formatTime, formatTimeToSeconds, getNumWords } from "./../utils/stringUtils";
-import { getWordsPerMinute } from "./../utils/statsUtils";
-import { getSubmitProblemUrl } from "./../utils/urlUtils";
+import { formatTime, formatTimeToSeconds, getNumWords } from "../utils/stringUtils";
+import { getWordsPerMinute } from "../utils/statsUtils";
+import { getSubmitProblemUrl } from "../utils/urlUtils";
 
 // Import Context
-import { UserContext } from "./../context/userProvider";
+import { UserContext } from "../context/userProvider";
 
 const AlgorithmDetailSpeed = (props) => {
   // Get input data from link
