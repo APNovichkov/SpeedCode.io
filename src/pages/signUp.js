@@ -44,17 +44,16 @@ const SignUp = () => {
   };
 
   if (isSignupSuccessfull) {
-    return <Redirect to="/login"/>;
+    return <Redirect to="/login" />;
   }
 
   return (
     <div>
-      <LandingNavbar isLoginOrSignUp={true}></LandingNavbar>
-
       <div className="signup-wrapper text-center">
-        <div className="login-header">Sign Up</div>
+        <LandingNavbar isLoginOrSignUp={true}></LandingNavbar>
         <div className="d-flex justify-content-center">
-          <div className="login-form-wrapper">
+          <div className="signup-form-wrapper">
+            <div className="login-header">Sign Up</div>
             <form onSubmit={handleSignUp}>
               <div className="login-input-wrapper text-left">
                 <label for="username" className="signup-form-label">

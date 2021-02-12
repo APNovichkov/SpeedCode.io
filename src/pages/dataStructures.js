@@ -26,6 +26,7 @@ const DataStructuresPage = (props) => {
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
+  const [tokenCookie] = useCookies("speedcode-cookiez-token");
   const [userObject, setUserObject] = useContext(UserContext);
 
   const updateUserObject = () => {
@@ -36,7 +37,9 @@ const DataStructuresPage = (props) => {
     updateUserObject();
 
     const fetchData = async () => {
-      let response = await axios.get(getDataStructuresUrl());
+      let response = await axios.get(getDataStructuresUrl(), {
+        headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+      });
 
       // Group by DS category
       let groupedResponse = _.groupBy(response.data.datastructures, "category");

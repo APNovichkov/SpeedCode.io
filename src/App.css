@@ -7,8 +7,15 @@ body {
 /* SIGNUP STUFF */
 
 .signup-wrapper{
-  height: 90vh;
-  padding-top: 8%;
+  height: 100vh;
+  background-image: url("/assets/images/hero_1.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+
+.signup-form-wrapper{
+  margin-top: 4%;
 }
 
 .signup-form-label{
@@ -22,6 +29,10 @@ body {
   color: #381460;
   margin-bottom: 20px;
   margin-top: 5px;
+}
+
+.signup-form-label{
+  color: #eeeeee;
 }
 
 /* LOGIN STUFF */
@@ -42,7 +53,7 @@ body {
 }
 
 .login-form-wrapper{
-  margin-top: 14%;
+  margin-top: 12%;
 }
 
 .login-input-wrapper{
@@ -723,6 +734,7 @@ body {
   padding: 20px;
   padding-left: 25px;
   padding-right: 25px;
+  margin-bottom: 20px;
 }
 
 .algo-detail-input-header{
@@ -840,6 +852,7 @@ body {
 }
 
 .algo-detail-start-typing-message{
+  margin-top: 8px;
   margin-left: 40px;
   font-weight: 300;
 }
@@ -874,13 +887,13 @@ body {
 
 .finished-blueprint-title{
   font-size: 25px;
-  color: #d63447;
+  color: #1C2B2D;
   font-weight: 600;
 }
 
 .finished-blueprint-subtitle{
   font-size: 15px;
-  color: #D56576;
+  color: #1C2B2D;
   font-weight: 400;
 }
 
@@ -892,20 +905,20 @@ body {
 .finished-blueprint-stat-card{
   width: 180px;
   margin-right: 20px;
-  border: 1px solid #FFD1D1;
-  background-color: #FFFCFC;
+  border: 1px solid #b7c3cf;
+  background-color: #6C7A89;
   border-radius: 10px;
   padding: 10px;
 }
 
 .finished-blueprint-stat-card-title{
-  color: #d63447;
+  color: #eeeeee;
   font-weight: 500;
   font-size: 15px;
 }
 
 .finished-blueprint-stat-card-value{
-  color: #d63447;
+  color: #eeeeee;
   font-weight: 700;
   font-size: 27px;
 }
@@ -915,14 +928,14 @@ body {
 }
 
 .finished-blueprint-stats-see-more-stats{
-  color: #d63447;
+  color: #274c74;
   margin-top: 25px;
   font-weight: 400;
   text-decoration: underline;
 }
 
 .finished-blueprint-stats-see-more-stats:hover{
-  color: #d63447;
+  color: #0F4C75;
   margin-top: 25px;
   font-weight: 600;
   text-decoration: underline;
@@ -934,32 +947,32 @@ body {
 
 .finished-blueprint-go-home-button{
   border: 1px solid #707070;
-  background-color: #381460;
-  color: #ffffff;
+  background-color: transparent;
+  color: #1C2B2D;
   width: 120px;
-  margin-right: 20px;
 }
 
 .finished-blueprint-go-home-button:hover{
   border: 1px solid #707070;
-  background-color: #4e3769;
+  background-color: #0F4C75;
+  color: #ffffff;
+  width: 120px;
+}
+
+.finished-blueprint-try-again-button{
+  border: 1px solid #63A583;
+  background-color: #63A583;
   color: #ffffff;
   width: 120px;
   margin-right: 20px;
 }
 
-.finished-blueprint-try-again-button{
-  border: 1px solid #63A583;
-  background-color: #ffffff;
-  color: #63A583;
-  width: 120px;
-}
-
 .finished-blueprint-try-again-button:hover{
   border: 1px solid #63A583;
-  background-color: #63A583;
+  background-color: #448f68;
   color: #ffffff;
   width: 120px;
+  margin-right: 20px;
 }
 
 /* STATISTICS STUFF */

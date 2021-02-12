@@ -1,6 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 // Import components
 import Stars from "./stars";
@@ -8,28 +9,35 @@ import Stars from "./stars";
 // Import utils
 import { getProblemStatisticsUrl } from "./../utils/urlUtils";
 
-// Import Context
-import {UserContext} from "./../context/userProvider";
+// Import Context and Cookies
+import { UserContext } from "./../context/userProvider";
 
 const OverviewCard = (props) => {
   let { name, algoId, urlName, description, longDescription, timeComplexity, difficulty, groupClass, code } = props;
 
   const [userObject] = useContext(UserContext);
   const [attempts, setAttempts] = useState("");
-  
-  useEffect(() => {
-    axios.get(getProblemStatisticsUrl(algoId, userObject['_id'])).then(res => {
-      console.log("Got statistics for this problem", res.data)
 
-      if(res.data != null){
-        setAttempts(res.data.attempts);
-      }else{
-        setAttempts(0);
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-  }, [])
+  const [tokenCookie] = useCookies("speedcode-cookiez-token");
+
+  useEffect(() => {
+    axios
+      .get(getProblemStatisticsUrl(algoId, userObject["_id"]), {
+        headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+      })
+      .then((res) => {
+        console.log("Got statistics for this problem", res.data);
+
+        if (res.data != null) {
+          setAttempts(res.data.attempts);
+        } else {
+          setAttempts(0);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className={`overview-card ${groupClass.toLowerCase()}`}>
@@ -57,35 +65,39 @@ const OverviewCard = (props) => {
                 difficulty: difficulty,
                 attempts: attempts,
                 groupClass: groupClass,
-                code: code
+                code: code,
               },
               problemId: algoId,
               problemObject: {
                 name: name,
                 id: algoId,
                 attempts: attempts,
-                difficulty: difficulty  
-              }
+                difficulty: difficulty,
+              },
             },
           }}
         >
           <button className="practice-button">Practice</button>
         </Link>
-        <Link className="overview-card-statistics-link" to={{
-          pathname: `/algorithms/${name}/statistics`,
-          state: {
-            problemId: algoId,
-            problemObject: {
-              name: name,
-              id: algoId,
-              attempts: attempts,
-              difficulty: difficulty
-            }
-          }
-        }}><span className="overview-card-statistics">
-            <span className="fas fa-wave-square"></span> {" "}
-            <span className="">See Statistics</span>
-          </span></Link>
+        <Link
+          className="overview-card-statistics-link"
+          to={{
+            pathname: `/algorithms/${name}/statistics`,
+            state: {
+              problemId: algoId,
+              problemObject: {
+                name: name,
+                id: algoId,
+                attempts: attempts,
+                difficulty: difficulty,
+              },
+            },
+          }}
+        >
+          <span className="overview-card-statistics">
+            <span className="fas fa-wave-square"></span> <span className="">See Statistics</span>
+          </span>
+        </Link>
       </div>
     </div>
   );

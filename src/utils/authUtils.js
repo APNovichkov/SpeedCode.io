@@ -8,3 +8,4 @@ export const updateUserObject = () => {
     
     console.log("Speedcode Cookie:", cookie);
 }
+

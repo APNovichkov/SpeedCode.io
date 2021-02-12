@@ -18,8 +18,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [isLoginSuccessfull, setIsLoginSuccessful] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
-  const [localUserObject, setLocalUserObject] = useState({});
-
+  
   const [_, setUserObject] = useContext(UserContext);
   const [cookies, setCookie] = useCookies(["speedcode-cookiez"]);
 
@@ -42,13 +41,12 @@ const Login = (props) => {
       .post(getLoginUrl(), formBody)
       .then((res) => {
         console.log("Got Response from login: ", res.data);
-        setLocalUserObject(res.data.user_object);
-
         // Update Context Here
         setUserObject(res.data.user_object);
 
         // Set cookie here
-        setCookie("speedcode-cookiez", res.data.user_object, { path: "/" });
+        setCookie("speedcode-cookiez-token", res.data.token, { path: "/" });
+        setCookie("speedcode-cookiez", res.data.user_object, { path: "/"});
 
         if (res.data.login_successfull) {
           setIsLoginSuccessful(true);
@@ -63,15 +61,13 @@ const Login = (props) => {
 
   if (isLoginSuccessfull) {
     console.log("Returning Redirect");
-    console.log("User object from login: ", localUserObject);
-
+    
     return (
       <Redirect
         to={{
           pathname: "/algorithms",
           state: {
             from: "login",
-            userObject: localUserObject,
           },
         }}
       />

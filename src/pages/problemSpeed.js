@@ -19,6 +19,8 @@ import { getSubmitProblemUrl } from "../utils/urlUtils";
 // Import Context
 import { UserContext } from "../context/userProvider";
 
+const DEFAULT_LANGUAGE_CHOICE = "python";
+
 const AlgorithmDetailSpeed = (props) => {
   // Get input data from link
   let {
@@ -39,6 +41,9 @@ const AlgorithmDetailSpeed = (props) => {
   const [charArray, setCharArray] = useState([]);
   const [numWords, setNumWords] = useState(0);
 
+  // Language choice
+  const [languageChoice, setLanguageChoice] = useState(DEFAULT_LANGUAGE_CHOICE);
+  
   // Typing over blueprint text stuff
   const [typedCode, setTypedCode] = useState("");
   const [currentLetter, setCurrentLetter] = useState("");
@@ -72,6 +77,7 @@ const AlgorithmDetailSpeed = (props) => {
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
+  const [tokenCookie] = useCookies("speedcode-cookiez-token");
   const [userObject, setUserObject] = useContext(UserContext);
 
   const updateUserObject = () => {
@@ -84,15 +90,15 @@ const AlgorithmDetailSpeed = (props) => {
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
   useEffect(() => {
-    if (code) {
-      const localCharArray = code.python.split("");
-      // const localCharArray = bubbleSortCode;
+    if (code[languageChoice]) {
+
+      console.log("Language Choice: ", languageChoice);
+      console.log("Code: ", code);
+
+      const localCharArray = code[languageChoice].split("");
+      
       setCharArray(localCharArray);
-      setNumWords(code.python.split(" ").length);
-
-      console.log(`Number of words: ${code.python.split(" ").length}`);
-
-      console.log(localCharArray);
+      setNumWords(code[languageChoice].split(" ").length);
 
       $(".current-letter").addClass("idle-letter");
 
@@ -102,17 +108,12 @@ const AlgorithmDetailSpeed = (props) => {
 
         const charPressed = event.key;
 
-        console.log(`Key was pressed: ${event.key}`);
-
         // check if key matches value
         setCurrentLetterIndex((currentLetterIndex) => {
           let potentialFirstTabIndex = currentLetterIndex + 2;
 
           if (localCharArray[potentialFirstTabIndex] == "\t") {
             let numTabs = getNumSequentialTabs(potentialFirstTabIndex, localCharArray);
-            console.log("Number of sequential tabs is: ", numTabs);
-            console.log(`Next ${numTabs} chars are tabs, so I am skipping them`);
-            // console.log("Current letter index: ", currentLetterIndex + 1);
             const skippedCurrentLetterIndex = currentLetterIndex + 1 + numTabs;
 
             if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
@@ -122,7 +123,6 @@ const AlgorithmDetailSpeed = (props) => {
             } else {
               $(".current-letter").addClass("wrong-letter");
 
-              // console.log("SETTING MISTAKES MADE TO: ", mistakesMade + 1);
               setMistakesMade((mistakesMade) => {
                 return mistakesMade + 1;
               });
@@ -135,23 +135,19 @@ const AlgorithmDetailSpeed = (props) => {
             } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
               return currentLetterIndex + 1;
             } else {
-              // TODO For some reason this is getting called twice
-              console.log("Setting mistakes made to: ", mistakesMade + 1);
               setMistakesMade((mistakesMade) => {
                 return mistakesMade + 1;
               });
 
-              // TODO - Fix This
               $(".current-letter").addClass("wrong-letter");
 
               return currentLetterIndex;
             }
           }
         });
-        // setKeyPressed(pressedChar);
       });
     }
-  }, [code]);
+  }, [code, languageChoice]);
 
   useEffect(() => {
     console.log("Mistakes made is updated to: ", mistakesMade);
@@ -163,6 +159,7 @@ const AlgorithmDetailSpeed = (props) => {
     setUntypedCode(charArray.slice(1, charArray.length));
   }, [charArray]);
 
+  
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
 
@@ -188,7 +185,9 @@ const AlgorithmDetailSpeed = (props) => {
       };
 
       axios
-        .post(getSubmitProblemUrl(), formBody)
+        .post(getSubmitProblemUrl(), formBody, {
+          headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+        })
         .then((res) => {
           console.log("Got response from algo submit: ", res.data);
         })
@@ -255,6 +254,8 @@ const AlgorithmDetailSpeed = (props) => {
               hasEnded={hasEnded}
               setMinutesParent={setMinutes}
               setSecondsParent={setSeconds}
+              languages={Object.keys(code)}
+              setLanguageToShow={setLanguageChoice}
             />
             <div>
               <div className="algo-detail-input-text-wrapper">

@@ -25,6 +25,7 @@ const AlgorithmsPage = (props) => {
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
+  const [tokenCookie] = useCookies("speedcode-cookiez-token");
   const [userObject, setUserObject] = useContext(UserContext);
 
   const updateUserObject = () => {
@@ -37,7 +38,9 @@ const AlgorithmsPage = (props) => {
 
     // Fetch Data
     const fetchData = async () => {
-      let response = await axios.get(getAlgorithmsUrl());
+      let response = await axios.get(getAlgorithmsUrl(), {
+        headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+      });
 
       // Group by category
       let groupedResponse = _.groupBy(response.data.algorithms, "category");

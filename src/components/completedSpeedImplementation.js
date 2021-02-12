@@ -2,16 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const CompletedSpeedImplementation = (props) => {
-  let {
-    problemName,
-    timeTaken,
-    mistakesMade,
-    wordsPerMinute,
-    goHome,
-    tryAgain,
-    problemId,
-    problemObject,
-  } = props;
+  let { problemName, timeTaken, mistakesMade, wordsPerMinute, goHome, tryAgain, problemId, problemObject } = props;
 
   return (
     <div
@@ -57,11 +48,11 @@ const CompletedSpeedImplementation = (props) => {
 
       <div className="finished-blueprint-stat-card-buttons-wrapper">
         <div className="d-flex justify-content-left">
-          <button className="btn finished-blueprint-go-home-button" onClick={goHome}>
-            Go Home
-          </button>
           <button className="btn finished-blueprint-try-again-button" onClick={tryAgain}>
             Try Again
+          </button>
+          <button className="btn finished-blueprint-go-home-button" onClick={goHome}>
+            Go Home
           </button>
         </div>
       </div>
