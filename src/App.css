@@ -370,7 +370,7 @@ body {
 }
 
 .algo-header-line-break {
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   border: none;
   border-color: #fcdee2;
 }
@@ -387,8 +387,6 @@ body {
   max-width: 80%;
   color: #1C2B2D;  
 }
-
-
 
 .algo-page-category-link {
   text-align: center;
@@ -501,11 +499,11 @@ body {
 
 /* SORTING CARD */
 .overview-card-group.sorting .h4 {
-  color: #381460;
+  color: #272727;
 }
 
 .overview-card-group.sorting .icon {
-  color: #381460;
+  color: #272727;
 }
 
 .overview-card .sorting {
@@ -544,14 +542,64 @@ body {
   border-color: #ffffff;
 }
 
+/* TREES CARD */
+.overview-card-group.trees .h4 {
+  color: #10375c;
+}
+
+.overview-card-group.trees .icon {
+  color: #10375c;
+}
+
+.overview-card.trees {
+  color: #eeeeee;
+  border-color: #10375c;
+  background-color: #10375c;
+}
+
+.overview-card.trees .overview-card-title{
+  font-weight: 500;
+  font-size: 20px;
+  color: #ffffff;
+  /* border-bottom: 2px solid #414141; */
+}
+
+.overview-card.trees .overview-card-description {
+  font-weight: 300;
+  font-size: 18px;
+  color: #eeeeee;
+}
+
+.overview-card-buttons-wrapper{
+  margin-top: 12px;
+}
+
+.overview-card.trees .practice-button{
+  background-color: transparent;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #38CB60;
+  border-color: #38CB60;
+}
+
+.overview-card.trees .practice-button:hover{
+  background-color: #38CB60;
+  border: 1px solid #272727;
+  border-radius: 5px;
+  height: 30px;
+  color: #ffffff;
+  border-color: #38CB60;
+}
+
 /* basic */
 
 .overview-card-group.basic .h4 {
-  color: #381460;
+  color: #272727;
 }
 
 .overview-card-group.basic .icon {
-  color: #381460;
+  color: #272727;
 }
 
 .overview-card .basic {

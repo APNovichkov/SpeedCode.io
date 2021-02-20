@@ -17,7 +17,8 @@ import { UserContext } from "./../context/userProvider";
 
 // Set Constants
 const dsCategoryToIcon = {
-  Basic: "fas fa-stream",
+  Basic: "far fa-play-circle",
+  Trees: "fas fa-tree"
 };
 
 const DataStructuresPage = (props) => {
@@ -59,7 +60,6 @@ const DataStructuresPage = (props) => {
       <LinksNavbar />
       <ObjectPageHeader objectType={"ds"} />
       <div className="algorithms-wrapper">
-        <hr className="algo-header-line-break"></hr>
         {ds.map((dsByCategory) => {
           let categoryName = dsByCategory[0].category;
           return (

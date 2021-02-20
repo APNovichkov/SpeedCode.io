@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { InputGroup } from "react-bootstrap";
 
 // Import Components
 import Stopwatch from "./stopwatch";
 
 const AlgoDetailInputHeader = (props) => {
-  let { hasStarted, hasEnded, setMinutesParent, setSecondsParent, languages, setLanguageToShow } = props;
+  let { hasStarted, hasEnded, setMinutesParent, setSecondsParent, languages, defaultLanguage, setLanguageToShow } = props;
 
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  const [selectedLanguage, setSelectedLanguage] = useState(defaultLanguage);
 
   useEffect(() => {
-    setLanguageToShow(selectedLanguage.trim());
+    if(selectedLanguage){
+      setLanguageToShow(selectedLanguage.trim());
+    }
   }, [selectedLanguage])
 
   const setMinutes = (minutes) => {

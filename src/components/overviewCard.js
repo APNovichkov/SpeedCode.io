@@ -26,8 +26,6 @@ const OverviewCard = (props) => {
         headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
       })
       .then((res) => {
-        console.log("Got statistics for this problem", res.data);
-
         if (res.data != null) {
           setAttempts(res.data.attempts);
         } else {

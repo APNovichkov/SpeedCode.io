@@ -46,7 +46,6 @@ const Statistics = (props) => {
     axios
       .get(getProblemStatisticsUrl(problemId, userObject["_id"]))
       .then((res) => {
-        console.log("Got statistics for this problem", res.data);
         setStatsObject(res.data);
 
         let tmpTimeSpentData = formatLineGraphData("Time Spent", "#d85b6a", res.data.time_spent, true);

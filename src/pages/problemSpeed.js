@@ -43,12 +43,12 @@ const AlgorithmDetailSpeed = (props) => {
 
   // Language choice
   const [languageChoice, setLanguageChoice] = useState(DEFAULT_LANGUAGE_CHOICE);
-  
+
   // Typing over blueprint text stuff
   const [typedCode, setTypedCode] = useState("");
   const [currentLetter, setCurrentLetter] = useState("");
   const [untypedCode, setUntypedCode] = useState("");
-  const [currentLetterIndex, setCurrentLetterIndex] = useState(-1);
+  const [currentLetterIndex, setCurrentLetterIndex] = useState();
 
   // Stats stuff
   const [mistakesMade, setMistakesMade] = useState(0);
@@ -63,17 +63,8 @@ const AlgorithmDetailSpeed = (props) => {
   const [toShowDialog, setToShowDialog] = useState(false);
   const [toGoHome, setToGoHome] = useState(false);
 
-  const getNumSequentialTabs = (startIndex, charArray) => {
-    let out = 0;
-    let index = startIndex;
-
-    // Find num tabs in sequential order starting at the start index
-    while (charArray[index] == "\t") {
-      out += 1;
-      index += 1;
-    }
-    return out;
-  };
+  // TMP
+  let globalCharArray = [];
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
@@ -88,78 +79,137 @@ const AlgorithmDetailSpeed = (props) => {
     updateUserObject();
   }, []);
 
-  // LOGIC FOR HANDLING TYPING OVER TEMPLATE
-  useEffect(() => {
-    if (code[languageChoice]) {
+  // UTIL FUNCTIONS
+  const getNumSequentialTabs = (startIndex, charArray) => {
+    let out = 0;
+    let index = startIndex;
 
+    // Find num tabs in sequential order starting at the start index
+    while (charArray[index] == "\t") {
+      out += 1;
+      index += 1;
+    }
+    return out;
+  };
+
+  const resetEnvironment = () => {
+    console.log("Resetting Environment");
+
+    setTypedCode("");
+    setCurrentLetter("");
+    setUntypedCode("");
+    setCurrentLetterIndex(-1);
+    setMistakesMade(0);
+    setMinutes();
+    setSeconds();
+    setHasStarted(false);
+    setHasEnded(false);
+    setToShowDialog(false);
+    setToGoHome(false);
+  };
+
+  // Setting Char Array
+  useEffect(() => {
+    if (charArray.length > 0) {
+      console.log("Char Array: ", charArray);
+      setCurrentLetter(charArray[0]);
+      setUntypedCode(charArray.slice(1, charArray.length));
+    }
+  }, [charArray]);
+
+  // LOGIC FOR HANDLING TYPING OVER TEMPLATE
+  const handleKeyPress = (event) => {
+    event.preventDefault();
+
+    const charPressed = event.key;
+    console.log("Global char arr from handleKeyPress:", globalCharArray);
+
+    // check if key matches value
+    setCurrentLetterIndex((currentLetterIndex) => {
+      let potentialFirstTabIndex = currentLetterIndex + 2;
+
+      console.log("Global char arr from handleKeyPress -> setter of current index:", globalCharArray);
+
+      if (globalCharArray[potentialFirstTabIndex] == "\t") {
+        let numTabs = getNumSequentialTabs(potentialFirstTabIndex, globalCharArray);
+        const skippedCurrentLetterIndex = currentLetterIndex + 1 + numTabs;
+
+        if (charPressed === globalCharArray[skippedCurrentLetterIndex]) {
+          return skippedCurrentLetterIndex + 1;
+        } else if (charPressed === "Enter" && globalCharArray[currentLetterIndex + 1] === "\n") {
+          console.log("Enter pressed when checking for tabs!");
+          return skippedCurrentLetterIndex;
+        } else {
+          $(".current-letter").addClass("wrong-letter");
+
+          console.log(
+            "Char pressed when checking for tabs: ",
+            charPressed,
+            " and skippedIndex + 1 is: ",
+            globalCharArray[skippedCurrentLetterIndex + 1]
+          );
+
+          setMistakesMade((mistakesMade) => {
+            return mistakesMade + 1;
+          });
+
+          return skippedCurrentLetterIndex;
+        }
+      } else {
+        if (charPressed === globalCharArray[currentLetterIndex + 1]) {
+          return currentLetterIndex + 1;
+        } else if (charPressed === "Enter" && globalCharArray[currentLetterIndex + 1] === "\n") {
+          console.log("Enter pressed and next char was \n");
+          return currentLetterIndex + 1;
+        } else {
+          // console.log("Char pressed: ", charPressed);
+          // console.log("Local Char array: ", globalCharArray);
+
+          setMistakesMade((mistakesMade) => {
+            return mistakesMade + 1;
+          });
+
+          $(".current-letter").addClass("wrong-letter");
+
+          return currentLetterIndex;
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    // This gets called every time languageChoice changes
+    resetEnvironment();
+    document.removeEventListener("keypress", (event) => handleKeyPress(event), true);
+
+    if (code[languageChoice]) {
       console.log("Language Choice: ", languageChoice);
       console.log("Code: ", code);
 
       const localCharArray = code[languageChoice].split("");
-      
+      globalCharArray = localCharArray;
+
+      console.log("Local Char Array from useEffect:", localCharArray);
+
       setCharArray(localCharArray);
       setNumWords(code[languageChoice].split(" ").length);
 
       $(".current-letter").addClass("idle-letter");
 
       // Handle key press
-      document.addEventListener("keypress", function (event) {
-        event.preventDefault();
-
-        const charPressed = event.key;
-
-        // check if key matches value
-        setCurrentLetterIndex((currentLetterIndex) => {
-          let potentialFirstTabIndex = currentLetterIndex + 2;
-
-          if (localCharArray[potentialFirstTabIndex] == "\t") {
-            let numTabs = getNumSequentialTabs(potentialFirstTabIndex, localCharArray);
-            const skippedCurrentLetterIndex = currentLetterIndex + 1 + numTabs;
-
-            if (charPressed === localCharArray[skippedCurrentLetterIndex]) {
-              return skippedCurrentLetterIndex + 1;
-            } else if (charPressed == "Enter" && localCharArray[skippedCurrentLetterIndex + 1] == "\n") {
-              return skippedCurrentLetterIndex + 1;
-            } else {
-              $(".current-letter").addClass("wrong-letter");
-
-              setMistakesMade((mistakesMade) => {
-                return mistakesMade + 1;
-              });
-
-              return skippedCurrentLetterIndex;
-            }
-          } else {
-            if (charPressed === localCharArray[currentLetterIndex + 1]) {
-              return currentLetterIndex + 1;
-            } else if (charPressed == "Enter" && localCharArray[currentLetterIndex + 1] == "\n") {
-              return currentLetterIndex + 1;
-            } else {
-              setMistakesMade((mistakesMade) => {
-                return mistakesMade + 1;
-              });
-
-              $(".current-letter").addClass("wrong-letter");
-
-              return currentLetterIndex;
-            }
-          }
-        });
-      });
+      document.addEventListener("keypress", (event) => handleKeyPress(event), true);
     }
-  }, [code, languageChoice]);
+  }, [languageChoice]);
 
   useEffect(() => {
     console.log("Mistakes made is updated to: ", mistakesMade);
   }, [mistakesMade]);
 
-  useEffect(() => {
-    console.log("Char Array: ", charArray);
-    setCurrentLetter(charArray[0]);
-    setUntypedCode(charArray.slice(1, charArray.length));
-  }, [charArray]);
+  // useEffect(() => {
 
-  
+  // }, [charArray]);
+
+  // Update Visual Typing when index changed
   useEffect(() => {
     console.log(`Index was updated to: ${currentLetterIndex}`);
 
@@ -196,9 +246,11 @@ const AlgorithmDetailSpeed = (props) => {
         });
     }
 
-    $(".current-letter").removeClass("idle-letter");
-    $(".current-letter").removeClass("wrong-letter");
-    $(".current-letter").addClass("correct-letter");
+    if (currentLetterIndex != -1) {
+      $(".current-letter").removeClass("idle-letter");
+      $(".current-letter").removeClass("wrong-letter");
+      $(".current-letter").addClass("correct-letter");
+    }
 
     setTypedCode(charArray.slice(0, currentLetterIndex + 1).join(""));
     setCurrentLetter(charArray[currentLetterIndex + 1]);
@@ -255,6 +307,7 @@ const AlgorithmDetailSpeed = (props) => {
               setMinutesParent={setMinutes}
               setSecondsParent={setSeconds}
               languages={Object.keys(code)}
+              defaultLanguage={DEFAULT_LANGUAGE_CHOICE}
               setLanguageToShow={setLanguageChoice}
             />
             <div>
