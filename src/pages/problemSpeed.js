@@ -118,7 +118,7 @@ const AlgorithmDetailSpeed = (props) => {
   }, [charArray]);
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
-  const handleKeyPress = (event) => {
+  function handleKeyPress(event){
     event.preventDefault();
 
     const charPressed = event.key;
@@ -177,11 +177,11 @@ const AlgorithmDetailSpeed = (props) => {
     });
   };
 
-  useEffect(() => {
-    // This gets called every time languageChoice changes
+  function handleLanguageChange(){
+    console.log("Removing keypress listener");
+    window.removeEventListener("keypress", handleKeyPress, true);
     resetEnvironment();
-    document.removeEventListener("keypress", (event) => handleKeyPress(event), true);
-
+    
     if (code[languageChoice]) {
       console.log("Language Choice: ", languageChoice);
       console.log("Code: ", code);
@@ -197,8 +197,17 @@ const AlgorithmDetailSpeed = (props) => {
       $(".current-letter").addClass("idle-letter");
 
       // Handle key press
-      document.addEventListener("keypress", (event) => handleKeyPress(event), true);
+      if(languageChoice == "python"){
+        console.log("Adding keypress event listener")
+        window.addEventListener("keypress", handleKeyPress, true);
+      }
+      
     }
+  }
+
+  useEffect(() => {
+    // This gets called every time languageChoice changes
+    handleLanguageChange();
   }, [languageChoice]);
 
   useEffect(() => {
