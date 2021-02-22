@@ -21,6 +21,9 @@ import { UserContext } from "../context/userProvider";
 
 const DEFAULT_LANGUAGE_CHOICE = "python";
 
+// TMP
+var globalCharArray = [];
+
 const AlgorithmDetailSpeed = (props) => {
   // Get input data from link
   let {
@@ -43,6 +46,7 @@ const AlgorithmDetailSpeed = (props) => {
 
   // Language choice
   const [languageChoice, setLanguageChoice] = useState(DEFAULT_LANGUAGE_CHOICE);
+  const [isInit, setIsInit] = useState(false);
 
   // Typing over blueprint text stuff
   const [typedCode, setTypedCode] = useState("");
@@ -62,9 +66,6 @@ const AlgorithmDetailSpeed = (props) => {
   const [hasEnded, setHasEnded] = useState(false);
   const [toShowDialog, setToShowDialog] = useState(false);
   const [toGoHome, setToGoHome] = useState(false);
-
-  // TMP
-  let globalCharArray = [];
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
@@ -118,17 +119,13 @@ const AlgorithmDetailSpeed = (props) => {
   }, [charArray]);
 
   // LOGIC FOR HANDLING TYPING OVER TEMPLATE
-  function handleKeyPress(event){
+  function handleKeyPress(event) {
     event.preventDefault();
-
     const charPressed = event.key;
-    console.log("Global char arr from handleKeyPress:", globalCharArray);
-
+    
     // check if key matches value
     setCurrentLetterIndex((currentLetterIndex) => {
       let potentialFirstTabIndex = currentLetterIndex + 2;
-
-      console.log("Global char arr from handleKeyPress -> setter of current index:", globalCharArray);
 
       if (globalCharArray[potentialFirstTabIndex] == "\t") {
         let numTabs = getNumSequentialTabs(potentialFirstTabIndex, globalCharArray);
@@ -162,8 +159,8 @@ const AlgorithmDetailSpeed = (props) => {
           console.log("Enter pressed and next char was \n");
           return currentLetterIndex + 1;
         } else {
-          // console.log("Char pressed: ", charPressed);
-          // console.log("Local Char array: ", globalCharArray);
+          console.log("Char pressed: ", charPressed);
+          console.log("Local Char array char: ", globalCharArray[currentLetterIndex + 1]);
 
           setMistakesMade((mistakesMade) => {
             return mistakesMade + 1;
@@ -175,13 +172,11 @@ const AlgorithmDetailSpeed = (props) => {
         }
       }
     });
-  };
+  }
 
-  function handleLanguageChange(){
-    console.log("Removing keypress listener");
-    window.removeEventListener("keypress", handleKeyPress, true);
+  function handleLanguageChange() {
     resetEnvironment();
-    
+
     if (code[languageChoice]) {
       console.log("Language Choice: ", languageChoice);
       console.log("Code: ", code);
@@ -189,21 +184,20 @@ const AlgorithmDetailSpeed = (props) => {
       const localCharArray = code[languageChoice].split("");
       globalCharArray = localCharArray;
 
-      console.log("Local Char Array from useEffect:", localCharArray);
-
       setCharArray(localCharArray);
       setNumWords(code[languageChoice].split(" ").length);
 
       $(".current-letter").addClass("idle-letter");
-
-      // Handle key press
-      if(languageChoice == "python"){
-        console.log("Adding keypress event listener")
-        window.addEventListener("keypress", handleKeyPress, true);
-      }
-      
     }
   }
+
+  useEffect(() => {
+    // Handle key press
+    if (!isInit) {
+      window.addEventListener("keypress", handleKeyPress);
+      setIsInit(true);
+    }
+  }, []);
 
   useEffect(() => {
     // This gets called every time languageChoice changes
@@ -213,10 +207,6 @@ const AlgorithmDetailSpeed = (props) => {
   useEffect(() => {
     console.log("Mistakes made is updated to: ", mistakesMade);
   }, [mistakesMade]);
-
-  // useEffect(() => {
-
-  // }, [charArray]);
 
   // Update Visual Typing when index changed
   useEffect(() => {
