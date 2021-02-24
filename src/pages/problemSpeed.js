@@ -53,6 +53,7 @@ const AlgorithmDetailSpeed = (props) => {
   const [currentLetter, setCurrentLetter] = useState("");
   const [untypedCode, setUntypedCode] = useState("");
   const [currentLetterIndex, setCurrentLetterIndex] = useState();
+  const [toShowEnterSpan, setToShowEnterSpan] = useState(false);
 
   // Stats stuff
   const [mistakesMade, setMistakesMade] = useState(0);
@@ -122,7 +123,7 @@ const AlgorithmDetailSpeed = (props) => {
   function handleKeyPress(event) {
     event.preventDefault();
     const charPressed = event.key;
-    
+
     // check if key matches value
     setCurrentLetterIndex((currentLetterIndex) => {
       let potentialFirstTabIndex = currentLetterIndex + 2;
@@ -137,14 +138,8 @@ const AlgorithmDetailSpeed = (props) => {
           console.log("Enter pressed when checking for tabs!");
           return skippedCurrentLetterIndex;
         } else {
+          $(".current-letter").removeClass("correct-letter")
           $(".current-letter").addClass("wrong-letter");
-
-          console.log(
-            "Char pressed when checking for tabs: ",
-            charPressed,
-            " and skippedIndex + 1 is: ",
-            globalCharArray[skippedCurrentLetterIndex + 1]
-          );
 
           setMistakesMade((mistakesMade) => {
             return mistakesMade + 1;
@@ -159,13 +154,11 @@ const AlgorithmDetailSpeed = (props) => {
           console.log("Enter pressed and next char was \n");
           return currentLetterIndex + 1;
         } else {
-          console.log("Char pressed: ", charPressed);
-          console.log("Local Char array char: ", globalCharArray[currentLetterIndex + 1]);
-
           setMistakesMade((mistakesMade) => {
             return mistakesMade + 1;
           });
 
+          $(".current-letter").removeClass("correct-letter")
           $(".current-letter").addClass("wrong-letter");
 
           return currentLetterIndex;
@@ -245,6 +238,17 @@ const AlgorithmDetailSpeed = (props) => {
         });
     }
 
+    // If next char is an enter, we need to set flag
+    if (charArray[currentLetterIndex + 1] == "\n") {
+      console.log("Next char is an enter");
+      setToShowEnterSpan(true);
+    } else {
+      setToShowEnterSpan(false);
+    }
+
+
+    // console.log("Next Char: ", charArray[currentLetterIndex+1]);
+
     if (currentLetterIndex != -1) {
       $(".current-letter").removeClass("idle-letter");
       $(".current-letter").removeClass("wrong-letter");
@@ -254,6 +258,8 @@ const AlgorithmDetailSpeed = (props) => {
     setTypedCode(charArray.slice(0, currentLetterIndex + 1).join(""));
     setCurrentLetter(charArray[currentLetterIndex + 1]);
     setUntypedCode(charArray.slice(currentLetterIndex + 2, charArray.length).join(""));
+
+    
   }, [currentLetterIndex]);
 
   // Handle Go Home Functionality
@@ -312,9 +318,16 @@ const AlgorithmDetailSpeed = (props) => {
             <div>
               <div className="algo-detail-input-text-wrapper">
                 <span className="typed-code">{typedCode}</span>
-                <span id="current-letter" className="current-letter idle-letter">
-                  {currentLetter}
-                </span>
+                {toShowEnterSpan ? (
+                  <span id="current-letter" className="enter-span">
+                    <span className="fas fa-level-down-alt rotate-span"></span>{currentLetter}
+                  </span>
+                ) : (
+                  <span id="current-letter" className="current-letter correct-letter">
+                    {currentLetter}
+                  </span>
+                )}
+
                 <span className="untyped-code">{untypedCode}</span>
               </div>
             </div>

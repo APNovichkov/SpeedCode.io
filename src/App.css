@@ -762,8 +762,6 @@ body {
   margin-top: 0px;
 }
 
-
-
 .algo-detail-input-wrapper{
   margin-top: 30px;
   margin-bottom: 40px;
@@ -859,6 +857,8 @@ body {
 }
 
 
+
+
 /* ALGO DETAIL SPEED TYPING SPECIFIC */
 
 .algo-detail-input-text-wrapper{
@@ -871,11 +871,24 @@ body {
 }
 
 .current-letter{
-  /* color: #38CB60; */
-  /* letter-spacing: 1px; */
   font-weight: 700;
   padding: 1px;
   border-radius: 2px;
+}
+
+.enter-span{
+  /* margin-top: 10px; */
+}
+
+.rotate-span{
+  margin-left: 5px;
+  background-color: #63A583;
+  --webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  color: #ffffff;
+  padding: 4px;
+  border-radius: 2px;
+  font-weight: 700;
 }
 
 .correct-letter{
@@ -887,9 +900,11 @@ body {
 .idle-letter{
   background-color: #FFCE00;
   border: 1px solid #FFCE00;
+  color: #ffffff;
 }
 
 .wrong-letter{
+  color: #ffffff;
   background-color: #D56576;
   border: 1px solid #D56576;
 }
