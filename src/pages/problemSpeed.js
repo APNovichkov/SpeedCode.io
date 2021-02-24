@@ -82,9 +82,13 @@ const AlgorithmDetailSpeed = (props) => {
   }, []);
 
   // UTIL FUNCTIONS
-  const getNumSequentialTabs = (startIndex, charArray) => {
+
+  // Handle Sequential tabs problem
+  const getNumSequentialTabs = (currentLetterIndex, charArray) => {
+    let potentialFirstTabIndex = currentLetterIndex + 2;
+
     let out = 0;
-    let index = startIndex;
+    let index = potentialFirstTabIndex;
 
     // Find num tabs in sequential order starting at the start index
     while (charArray[index] == "\t") {
@@ -92,6 +96,31 @@ const AlgorithmDetailSpeed = (props) => {
       index += 1;
     }
     return out;
+  };
+
+  // Handle Comments problem
+  const getNumCommentChars = (currentIndex, charArray) => {
+    // Comments always start 2 spaces afeter some code is written or at the beginning
+    let out = 0;
+    let potentialCommentIndexes = currentIndex + 4;
+
+    if (charArray[potentialCommentIndexes] == "#"){
+      let tIndex = potentialCommentIndexes;
+
+      while(charArray[tIndex] != "\n"){
+        out += 1
+        tIndex ++;
+      }
+    }
+
+    if(out != 0){
+      out = out + potentialCommentIndexes - currentIndex - 2
+    }
+
+
+    console.log("Skipping ", out, " chars");
+    
+    return out
   };
 
   const resetEnvironment = () => {
@@ -124,45 +153,37 @@ const AlgorithmDetailSpeed = (props) => {
     event.preventDefault();
     const charPressed = event.key;
 
-    // check if key matches value
     setCurrentLetterIndex((currentLetterIndex) => {
-      let potentialFirstTabIndex = currentLetterIndex + 2;
+      let numSequentialTabs = getNumSequentialTabs(currentLetterIndex, globalCharArray)
+      let updatedCurrentLetterIndex = currentLetterIndex + 1 + numSequentialTabs;
 
-      if (globalCharArray[potentialFirstTabIndex] == "\t") {
-        let numTabs = getNumSequentialTabs(potentialFirstTabIndex, globalCharArray);
-        const skippedCurrentLetterIndex = currentLetterIndex + 1 + numTabs;
+      // Handle Comment Sections
+      let numCommentChars = getNumCommentChars(currentLetterIndex, globalCharArray)
+      let isThereCommentSectionAhead = numCommentChars != 0;
 
-        if (charPressed === globalCharArray[skippedCurrentLetterIndex]) {
-          return skippedCurrentLetterIndex + 1;
-        } else if (charPressed === "Enter" && globalCharArray[currentLetterIndex + 1] === "\n") {
-          console.log("Enter pressed when checking for tabs!");
-          return skippedCurrentLetterIndex;
-        } else {
-          $(".current-letter").removeClass("correct-letter")
-          $(".current-letter").addClass("wrong-letter");
-
-          setMistakesMade((mistakesMade) => {
-            return mistakesMade + 1;
-          });
-
-          return skippedCurrentLetterIndex;
+      if(isThereCommentSectionAhead){
+        if (charPressed === globalCharArray[currentLetterIndex+1]){
+          return updatedCurrentLetterIndex + numCommentChars
         }
+      }
+
+      
+      // Handle Normal Use Cases
+      if (charPressed === globalCharArray[updatedCurrentLetterIndex]) {
+        console.log("Correct letter pressed!")
+        return updatedCurrentLetterIndex;
+      } else if (charPressed === "Enter" && globalCharArray[currentLetterIndex + 1] === "\n") {
+        console.log("Enter pressed correctly!");
+        return updatedCurrentLetterIndex;
       } else {
-        if (charPressed === globalCharArray[currentLetterIndex + 1]) {
-          return currentLetterIndex + 1;
-        } else if (charPressed === "Enter" && globalCharArray[currentLetterIndex + 1] === "\n") {
-          console.log("Enter pressed and next char was \n");
-          return currentLetterIndex + 1;
-        } else {
-          setMistakesMade((mistakesMade) => {
-            return mistakesMade + 1;
-          });
+        $(".current-letter").removeClass("correct-letter");
+        $(".current-letter").addClass("wrong-letter");
 
-          $(".current-letter").removeClass("correct-letter")
-          $(".current-letter").addClass("wrong-letter");
+        setMistakesMade((mistakesMade) => {
+          return mistakesMade + 1;
+        });
 
-          return currentLetterIndex;
-        }
+        return currentLetterIndex;
       }
     });
   }
@@ -246,7 +267,6 @@ const AlgorithmDetailSpeed = (props) => {
       setToShowEnterSpan(false);
     }
 
-
     // console.log("Next Char: ", charArray[currentLetterIndex+1]);
 
     if (currentLetterIndex != -1) {
@@ -258,8 +278,6 @@ const AlgorithmDetailSpeed = (props) => {
     setTypedCode(charArray.slice(0, currentLetterIndex + 1).join(""));
     setCurrentLetter(charArray[currentLetterIndex + 1]);
     setUntypedCode(charArray.slice(currentLetterIndex + 2, charArray.length).join(""));
-
-    
   }, [currentLetterIndex]);
 
   // Handle Go Home Functionality
@@ -320,7 +338,8 @@ const AlgorithmDetailSpeed = (props) => {
                 <span className="typed-code">{typedCode}</span>
                 {toShowEnterSpan ? (
                   <span id="current-letter" className="enter-span">
-                    <span className="fas fa-level-down-alt rotate-span"></span>{currentLetter}
+                    <span className="fas fa-level-down-alt rotate-span"></span>
+                    {currentLetter}
                   </span>
                 ) : (
                   <span id="current-letter" className="current-letter correct-letter">
