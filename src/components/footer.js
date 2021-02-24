@@ -30,7 +30,7 @@ const Footer = (props) => {
         </div>
         <div className="col-md-2">
           <div className="footer-links-wrapper">
-            <div className="copyright-wrapper">Copyright 2020</div>
+            <div className="copyright-wrapper">Copyright 2021</div>
           </div>
         </div>
       </div>

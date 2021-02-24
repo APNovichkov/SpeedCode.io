@@ -115,8 +115,8 @@ body {
 .footer-wrapper{
   background-color: #6c7a89;
   color: #ffffff;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding-left: 11%;
+  padding-right: 11%;
   padding-top: 40px;
   padding-bottom: 40px;
 }
@@ -207,7 +207,7 @@ body {
 .landing-image{
   max-width: 100%;
   /* margin-left: 50px; */
-  border: 1px solid #faecee;
+  /* border: 1px solid #f4f4f4; */
   border-radius: 10px;
   box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.3);
 }
@@ -215,23 +215,24 @@ body {
 .landing-description-item-title{
   font-size: 25px;
   font-weight: 800;
-  color: #d63447;
+  color: #1C2B2D;
 }
 
 .landing-description-item-text{
   font-size: 18px;
   font-weight: 400;
-  color: #D56576;
+  color: #283638;
   margin-top: 10px;
 }
 
 .landing-description-background-wrapper{
-  background-color: #fcfbf6;
+  background-color: #f4f4f4;
 }
 
 .landing-description-wrapper{
   margin-left: 5%;
   margin-right: 5%;
+  padding-top: 120px;
 }
 
 .landing-description-item-wrapper{
@@ -318,6 +319,21 @@ body {
   border-radius: 60px;
   margin-left: 10px;
 }
+
+.logout-button{
+  font-size: 16px;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.logout-button:hover{
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* LINKS NAVBAR STUFF */
 
 .links-navbar-wrapper {
   background-color: #6c7a89;

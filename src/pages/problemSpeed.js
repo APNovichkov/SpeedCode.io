@@ -241,7 +241,7 @@ const AlgorithmDetailSpeed = (props) => {
         userObject: userObject,
         statsObject: {
           language: "python",
-          mistakesMade: mistakesMade,
+          mistakesMade: mistakesMade/2,
           timeSpent: formatTimeToSeconds(minutes, seconds),
           wordsPerMinute: getWordsPerMinute(minutes, seconds, numWords),
         },
