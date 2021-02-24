@@ -20,7 +20,7 @@ const Statistics = (props) => {
   let { problemId, problemObject } = props.location.state;
 
   // Page Parameters
-  const [timeTakenData, setTimeTakenData] = useState();
+  const [timeTakenData, setTimeTakenData] = useState([]);
   const [mistakesMadeData, setMistakesMadeData] = useState([]);
   const [wordsPerMinuteData, setWordsPerMinuteData] = useState([]);
   const [overviewData, setOverviewData] = useState([]);
@@ -32,6 +32,7 @@ const Statistics = (props) => {
 
   // Cookies and Context
   const [cookie] = useCookies("speedcode-cookiez");
+  const [tokenCookie] = useCookies("speedcode-cookiez-token");
   const [userObject, setUserObject] = useContext(UserContext);
 
   const updateUserObject = () => {
@@ -44,7 +45,9 @@ const Statistics = (props) => {
 
     //Get Statistics for this algoId and userId
     axios
-      .get(getProblemStatisticsUrl(problemId, userObject["_id"]))
+      .get(getProblemStatisticsUrl(problemId, userObject["_id"]), {
+        headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+      })
       .then((res) => {
         setStatsObject(res.data);
 
@@ -64,7 +67,9 @@ const Statistics = (props) => {
 
     setIsLoadingPerformanceOverview(true);
     axios
-      .get(getPerformanceOverviewUrl(problemId, userObject["_id"]))
+      .get(getPerformanceOverviewUrl(problemId, userObject["_id"]), {
+        headers: { Authorization: `${tokenCookie["speedcode-cookiez-token"]}` },
+      })
       .then((res) => {
         console.log("Got performance overview for this problem: ", res.data);
         setPerformanceOverview(res.data);
@@ -85,7 +90,7 @@ const Statistics = (props) => {
       <LinksNavbar userObject={userObject} />
       <div className="statistics-page-wrapper">
         <div className="statistics-page-header-wrapper">
-          <div className="statistics-page-header">{problemObject.name} Statistics</div>
+          <div className="statistics-page-header">{problemObject.name} Implementation Statistics</div>
         </div>
         <div className="statistics-page-subheader-wrapper">
           <div className="statistics-page-subheader">
@@ -123,7 +128,7 @@ const Statistics = (props) => {
               )}
             </div>
             <div className="statistics-stat-card text-center">
-              <div className="finished-blueprint-stat-card-title">Highest Words per Minute</div>
+              <div className="finished-blueprint-stat-card-title">Max Words per Minute</div>
               {isLoadingPerformanceOverview ? (
                 <BasicSpinner spinnerClass="statistics-performance-overview-spinner" />
               ) : (

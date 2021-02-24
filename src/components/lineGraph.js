@@ -14,6 +14,7 @@ const LineGraph = (props) => {
         xScale={{ type: "point" }}
         yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
         yFormat=" >-.2f"
+        curve="natural"
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -35,7 +36,7 @@ const LineGraph = (props) => {
           legendPosition: "middle",
         }}
         colors={{scheme: scheme}}
-        pointSize={10}
+        pointSize={5}
         pointColor={{ theme: "background" }}
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}

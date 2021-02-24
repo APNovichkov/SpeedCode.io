@@ -184,7 +184,6 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #eeeeee;
-  
   margin-bottom: 100px;
 }
 
@@ -275,10 +274,10 @@ body {
 }
 
 .navbar-wrapper {
-  padding-top: 5px;
-  padding-bottom: 33px;
-  margin-left: 150px;
-  margin-right: 120px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 160px;
+  margin-right: 130px;
 }
 
 .navbar-logo {
@@ -300,6 +299,7 @@ body {
 
 .navbar-welcome {
   color: #1C2B2D;
+  margin-top: 10px;
 }
 
 .navbar-search {
@@ -969,21 +969,21 @@ body {
   width: 180px;
   margin-right: 20px;
   border: 1px solid #b7c3cf;
-  background-color: #6C7A89;
+  background-color: #dce2eb;
   border-radius: 10px;
   padding: 10px;
 }
 
 .finished-blueprint-stat-card-title{
-  color: #eeeeee;
+  color: #414141;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .finished-blueprint-stat-card-value{
-  color: #eeeeee;
+  color: #414141;
   font-weight: 700;
-  font-size: 27px;
+  font-size: 22px;
 }
 
 .finished-blueprint-stats-see-more-stats-wrapper{
@@ -1045,13 +1045,13 @@ body {
   padding-right: 120px;
   padding-top: 20px;
   padding-bottom: 40px;
-  background-color: #fffcf4;
+  background-color: #f4f4f4;
 }
 
 .statistics-page-header{
-  font-size: 30px;
-  font-weight: 700;
-  color: #d63447;
+  font-size: 26px;
+  font-weight: 600;
+  color: #414141;
 }
 
 .statistics-page-subheader-wrapper{
@@ -1060,9 +1060,9 @@ body {
 }
 
 .statistics-summary-wrapper{
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 20px;
-  border-left: 4px solid #d85b6a;
+  border-left: 3px solid #afafaf;
   padding-left: 15px;
 }
 
@@ -1078,7 +1078,7 @@ body {
   width: auto;
   margin-right: 20px;
   border: 1px solid #dfdfdf;
-  background-color: #fffefa;
+  background-color: #e9edf1;
   border-radius: 10px;
   padding: 10px;
 }
@@ -1087,7 +1087,8 @@ body {
   border: 1px solid #dfdfdf;
   border-radius: 5px;
   padding: 10px;
-  background-color: #fffefa;
+  background-color: transparent;
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.1);
 }
 
 .statistics-line-graph{
@@ -1102,23 +1103,23 @@ body {
 .statistics-graph-header-wrapper{
   margin-bottom: 10px;
   font-weight: 500;
-  font-size: 23px;
-  color: #4e3769;
+  font-size: 20px;
+  color: #414141;
 }
 
 .statistics-summary-header-wrapper{
-  margin-top: 20px;
+  
   margin-bottom: 8px;
 }
 
 .statistics-summary-header{
   font-weight: 500;
-  font-size: 23px;
-  color: #d63447;
+  font-size: 20px;
+  color: #414141;
 }
 
 .statistics-performance-overview-spinner{
-  color: #d63447;
+  color: #414141;
   height: 29px;
   width: 29px;
   margin-top: 9px;
