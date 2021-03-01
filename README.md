@@ -10,6 +10,3 @@
 <p align="center" style="margin-top: 20px;">
 Speedcode is a web platform that helps students and software engineers learn and memorize a large variety of popular algorithms and Data Structures. This codebase and the serverside codebase are maintained in a private organization. 
 </p>
-
-
-
